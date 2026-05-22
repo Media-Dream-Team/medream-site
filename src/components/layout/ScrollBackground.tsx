@@ -89,6 +89,36 @@ function buildMountains(w: number, h: number): MountainLayer[] {
   ]
 }
 
+// ─── Star layer ───────────────────────────────────────────────────────────────
+
+interface Star {
+  xNorm: number        // 0–1 normalized x position
+  yNorm: number        // 0–1 normalized y position
+  size: number         // px
+  color: string
+  depth: number        // 0=far, 1=near — drives parallax shift
+  twinkleSpeed: number
+  twinklePhase: number
+}
+
+const STAR_COLORS = ['#fbf4e0', '#fbf4e0', '#fbf4e0', '#ecc842', '#8fa8e8']
+
+function buildStars(count: number): Star[] {
+  const stars: Star[] = []
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      xNorm:        Math.random(),
+      yNorm:        Math.random(),
+      size:         0.5 + Math.random() * 2,
+      color:        STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
+      depth:        Math.random(),              // continuous 0–1
+      twinkleSpeed: 0.3 + Math.random() * 0.8,
+      twinklePhase: Math.random() * Math.PI * 2,
+    })
+  }
+  return stars
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function ScrollBackground() {
@@ -102,6 +132,9 @@ export function ScrollBackground() {
 
     const dpr = window.devicePixelRatio || 1
     let mountains: MountainLayer[] = []
+    const isMobile = window.innerWidth < 768
+    let stars: Star[] = buildStars(isMobile ? 60 : 120)
+    let startTime = performance.now()
     let rafId = 0
 
     function resize() {
@@ -113,6 +146,8 @@ export function ScrollBackground() {
       canvas!.style.height = `${h}px`
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
       mountains = buildMountains(w, h)
+      const nowMobile = window.innerWidth < 768
+      stars = buildStars(nowMobile ? 60 : 120)
     }
 
     function getScrollP() {
@@ -130,7 +165,39 @@ export function ScrollBackground() {
       ctx!.fillStyle = gradientStop(SKY_STOPS, p)
       ctx!.fillRect(0, 0, w, h)
 
-      // 2. Mountains
+      // 2. Stars
+      const elapsed = (performance.now() - startTime) / 1000  // seconds
+      const starOpacity = clamp(1 - p / 0.35, 0, 1)
+
+      if (starOpacity > 0) {
+        for (const star of stars) {
+          const twinkle = Math.sin(elapsed * star.twinkleSpeed + star.twinklePhase) * 0.25 + 0.75
+          const alpha = starOpacity * twinkle
+
+          // Parallax: depth 0 = no shift, depth 1 = max shift
+          const parallaxShift = star.depth * window.scrollY * 0.08
+          const x = (star.xNorm * window.innerWidth + parallaxShift) % window.innerWidth
+          const y = star.yNorm * window.innerHeight
+
+          ctx!.save()
+          ctx!.globalAlpha = alpha
+          ctx!.fillStyle = star.color
+          if (star.size > 1.5) {
+            // Glow for larger stars
+            const grad = ctx!.createRadialGradient(x, y, 0, x, y, star.size * 2)
+            grad.addColorStop(0, star.color)
+            grad.addColorStop(1, 'transparent')
+            ctx!.fillStyle = grad
+            ctx!.fillRect(x - star.size * 2, y - star.size * 2, star.size * 4, star.size * 4)
+          }
+          ctx!.beginPath()
+          ctx!.arc(x, y, star.size / 2, 0, Math.PI * 2)
+          ctx!.fill()
+          ctx!.restore()
+        }
+      }
+
+      // 3. Mountains
       for (const layer of mountains) {
         const opacity = smoothstep(layer.opacityRange[0], layer.opacityRange[1], p)
         if (opacity <= 0) continue
