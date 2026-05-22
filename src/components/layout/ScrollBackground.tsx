@@ -131,6 +131,24 @@ interface ShootingStar {
   color: string
 }
 
+// ─── Cloud wisp layer ─────────────────────────────────────────────────────────
+
+interface CloudWisp {
+  xNorm: number   // 0–1
+  yNorm: number   // 0.25–0.55 range
+  rx: number      // x radius px
+  ry: number      // y radius px
+}
+
+function buildClouds(): CloudWisp[] {
+  return Array.from({ length: 6 }, () => ({
+    xNorm: Math.random(),
+    yNorm: 0.25 + Math.random() * 0.30,
+    rx:    40 + Math.random() * 50,
+    ry:    8  + Math.random() * 10,
+  }))
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function ScrollBackground() {
@@ -146,6 +164,7 @@ export function ScrollBackground() {
     let mountains: MountainLayer[] = []
     const isMobile = window.innerWidth < 768
     let stars: Star[] = buildStars(isMobile ? 60 : 120)
+    const clouds: CloudWisp[] = buildClouds()
     let startTime = performance.now()
     let rafId = 0
 
@@ -196,7 +215,52 @@ export function ScrollBackground() {
       ctx!.fillStyle = gradientStop(SKY_STOPS, p)
       ctx!.fillRect(0, 0, w, h)
 
-      // 2. Stars
+      // 2. Aurora glow (space zone)
+      {
+        const elapsed = (performance.now() - startTime) / 1000
+        const pulse = Math.sin(elapsed * 0.4) * 0.15 + 0.85
+        const alpha = clamp(0.25 - p * 0.6, 0, 0.25) * pulse
+        if (alpha > 0) {
+          const grad = ctx!.createRadialGradient(w / 2, 0, 0, w / 2, 0, h * 0.7)
+          grad.addColorStop(0, `rgba(61,110,232,${alpha})`)
+          grad.addColorStop(1, 'transparent')
+          ctx!.fillStyle = grad
+          ctx!.fillRect(0, 0, w, h)
+        }
+      }
+
+      // 3. Cloud wisps (sky zone p 0.28–0.60)
+      {
+        const cloudAlpha = smoothstep(0.28, 0.38, p) * smoothstep(0.60, 0.50, p) * 0.06
+        if (cloudAlpha > 0) {
+          const drift = (((performance.now() - startTime) / 1000) * 12) % window.innerWidth
+          for (const c of clouds) {
+            const cx = ((c.xNorm * window.innerWidth - drift) + window.innerWidth) % window.innerWidth
+            const cy = c.yNorm * window.innerHeight
+            ctx!.save()
+            ctx!.globalAlpha = cloudAlpha
+            ctx!.fillStyle = '#fbf4e0'
+            ctx!.beginPath()
+            ctx!.ellipse(cx, cy, c.rx, c.ry, 0, 0, Math.PI * 2)
+            ctx!.fill()
+            ctx!.restore()
+          }
+        }
+      }
+
+      // 4. Dawn-gold horizon glow (sky → mountain transition)
+      {
+        const alpha = smoothstep(0.35, 0.55, p) * smoothstep(0.88, 0.75, p) * 0.12
+        if (alpha > 0) {
+          const grad = ctx!.createRadialGradient(w / 2, h, 0, w / 2, h, h * 0.6)
+          grad.addColorStop(0, `rgba(236,200,66,${alpha})`)
+          grad.addColorStop(1, 'transparent')
+          ctx!.fillStyle = grad
+          ctx!.fillRect(0, 0, w, h)
+        }
+      }
+
+      // 5. Stars
       const elapsed = (performance.now() - startTime) / 1000  // seconds
       const starOpacity = clamp(1 - p / 0.35, 0, 1)
 
@@ -228,7 +292,7 @@ export function ScrollBackground() {
         }
       }
 
-      // 3. Shooting star
+      // 6. Shooting star
       if (p < 0.30) {
         const now = performance.now()
 
@@ -272,7 +336,7 @@ export function ScrollBackground() {
         shootingStar = null
       }
 
-      // 4. Mountains
+      // 7. Mountains
       for (const layer of mountains) {
         const opacity = smoothstep(layer.opacityRange[0], layer.opacityRange[1], p)
         if (opacity <= 0) continue
@@ -287,6 +351,18 @@ export function ScrollBackground() {
         ctx!.closePath()
         ctx!.fill()
         ctx!.restore()
+      }
+
+      // 8. Ground warm glow (bottom of page)
+      {
+        const alpha = smoothstep(0.78, 0.92, p) * 0.09
+        if (alpha > 0) {
+          const grad = ctx!.createRadialGradient(w / 2, h, 0, w / 2, h, h * 0.5)
+          grad.addColorStop(0, `rgba(236,200,66,${alpha})`)
+          grad.addColorStop(1, 'transparent')
+          ctx!.fillStyle = grad
+          ctx!.fillRect(0, 0, w, h)
+        }
       }
 
       rafId = requestAnimationFrame(draw)
