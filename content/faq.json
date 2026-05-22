@@ -1,0 +1,37 @@
+[
+  {
+    "question_th": "เริ่มทำเกมต้องมีขั้นตอนอะไรบ้าง?",
+    "question_en": "What are the steps to start making a game?",
+    "answer_th": "เราเริ่มจากรับ requirements → game design → UX/UI → development → testing ก่อนส่งมอบงาน",
+    "answer_en": "We start with requirements → game design → UX/UI → development → testing before delivery",
+    "featured": true
+  },
+  {
+    "question_th": "ทำเกมประเภทไหนได้บ้าง?",
+    "question_en": "What types of games can you make?",
+    "answer_th": "เราทำได้ทั้ง event game, CRM game, PC/mobile game, AR/VR และ e-learning",
+    "answer_en": "We can make event games, CRM games, PC/mobile games, AR/VR, and e-learning",
+    "featured": true
+  },
+  {
+    "question_th": "ราคาเริ่มต้นเท่าไหร่?",
+    "question_en": "What is the starting price?",
+    "answer_th": "ราคาขึ้นอยู่กับขอบเขตงาน กรุณาติดต่อเราเพื่อรับใบเสนอราคา",
+    "answer_en": "Pricing depends on scope. Please contact us for a quote.",
+    "featured": true
+  },
+  {
+    "question_th": "ระยะเวลาในการทำเกมนานแค่ไหน?",
+    "question_en": "How long does game development take?",
+    "answer_th": "ขึ้นอยู่กับขนาดโปรเจกต์ ตั้งแต่ 1 เดือนสำหรับ mini game จนถึง 6+ เดือนสำหรับเกมเต็ม",
+    "answer_en": "Depends on project size — from 1 month for mini games to 6+ months for full games",
+    "featured": true
+  },
+  {
+    "question_th": "ทำ AR/VR ได้ไหม?",
+    "question_en": "Do you do AR/VR?",
+    "answer_th": "ได้เลย เรามีทีมที่เชี่ยวชาญทั้ง AR และ VR สำหรับงาน event และการตลาด",
+    "answer_en": "Yes — we have specialists in both AR and VR for events and marketing",
+    "featured": true
+  }
+]

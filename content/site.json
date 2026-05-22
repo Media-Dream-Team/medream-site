@@ -1,0 +1,30 @@
+{
+  "name": "MeDream Studio",
+  "tagline_th": "เราทำให้ความฝันกลายเป็นประสบการณ์จริง",
+  "tagline_en": "We turn dreams into real experiences",
+  "vision_th": "เป็นสตูดิโอสร้างสรรค์ชั้นนำที่ทำให้แบรนด์มีชีวิต",
+  "vision_en": "To be a leading creative studio that brings brands to life",
+  "mission_th": "สร้างประสบการณ์ดิจิทัลที่น่าจดจำผ่านเกม แอนิเมชัน และ AR/VR",
+  "mission_en": "Create memorable digital experiences through games, animation, and AR/VR",
+  "intro_th": "MeDream Studio คือทีมสร้างสรรค์ที่รวมนักออกแบบ นักพัฒนา และนักเล่าเรื่องเข้าไว้ด้วยกัน",
+  "intro_en": "MeDream Studio is a creative team combining designers, developers, and storytellers",
+  "history_th": "ก่อตั้งขึ้นด้วยความหลงใหลในการสร้างสรรค์ประสบการณ์ที่ไม่เหมือนใคร",
+  "history_en": "Founded with a passion for creating unique interactive experiences",
+  "pipeline": [
+    { "label_th": "รับ Requirements", "label_en": "Requirements",  "icon": "📋" },
+    { "label_th": "Game Design",      "label_en": "Game Design",   "icon": "🎮" },
+    { "label_th": "UX/UI",            "label_en": "UX/UI",         "icon": "🎨" },
+    { "label_th": "Development",      "label_en": "Development",   "icon": "💻" },
+    { "label_th": "Testing",          "label_en": "Testing",       "icon": "✅" }
+  ],
+  "socials": [
+    { "platform": "Facebook", "url": "https://www.facebook.com/teammediadream", "icon": "facebook" },
+    { "platform": "Twitter",  "url": "https://x.com/MeDreamStudio",             "icon": "twitter" },
+    { "platform": "TikTok",   "url": "https://www.tiktok.com/@medream_studio",  "icon": "tiktok" },
+    { "platform": "YouTube",  "url": "https://www.youtube.com/watch?v=ZrHFJijoiCs", "icon": "youtube" }
+  ],
+  "email": "contact@medream-studio.com",
+  "phone": "",
+  "copyright_th": "© 2025 MeDream Studio. สงวนลิขสิทธิ์",
+  "copyright_en": "© 2025 MeDream Studio. All rights reserved."
+}

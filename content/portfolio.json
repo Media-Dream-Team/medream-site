@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sumeeper",
+    "title_th": "Sumeeper",
+    "title_en": "Sumeeper",
+    "type": "own-ip",
+    "featured": true,
+    "image": "/images/portfolio/placeholder.png",
+    "tags": ["PC Game", "Puzzle"],
+    "year": 2025,
+    "desc_th": "เกม puzzle บน Steam ที่พัฒนาโดยทีม MeDream",
+    "desc_en": "A puzzle game on Steam developed by the MeDream team"
+  },
+  {
+    "id": "client-event-game-1",
+    "title_th": "เกม Event สำหรับลูกค้า",
+    "title_en": "Client Event Game",
+    "type": "client",
+    "featured": true,
+    "image": "/images/portfolio/placeholder.png",
+    "tags": ["Event Game", "Gamification"],
+    "year": 2024,
+    "desc_th": "เกม event สำหรับงานออกบูธ",
+    "desc_en": "Event game for trade show booth"
+  }
+]

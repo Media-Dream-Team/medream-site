@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "key": "about",     "href": "/about",     "label_th": "เกี่ยวกับเรา", "label_en": "About" },
+    { "key": "services",  "href": "/services",  "label_th": "บริการ",       "label_en": "Services" },
+    { "key": "portfolio", "href": "/portfolio", "label_th": "ผลงาน",        "label_en": "Portfolio" },
+    { "key": "team",      "href": "/team",      "label_th": "ทีมงาน",       "label_en": "Team" },
+    { "key": "blog",      "href": "/blog",      "label_th": "บทความ",       "label_en": "Blog" },
+    { "key": "faq",       "href": "/faq",       "label_th": "คำถาม",        "label_en": "FAQ" },
+    { "key": "careers",   "href": "/careers",   "label_th": "ร่วมงาน",      "label_en": "Careers" },
+    { "key": "contact",   "href": "/contact",   "label_th": "ติดต่อ",       "label_en": "Contact" }
+  ]
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "event-game",
+    "icon": "🎮",
+    "title_th": "เกม Event",
+    "title_en": "Event Game",
+    "desc_th": "เกมสำหรับงาน event เก็บข้อมูลผู้เล่น วิเคราะห์ผลใน dashboard",
+    "desc_en": "Games for events — collects player data and delivers analytics dashboard",
+    "cta_th": "สนใจบริการนี้",
+    "cta_en": "Enquire about this"
+  },
+  {
+    "id": "crm-game",
+    "icon": "🏆",
+    "title_th": "เกม CRM",
+    "title_en": "CRM Game",
+    "desc_th": "เกมสะสมแต้มและดึงดูดลูกค้าให้ผูกพันกับแบรนด์",
+    "desc_en": "Loyalty and engagement games that keep customers connected to your brand",
+    "cta_th": "สนใจบริการนี้",
+    "cta_en": "Enquire about this"
+  },
+  {
+    "id": "animation",
+    "icon": "🎬",
+    "title_th": "แอนิเมชัน 2D/3D",
+    "title_en": "2D/3D Animation",
+    "desc_th": "แอนิเมชันสำหรับโฆษณา สื่อการสอน และ interactive storytelling",
+    "desc_en": "Animation for advertising, e-learning, and interactive storytelling",
+    "cta_th": "สนใจบริการนี้",
+    "cta_en": "Enquire about this"
+  },
+  {
+    "id": "interactive-quiz",
+    "icon": "❓",
+    "title_th": "แบบสอบถาม Interactive",
+    "title_en": "Interactive Quiz",
+    "desc_th": "แบบทดสอบและแบบสอบถามแบบ interactive สำหรับการวิจัยและการตลาด",
+    "desc_en": "Interactive quizzes and surveys for research and marketing",
+    "cta_th": "สนใจบริการนี้",
+    "cta_en": "Enquire about this"
+  },
+  {
+    "id": "ar-vr",
+    "icon": "🥽",
+    "title_th": "AR / VR",
+    "title_en": "AR / VR",
+    "desc_th": "ประสบการณ์ Augmented และ Virtual Reality สำหรับแบรนด์และการศึกษา",
+    "desc_en": "Augmented and Virtual Reality experiences for brands and education",
+    "cta_th": "สนใจบริการนี้",
+    "cta_en": "Enquire about this"
+  },
+  {
+    "id": "pc-mobile-game",
+    "icon": "📱",
+    "title_th": "เกม PC / Mobile",
+    "title_en": "PC / Mobile Game",
+    "desc_th": "พัฒนาเกม PC และ Mobile ตั้งแต่ต้นจนเสร็จ ทั้ง casual และ serious game",
+    "desc_en": "End-to-end PC and mobile game development — casual and serious games",
+    "cta_th": "สนใจบริการนี้",
+    "cta_en": "Enquire about this"
+  },
+  {
+    "id": "elearning",
+    "icon": "📚",
+    "title_th": "สื่อการเรียนการสอน",
+    "title_en": "E-Learning Media",
+    "desc_th": "สื่อการเรียนรู้แบบ interactive ที่ทำให้การเรียนสนุกและมีประสิทธิภาพ",
+    "desc_en": "Interactive learning media that makes education fun and effective",
+    "cta_th": "สนใจบริการนี้",
+    "cta_en": "Enquire about this"
+  }
+]
