@@ -1,0 +1,30 @@
+[
+  {
+    "id": "unity-developer",
+    "title_th": "Unity Developer",
+    "title_en": "Unity Developer",
+    "type_th": "เต็มเวลา",
+    "type_en": "Full-time",
+    "location_th": "กรุงเทพฯ / Remote",
+    "location_en": "Bangkok / Remote",
+    "open": true,
+    "desc_th": "ร่วมทีมพัฒนาเกมและ interactive experience ด้วย Unity",
+    "desc_en": "Join the team building games and interactive experiences with Unity",
+    "requirements_th": ["ประสบการณ์ Unity 2 ปีขึ้นไป", "เขียน C# ได้", "มีพอร์ตโฟลิโอ"],
+    "requirements_en": ["2+ years Unity experience", "Proficient in C#", "Portfolio required"]
+  },
+  {
+    "id": "2d-animator",
+    "title_th": "2D Animator",
+    "title_en": "2D Animator",
+    "type_th": "ฟรีแลนซ์",
+    "type_en": "Freelance",
+    "location_th": "Remote",
+    "location_en": "Remote",
+    "open": true,
+    "desc_th": "สร้าง animation สำหรับเกมและโฆษณา",
+    "desc_en": "Create animations for games and commercials",
+    "requirements_th": ["ใช้ Adobe Animate หรือ Spine ได้", "มีผลงานที่ผ่านมา"],
+    "requirements_en": ["Proficient in Adobe Animate or Spine", "Previous work samples required"]
+  }
+]

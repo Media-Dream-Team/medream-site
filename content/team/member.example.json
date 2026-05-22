@@ -1,0 +1,18 @@
+{
+  "name": "ชื่อ นามสกุล",
+  "role_th": "ตำแหน่ง",
+  "role_en": "Job Title",
+  "photo": "/images/team/placeholder.png",
+  "bio_th": "ประวัติย่อภาษาไทย",
+  "bio_en": "Short bio in English",
+  "skills": ["Unity", "C#", "Game Design"],
+  "works": [
+    {
+      "title": "ชื่อผลงาน",
+      "image": "/images/portfolio/placeholder.png",
+      "desc_th": "คำอธิบายผลงาน",
+      "desc_en": "Work description",
+      "year": 2025
+    }
+  ]
+}

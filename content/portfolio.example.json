@@ -1,0 +1,28 @@
+[
+  {
+    "id": "project-slug",
+    "title_th": "ชื่อโปรเจกต์",
+    "title_en": "Project Title",
+    "type": "own-ip",
+    "featured": true,
+    "image": "/images/portfolio/placeholder.png",
+    "tags": ["PC Game", "Puzzle"],
+    "year": 2025,
+    "desc_th": "คำอธิบายสั้นๆ เกี่ยวกับโปรเจกต์",
+    "desc_en": "Short description of the project"
+  },
+  {
+    "id": "client-project-slug",
+    "title_th": "ชื่อโปรเจกต์ลูกค้า",
+    "title_en": "Client Project Title",
+    "type": "client",
+    "featured": false,
+    "image": "/images/portfolio/placeholder.png",
+    "tags": ["Event Game", "Gamification"],
+    "year": 2024,
+    "desc_th": "คำอธิบายสั้นๆ",
+    "desc_en": "Short description",
+    "client_th": "ชื่อลูกค้า",
+    "client_en": "Client Name"
+  }
+]

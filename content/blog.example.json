@@ -1,0 +1,28 @@
+[
+  {
+    "slug": "how-we-made-sumeeper",
+    "title_th": "เบื้องหลังการสร้าง Sumeeper",
+    "title_en": "Behind the Scenes: Making Sumeeper",
+    "cover": "/images/blog/placeholder.png",
+    "date": "2025-03-15",
+    "author": "Team MeDream",
+    "tags": ["Game Dev", "Unity", "Indie"],
+    "excerpt_th": "เรื่องราวการพัฒนาเกม puzzle ของเราตั้งแต่ไอเดียจนถึง Steam",
+    "excerpt_en": "The story of developing our puzzle game from idea to Steam launch",
+    "content_th": "เนื้อหาบทความภาษาไทย...",
+    "content_en": "Full article content in English..."
+  },
+  {
+    "slug": "ar-marketing-trends-2025",
+    "title_th": "เทรนด์ AR Marketing ปี 2025",
+    "title_en": "AR Marketing Trends in 2025",
+    "cover": "/images/blog/placeholder.png",
+    "date": "2025-01-10",
+    "author": "Team MeDream",
+    "tags": ["AR", "Marketing", "Trends"],
+    "excerpt_th": "AR กำลังเปลี่ยนวิธีที่แบรนด์สื่อสารกับลูกค้า",
+    "excerpt_en": "AR is changing how brands communicate with customers",
+    "content_th": "เนื้อหาบทความภาษาไทย...",
+    "content_en": "Full article content in English..."
+  }
+]
