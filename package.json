@@ -9,6 +9,10 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "engines": {
+    "node": "22.x"
+  },
+  "packageManager": "pnpm@9.15.0",
   "dependencies": {
     "@tsparticles/react": "^4.0.5",
     "@tsparticles/slim": "^4.0.5",
