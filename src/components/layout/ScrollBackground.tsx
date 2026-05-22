@@ -253,7 +253,7 @@ export function ScrollBackground() {
             const tailY = headY - Math.sin(angle) * length
 
             const grad = ctx!.createLinearGradient(tailX, tailY, headX, headY)
-            grad.addColorStop(0, 'transparent')
+            grad.addColorStop(0, color + '00')
             grad.addColorStop(1, color)
 
             ctx!.save()
@@ -267,6 +267,9 @@ export function ScrollBackground() {
             ctx!.restore()
           }
         }
+      } else {
+        // Clear any in-flight star when space zone exits
+        shootingStar = null
       }
 
       // 4. Mountains
