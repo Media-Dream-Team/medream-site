@@ -7,6 +7,7 @@ import { routing } from '@/i18n/routing'
 import { getNavConfig, getSiteConfig } from '@/lib/content'
 import { NavBar } from '@/components/layout/NavBar'
 import { Footer } from '@/components/layout/Footer'
+import { ScrollBackground } from '@/components/layout/ScrollBackground'
 import '../globals.css'
 
 export function generateStaticParams() {
@@ -50,6 +51,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
+          <ScrollBackground />
           <NavBar items={nav.items} />
           <main>{children}</main>
           <Footer site={site} navItems={nav.items} locale={locale} />
