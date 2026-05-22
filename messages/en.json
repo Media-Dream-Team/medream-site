@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "open_menu": "Open menu",
+    "close_menu": "Close menu",
+    "contact_cta": "Contact Us"
+  },
+  "hero": {
+    "cta_portfolio": "See Our Work",
+    "cta_contact": "Contact Us"
+  },
+  "contact_form": {
+    "title": "Contact Us",
+    "name": "Full Name",
+    "email": "Contact Email",
+    "phone": "Phone Number",
+    "service": "Service of Interest",
+    "service_placeholder": "Select a service",
+    "budget": "Estimated Budget",
+    "budget_placeholder": "Select budget range",
+    "budget_options": {
+      "under_50k": "Under 50,000 THB",
+      "50k_200k": "50,000 – 200,000 THB",
+      "200k_500k": "200,000 – 500,000 THB",
+      "over_500k": "Over 500,000 THB"
+    },
+    "message": "Additional message",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "success": "Sent successfully! We'll be in touch soon.",
+    "error": "Something went wrong. Please try again.",
+    "required": "Required"
+  },
+  "portfolio": {
+    "filter_all": "All",
+    "filter_own_ip": "Our IP",
+    "filter_client": "Client Work",
+    "see_all": "See All Work"
+  },
+  "faq": {
+    "see_all": "See All FAQs"
+  },
+  "team": {
+    "view_portfolio": "View Portfolio"
+  },
+  "blog": {
+    "read_more": "Read more"
+  },
+  "careers": {
+    "full_time": "Full-time",
+    "freelance": "Freelance",
+    "intern": "Internship",
+    "no_openings": "No open positions at this time"
+  },
+  "common": {
+    "see_all": "See All",
+    "back": "Back"
+  }
+}
