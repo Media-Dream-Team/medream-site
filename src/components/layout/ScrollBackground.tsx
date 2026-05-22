@@ -119,6 +119,18 @@ function buildStars(count: number): Star[] {
   return stars
 }
 
+// ─── Shooting star ────────────────────────────────────────────────────────────
+
+interface ShootingStar {
+  x: number           // start x px
+  y: number           // start y px
+  angle: number       // radians, ~−15° to −25°
+  length: number      // px
+  duration: number    // ms
+  startTime: number   // performance.now() when it started
+  color: string
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function ScrollBackground() {
@@ -137,6 +149,9 @@ export function ScrollBackground() {
     let startTime = performance.now()
     let rafId = 0
 
+    let shootingStar: ShootingStar | null = null
+    let nextShootAt: number = performance.now() + 2000 + Math.random() * 3000
+
     function resize() {
       const w = window.innerWidth
       const h = window.innerHeight
@@ -148,6 +163,22 @@ export function ScrollBackground() {
       mountains = buildMountains(w, h)
       const nowMobile = window.innerWidth < 768
       stars = buildStars(nowMobile ? 60 : 120)
+    }
+
+    function spawnShootingStar() {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      const angle = -(15 + Math.random() * 10) * (Math.PI / 180)
+      const colors = ['#ecc842', '#fbf4e0', '#8fa8e8']
+      shootingStar = {
+        x:         w * (0.1 + Math.random() * 0.7),
+        y:         h * (0.05 + Math.random() * 0.35),
+        angle,
+        length:    80 + Math.random() * 80,
+        duration:  600 + Math.random() * 300,
+        startTime: performance.now(),
+        color:     colors[Math.floor(Math.random() * colors.length)],
+      }
     }
 
     function getScrollP() {
@@ -197,7 +228,48 @@ export function ScrollBackground() {
         }
       }
 
-      // 3. Mountains
+      // 3. Shooting star
+      if (p < 0.30) {
+        const now = performance.now()
+
+        if (!shootingStar && now >= nextShootAt) {
+          spawnShootingStar()
+        }
+
+        if (shootingStar) {
+          const t = clamp((now - shootingStar.startTime) / shootingStar.duration, 0, 1)
+          // ease-in-out opacity: peaks at 0.5, zero at ends
+          const alpha = Math.sin(t * Math.PI) * starOpacity
+
+          if (t >= 1) {
+            shootingStar = null
+            nextShootAt = now + 3000 + Math.random() * 5000
+          } else {
+            const { x, y, angle, length, color } = shootingStar
+            // Head position advances along the angle
+            const headX = x + Math.cos(angle) * length * t
+            const headY = y + Math.sin(angle) * length * t
+            const tailX = headX - Math.cos(angle) * length
+            const tailY = headY - Math.sin(angle) * length
+
+            const grad = ctx!.createLinearGradient(tailX, tailY, headX, headY)
+            grad.addColorStop(0, 'transparent')
+            grad.addColorStop(1, color)
+
+            ctx!.save()
+            ctx!.globalAlpha = alpha
+            ctx!.strokeStyle = grad
+            ctx!.lineWidth = 1.5
+            ctx!.beginPath()
+            ctx!.moveTo(tailX, tailY)
+            ctx!.lineTo(headX, headY)
+            ctx!.stroke()
+            ctx!.restore()
+          }
+        }
+      }
+
+      // 4. Mountains
       for (const layer of mountains) {
         const opacity = smoothstep(layer.opacityRange[0], layer.opacityRange[1], p)
         if (opacity <= 0) continue
