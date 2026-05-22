@@ -210,6 +210,7 @@ export function ScrollBackground() {
       const dprLocal = window.devicePixelRatio || 1
       const w = canvas!.width / dprLocal
       const h = canvas!.height / dprLocal
+      const elapsed = (performance.now() - startTime) / 1000
 
       // 1. Background fill
       ctx!.fillStyle = gradientStop(SKY_STOPS, p)
@@ -217,7 +218,6 @@ export function ScrollBackground() {
 
       // 2. Aurora glow (space zone)
       {
-        const elapsed = (performance.now() - startTime) / 1000
         const pulse = Math.sin(elapsed * 0.4) * 0.15 + 0.85
         const alpha = clamp(0.25 - p * 0.6, 0, 0.25) * pulse
         if (alpha > 0) {
@@ -233,10 +233,10 @@ export function ScrollBackground() {
       {
         const cloudAlpha = smoothstep(0.28, 0.38, p) * smoothstep(0.60, 0.50, p) * 0.06
         if (cloudAlpha > 0) {
-          const drift = (((performance.now() - startTime) / 1000) * 12) % window.innerWidth
+          const drift = (elapsed * 12) % w
           for (const c of clouds) {
-            const cx = ((c.xNorm * window.innerWidth - drift) + window.innerWidth) % window.innerWidth
-            const cy = c.yNorm * window.innerHeight
+            const cx = ((c.xNorm * w - drift) + w) % w
+            const cy = c.yNorm * h
             ctx!.save()
             ctx!.globalAlpha = cloudAlpha
             ctx!.fillStyle = '#fbf4e0'
@@ -261,7 +261,6 @@ export function ScrollBackground() {
       }
 
       // 5. Stars
-      const elapsed = (performance.now() - startTime) / 1000  // seconds
       const starOpacity = clamp(1 - p / 0.35, 0, 1)
 
       if (starOpacity > 0) {
