@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MeDream Studio Website
 
-## Getting Started
+Next.js 16 · Tailwind CSS v4 · next-intl (TH/EN) · Vercel
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content Updates
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edit JSON files in `/content/`, commit, push → Vercel auto-redeploys.
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+GOOGLE_SERVICE_ACCOUNT_KEY=  # base64-encoded service account JSON
+GOOGLE_SHEET_ID=              # spreadsheet ID from sheet URL
+SITE_URL=https://www.medream-studio.com
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Google Sheets Setup
 
-## Deploy on Vercel
+1. Create a Google Sheet with columns: Timestamp | Name | Email | Phone | Service | Budget | Message | Locale
+2. Create a service account in Google Cloud Console
+3. Enable Google Sheets API
+4. Share the sheet with the service account email
+5. Base64-encode the downloaded JSON key: `base64 -i key.json | tr -d '\n'`
+6. Set `GOOGLE_SERVICE_ACCOUNT_KEY` to that string in Vercel dashboard
+7. Set `GOOGLE_SHEET_ID` to the spreadsheet ID (from the sheet URL)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push to `main` → Vercel deploys automatically.
