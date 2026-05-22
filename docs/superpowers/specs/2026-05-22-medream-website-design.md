@@ -44,7 +44,14 @@ No CMS. Technical team edits JSON → `git push` → Vercel redeploys.
 
 Concept: night (Midnight) → transition (Royal/Electric Blue) → dawn (Dawn Gold). Animates the "dream becoming reality" metaphor.
 
-**Typography:** Sarabun (Google Fonts) — supports Thai + Latin. Weights: 400 (body), 700 (headings). Fallback: Arial, sans-serif.
+**Typography:** LINE Seed Sans TH — self-hosted WOFF2 in `/public/fonts/`. Supports Thai + Latin.
+- `LINESeedSansTH_W_Rg.woff2` — body text
+- `LINESeedSansTH_W_Bd.woff2` — subheadings, UI labels
+- `LINESeedSansTH_W_XBd.woff2` — headings
+- `LINESeedSansTH_W_He.woff2` — hero display text
+- `LINeSeedSansTH_W_Th.woff2` — captions, muted text
+
+Fallback: Arial, sans-serif.
 
 ---
 
@@ -152,6 +159,24 @@ Images stored in `/public/images/` organized by content type (`/public/images/po
 **Pre-fill via URL param:** Service cards link to `/#contact-form?service=event-game` — form JS reads param and pre-selects the dropdown.
 
 ---
+
+## Responsive Design
+
+Mobile-first. All pages must work on 3 breakpoints:
+
+| Breakpoint | Width | Notes |
+|---|---|---|
+| Mobile | < 768px | Single column, hamburger nav, touch-friendly tap targets |
+| Tablet | 768px–1024px | iPad mini → iPad Pro 11" portrait. 2-column grids where applicable |
+| Tablet landscape | 1024px–1280px | iPad Pro 11" landscape, iPad Pro 12.9" portrait. Closer to desktop but nav stays tablet style |
+| Desktop | > 1280px | Full layout as designed |
+
+Key mobile behaviors:
+- Nav collapses to hamburger menu (slide-in drawer)
+- Hero particle density reduced on mobile (perf)
+- Service/portfolio cards stack to single column
+- Contact form full-width inputs
+- Way of Work pipeline renders as vertical steps (not horizontal)
 
 ## SEO
 
