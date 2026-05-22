@@ -52,7 +52,7 @@ function HeroContent({ site }: Props) {
   const l = locale as 'th' | 'en'
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-midnight">
+    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Dawn glow from bottom */}
       <div
         className="absolute inset-0 pointer-events-none"
