@@ -160,7 +160,6 @@ export function ScrollBackground() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const dpr = window.devicePixelRatio || 1
     let mountains: MountainLayer[] = []
     const isMobile = window.innerWidth < 768
     let stars: Star[] = buildStars(isMobile ? 60 : 120)
@@ -172,6 +171,7 @@ export function ScrollBackground() {
     let nextShootAt: number = performance.now() + 2000 + Math.random() * 3000
 
     function resize() {
+      const dpr = window.devicePixelRatio || 1
       const w = window.innerWidth
       const h = window.innerHeight
       canvas!.width  = w * dpr
@@ -270,8 +270,8 @@ export function ScrollBackground() {
 
           // Parallax: depth 0 = no shift, depth 1 = max shift
           const parallaxShift = star.depth * window.scrollY * 0.08
-          const x = (star.xNorm * window.innerWidth + parallaxShift) % window.innerWidth
-          const y = star.yNorm * window.innerHeight
+          const x = (star.xNorm * w + parallaxShift) % w
+          const y = star.yNorm * h
 
           ctx!.save()
           ctx!.globalAlpha = alpha
@@ -316,7 +316,7 @@ export function ScrollBackground() {
             const tailY = headY - Math.sin(angle) * length
 
             const grad = ctx!.createLinearGradient(tailX, tailY, headX, headY)
-            grad.addColorStop(0, color + '00')
+            grad.addColorStop(0, 'rgba(0,0,0,0)')
             grad.addColorStop(1, color)
 
             ctx!.save()
@@ -391,6 +391,7 @@ export function ScrollBackground() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       style={{
         position: 'fixed',
         inset: 0,
