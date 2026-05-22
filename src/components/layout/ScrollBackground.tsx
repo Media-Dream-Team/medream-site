@@ -59,7 +59,7 @@ const SKY_STOPS: [number, string][] = [
 interface MountainLayer {
   points: [number, number][]  // polygon points [x, y]
   color: string
-  farOpacityRange: [number, number]  // [fadeInStart, fadeInEnd] p values
+  opacityRange: [number, number]  // [fadeInStart, fadeInEnd] p values
 }
 
 function buildMountains(w: number, h: number): MountainLayer[] {
@@ -84,8 +84,8 @@ function buildMountains(w: number, h: number): MountainLayer[] {
   ]
 
   return [
-    { points: farPoints,  color: '#0d1828', farOpacityRange: [0.48, 0.62] },
-    { points: nearPoints, color: '#050c14', farOpacityRange: [0.54, 0.68] },
+    { points: farPoints,  color: '#0d1828', opacityRange: [0.48, 0.62] },
+    { points: nearPoints, color: '#050c14', opacityRange: [0.54, 0.68] },
   ]
 }
 
@@ -111,7 +111,7 @@ export function ScrollBackground() {
       canvas!.height = h * dpr
       canvas!.style.width  = `${w}px`
       canvas!.style.height = `${h}px`
-      ctx!.scale(dpr, dpr)
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
       mountains = buildMountains(w, h)
     }
 
@@ -122,8 +122,9 @@ export function ScrollBackground() {
 
     function draw() {
       const p = getScrollP()
-      const w = window.innerWidth
-      const h = window.innerHeight
+      const dprLocal = window.devicePixelRatio || 1
+      const w = canvas!.width / dprLocal
+      const h = canvas!.height / dprLocal
 
       // 1. Background fill
       ctx!.fillStyle = gradientStop(SKY_STOPS, p)
@@ -131,7 +132,7 @@ export function ScrollBackground() {
 
       // 2. Mountains
       for (const layer of mountains) {
-        const opacity = smoothstep(layer.farOpacityRange[0], layer.farOpacityRange[1], p)
+        const opacity = smoothstep(layer.opacityRange[0], layer.opacityRange[1], p)
         if (opacity <= 0) continue
         ctx!.save()
         ctx!.globalAlpha = opacity
