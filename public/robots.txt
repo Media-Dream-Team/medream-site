@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /th/team/
+Disallow: /en/team/
+
+# Host
+Host: https://www.medream-studio.com
+
+# Sitemaps
+Sitemap: https://www.medream-studio.com/sitemap.xml
