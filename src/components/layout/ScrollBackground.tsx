@@ -165,7 +165,7 @@ export function ScrollBackground() {
     const isMobile = window.innerWidth < 768
     let stars: Star[] = buildStars(isMobile ? 60 : 120)
     const clouds: CloudWisp[] = buildClouds()
-    let startTime = performance.now()
+    const startTime = performance.now()
     let rafId = 0
 
     let shootingStar: ShootingStar | null = null
