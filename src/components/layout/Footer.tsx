@@ -19,7 +19,7 @@ export function Footer({ site, navItems, locale }: Props) {
           {/* Brand */}
           <div>
             <Image
-              src="/images/logo/logo-color.png"
+              src="/images/logo/logo-white.png"
               alt="MeDream Studio"
               width={48}
               height={48}
