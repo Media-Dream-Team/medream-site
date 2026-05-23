@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
@@ -153,6 +154,9 @@ function buildClouds(): CloudWisp[] {
 
 export function ScrollBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const pathname = usePathname()
+  // Home = bare locale root: "/" or "/en" or "/th"
+  const isHome = /^\/(en|th)?\/?$/.test(pathname)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -206,7 +210,9 @@ export function ScrollBackground() {
     }
 
     function draw() {
-      const p = getScrollP()
+      // Non-home pages are too short — a tiny scroll inflates p into the bright-blue sky zone.
+      // Lock to p=0 (dark space) so only home gets the full sky journey.
+      const p = isHome ? getScrollP() : 0
       const dprLocal = window.devicePixelRatio || 1
       const w = canvas!.width / dprLocal
       const h = canvas!.height / dprLocal
@@ -216,8 +222,8 @@ export function ScrollBackground() {
       ctx!.fillStyle = gradientStop(SKY_STOPS, p)
       ctx!.fillRect(0, 0, w, h)
 
-      // 2. Aurora glow (space zone)
-      {
+      // 2. Aurora glow (space zone, home only — short pages have no scroll to fade it out)
+      if (isHome) {
         const pulse = Math.sin(elapsed * 0.4) * 0.15 + 0.85
         const alpha = clamp(0.25 - p * 0.6, 0, 0.25) * pulse
         if (alpha > 0) {
@@ -386,7 +392,7 @@ export function ScrollBackground() {
       window.removeEventListener('resize', resize)
       document.removeEventListener('visibilitychange', handleVisibility)
     }
-  }, [])
+  }, [isHome])
 
   return (
     <canvas
