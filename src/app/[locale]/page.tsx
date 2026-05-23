@@ -1,7 +1,21 @@
+import type { Metadata } from 'next'
 import {
   getSiteConfig, getServices, getFeaturedPortfolio,
   getAwards, getFeaturedFaq,
 } from '@/lib/content'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const isTh = locale === 'th'
+  return {
+    title: isTh
+      ? 'MeDream Studio | รับพัฒนาเกม Game Developer & Media Dream Team'
+      : 'MeDream Studio | Game Developer & Media Dream Team Thailand',
+    description: isTh
+      ? 'MeDream Studio (Media Dream Team) — ทีม Game Developer รับพัฒนาเกม Unity, Mobile Game, Serious Game, AR/VR และแอนิเมชัน ครบวงจร'
+      : 'MeDream Studio (Media Dream Team) — Thailand game developer studio. We build Unity games, mobile games, serious games, AR/VR, and animation.',
+  }
+}
 import { HeroSection } from '@/components/home/HeroSection'
 import { WhoWeAreSection } from '@/components/home/WhoWeAreSection'
 import { ServicesSection } from '@/components/home/ServicesSection'

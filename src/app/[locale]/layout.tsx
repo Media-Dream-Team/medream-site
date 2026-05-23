@@ -21,12 +21,45 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const site = getSiteConfig()
+  const isTh = locale === 'th'
+  const description = isTh ? site.tagline_th : site.tagline_en
+  const url = 'https://medream-studio.com'
+
   return {
     title: {
-      default: site.name,
+      default: `${site.name} | Game Developer & Media Dream Team`,
       template: `%s | ${site.name}`,
     },
-    description: locale === 'th' ? site.tagline_th : site.tagline_en,
+    description,
+    keywords: isTh
+      ? ['MeDream', 'MeDream Studio', 'Media Dream Team', 'รับทำเกม', 'พัฒนาเกม', 'Game Developer', 'Game Dev', 'เกมดีเวลอปเปอร์', 'Unity Developer', 'AR VR', 'แอนิเมชัน', 'สตูดิโอเกม']
+      : ['MeDream', 'MeDream Studio', 'Media Dream Team', 'Game Developer', 'Game Dev', 'Game Development Studio', 'Unity Developer', 'AR VR', 'Animation Studio', 'Thailand Game Dev'],
+    authors: [{ name: 'MeDream Studio' }],
+    creator: 'MeDream Studio',
+    metadataBase: new URL(url),
+    alternates: {
+      canonical: `${url}/${locale}`,
+      languages: { th: `${url}/th`, en: `${url}/en` },
+    },
+    openGraph: {
+      type: 'website',
+      locale: isTh ? 'th_TH' : 'en_US',
+      url,
+      siteName: site.name,
+      title: `${site.name} | Game Developer & Media Dream Team`,
+      description,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${site.name} | Game Developer`,
+      description,
+      creator: '@MeDreamStudio',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
+    },
   }
 }
 
@@ -47,8 +80,26 @@ export default async function LocaleLayout({
   const nav = getNavConfig()
   const site = getSiteConfig()
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'MeDream Studio',
+    alternateName: ['MeDream', 'Media Dream Team'],
+    url: 'https://medream-studio.com',
+    logo: 'https://medream-studio.com/images/logo/logo-color.png',
+    description: locale === 'th' ? site.mission_th : site.mission_en,
+    email: site.email,
+    sameAs: site.socials.map(s => s.url),
+  }
+
   return (
     <html lang={locale}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <NextIntlClientProvider messages={messages}>
           <ScrollBackground />
