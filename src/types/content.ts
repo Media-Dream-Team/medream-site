@@ -65,6 +65,7 @@ export interface PortfolioItem {
   year: number
   desc_th: string
   desc_en: string
+  url?: string
 }
 
 export interface TeamMember {

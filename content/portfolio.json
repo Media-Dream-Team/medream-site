@@ -5,11 +5,12 @@
     "title_en": "Sumeeper",
     "type": "own-ip",
     "featured": true,
-    "image": "/images/portfolio/placeholder.png",
+    "image": "/images/portfolio/sumeeper.png",
     "tags": ["PC Game", "Puzzle"],
     "year": 2025,
     "desc_th": "เกม puzzle บน Steam ที่พัฒนาโดยทีม MeDream",
-    "desc_en": "A puzzle game on Steam developed by the MeDream team"
+    "desc_en": "A puzzle game on Steam developed by the MeDream team",
+    "url": "https://media-dream-team.itch.io/sumeeper"
   },
   {
     "id": "client-event-game-1",

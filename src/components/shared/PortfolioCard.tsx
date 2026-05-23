@@ -38,6 +38,16 @@ export function PortfolioCard({ item, locale }: Props) {
         <p className="text-horizon text-sm mt-1 leading-relaxed">
           {l === 'th' ? item.desc_th : item.desc_en}
         </p>
+        {item.url && (
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-3 text-xs px-3 py-1.5 rounded bg-electric/10 text-electric border border-electric/30 hover:bg-electric/20 transition-colors"
+          >
+            {l === 'th' ? 'เล่นเกม →' : 'Play →'}
+          </a>
+        )}
       </div>
     </div>
   )
