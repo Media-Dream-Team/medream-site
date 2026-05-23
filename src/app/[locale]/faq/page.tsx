@@ -5,7 +5,25 @@ import { FaqItem } from '@/components/shared/FaqItem'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return { title: locale === 'th' ? 'คำถามที่พบบ่อย' : 'FAQ' }
+  const isTh = locale === 'th'
+  const title = isTh ? 'คำถามที่พบบ่อย | MeDream Studio' : 'FAQ | MeDream Studio'
+  const description = isTh
+    ? 'คำถามที่พบบ่อยเกี่ยวกับบริการพัฒนาเกม แอนิเมชัน AR/VR และการทำงานร่วมกับ MeDream Studio'
+    : 'Frequently asked questions about game development, animation, AR/VR services and working with MeDream Studio.'
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://medream-studio.com/${locale}/faq`,
+      languages: { th: 'https://medream-studio.com/th/faq', en: 'https://medream-studio.com/en/faq' },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://medream-studio.com/${locale}/faq`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MeDream Studio' }],
+    },
+  }
 }
 
 export default async function FaqPage({ params }: { params: Promise<{ locale: string }> }) {

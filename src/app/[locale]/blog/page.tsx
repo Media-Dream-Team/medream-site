@@ -6,7 +6,25 @@ import { getBlogPosts } from '@/lib/content'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return { title: locale === 'th' ? 'บทความ' : 'Blog' }
+  const isTh = locale === 'th'
+  const title = isTh ? 'บทความ | MeDream Studio' : 'Blog | MeDream Studio'
+  const description = isTh
+    ? 'บทความและความรู้เกี่ยวกับการพัฒนาเกม แอนิเมชัน AR/VR และอุตสาหกรรมดิจิทัลจาก MeDream Studio'
+    : 'Articles and insights on game development, animation, AR/VR and the digital industry from MeDream Studio.'
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://medream-studio.com/${locale}/blog`,
+      languages: { th: 'https://medream-studio.com/th/blog', en: 'https://medream-studio.com/en/blog' },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://medream-studio.com/${locale}/blog`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MeDream Studio' }],
+    },
+  }
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -32,8 +32,22 @@ export async function generateMetadata({
     },
     description,
     keywords: isTh
-      ? ['MeDream', 'MeDream Studio', 'Media Dream Team', 'รับทำเกม', 'พัฒนาเกม', 'Game Developer', 'Game Dev', 'เกมดีเวลอปเปอร์', 'Unity Developer', 'AR VR', 'แอนิเมชัน', 'สตูดิโอเกม']
-      : ['MeDream', 'MeDream Studio', 'Media Dream Team', 'Game Developer', 'Game Dev', 'Game Development Studio', 'Unity Developer', 'AR VR', 'Animation Studio', 'Thailand Game Dev'],
+      ? [
+          'MeDream', 'MeDream Studio', 'Media Dream Team', 'มีเดียดรีม', 'มีดรีม',
+          'รับทำเกม', 'พัฒนาเกม', 'สตูดิโอเกมไทย', 'ทีมพัฒนาเกมไทย',
+          'Game Developer', 'Game Dev', 'Thai Game Studio', 'Thai Game Dev',
+          'เกมดีเวลอปเปอร์', 'Unity Developer', 'Unity Dev Team', 'ยูนิตี้ดีเวลอปเปอร์',
+          'AR VR', 'แอนิเมชัน', 'สตูดิโอเกม', 'Media Studio', 'Media Creator',
+          'สื่อดิจิทัล', 'ครีเอทีฟสตูดิโอ',
+        ]
+      : [
+          'MeDream', 'MeDream Studio', 'Media Dream Team',
+          'Thai Game Studio', 'Thai Game Dev', 'Thailand Game Studio', 'Thailand Game Developer',
+          'Game Developer', 'Game Dev', 'Game Development Studio',
+          'Unity Developer', 'Unity Dev', 'Unity Dev Team',
+          'Media Studio', 'Media Creator', 'Creative Studio Thailand',
+          'AR VR', 'Animation Studio', 'Digital Media Studio',
+        ],
     authors: [{ name: 'MeDream Studio' }],
     creator: 'MeDream Studio',
     metadataBase: new URL(url),

@@ -5,7 +5,28 @@ import { AwardsSection } from '@/components/home/AwardsSection'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return { title: locale === 'th' ? 'เกี่ยวกับเรา' : 'About Us' }
+  const isTh = locale === 'th'
+  const title = isTh ? 'เกี่ยวกับเรา | MeDream Studio' : 'About Us | MeDream Studio'
+  const description = isTh
+    ? 'MeDream Studio คือทีมสร้างสรรค์ที่รวมนักออกแบบ นักพัฒนา และนักเล่าเรื่อง สร้างประสบการณ์ดิจิทัลที่น่าจดจำ'
+    : 'MeDream Studio is a creative team of designers, developers, and storytellers building memorable digital experiences in Thailand.'
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://medream-studio.com/${locale}/about`,
+      languages: { th: 'https://medream-studio.com/th/about', en: 'https://medream-studio.com/en/about' },
+    },
+    keywords: isTh
+      ? ['MeDream Studio คือ', 'ทีมพัฒนาเกมไทย', 'Thai Game Dev Team', 'Unity Dev Team', 'Media Studio ไทย', 'ครีเอทีฟสตูดิโอ', 'Media Dream Team']
+      : ['About MeDream', 'Thai Game Dev Team', 'Unity Dev Team', 'Media Studio Thailand', 'Creative Studio', 'Media Dream Team'],
+    openGraph: {
+      title,
+      description,
+      url: `https://medream-studio.com/${locale}/about`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MeDream Studio' }],
+    },
+  }
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {

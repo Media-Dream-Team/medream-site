@@ -4,7 +4,25 @@ import { getCareerOpenings } from '@/lib/content'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return { title: locale === 'th' ? 'ร่วมงานกับเรา' : 'Careers' }
+  const isTh = locale === 'th'
+  const title = isTh ? 'ร่วมงานกับเรา | MeDream Studio' : 'Careers | MeDream Studio'
+  const description = isTh
+    ? 'MeDream Studio กำลังมองหานักพัฒนาเกม นักออกแบบ และผู้มีความสร้างสรรค์มาร่วมทีม'
+    : 'Join MeDream Studio — we are looking for game developers, designers, and creative talent.'
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://medream-studio.com/${locale}/careers`,
+      languages: { th: 'https://medream-studio.com/th/careers', en: 'https://medream-studio.com/en/careers' },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://medream-studio.com/${locale}/careers`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MeDream Studio' }],
+    },
+  }
 }
 
 export default async function CareersPage({ params }: { params: Promise<{ locale: string }> }) {
