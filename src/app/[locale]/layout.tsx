@@ -48,12 +48,14 @@ export async function generateMetadata({
       siteName: site.name,
       title: `${site.name} | Game Developer & Media Dream Team`,
       description,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MeDream Studio' }],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${site.name} | Game Developer`,
       description,
       creator: '@MeDreamStudio',
+      images: ['/og-image.jpg'],
     },
     robots: {
       index: true,
