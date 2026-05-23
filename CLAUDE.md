@@ -75,3 +75,45 @@ Custom brand tokens are defined via `@theme` in `src/app/globals.css` — no `ta
 ### Hidden Pages
 
 `/team/[slug]` pages are not linked from the nav and are excluded from sitemap/robots.txt. They're accessed directly by URL only.
+
+### SEO / Metadata Pattern
+
+Every sub-page `generateMetadata` must include `description`, `keywords`, `alternates.languages` (hreflang), and `openGraph` with image. Canonical domain is `medream-studio.com` (no www) — `next.config.ts` 301-redirects `www.*` to bare domain.
+
+```tsx
+export async function generateMetadata({ params }) {
+  const { locale } = await params
+  const isTh = locale === 'th'
+  const title = isTh ? 'Thai Title | MeDream Studio' : 'EN Title | MeDream Studio'
+  const description = isTh ? '...' : '...'
+  return {
+    title,
+    description,
+    keywords: isTh ? ['...'] : ['...'],
+    alternates: {
+      canonical: `https://medream-studio.com/${locale}/page`,
+      languages: { th: 'https://medream-studio.com/th/page', en: 'https://medream-studio.com/en/page' },
+    },
+    openGraph: {
+      title, description,
+      url: `https://medream-studio.com/${locale}/page`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'MeDream Studio' }],
+    },
+  }
+}
+```
+
+### Sitemap — Two Systems
+
+There are two sitemap mechanisms — keep them in sync:
+- `src/app/sitemap.ts` — Next.js built-in, serves `/sitemap.xml` at runtime
+- `next-sitemap.config.js` — runs postbuild via `next-sitemap`, generates `public/sitemap*.xml`
+
+Both use `https://medream-studio.com` (no www). Both exclude `/*/team/*`. If adding new routes, update `staticRoutes` in `src/app/sitemap.ts`.
+
+### Content vs Metadata
+
+`content/*.json` = visible page text (what users and Google's crawler read).
+`generateMetadata` keywords/description = `<head>` tags only (invisible to users, weak Google signal).
+
+To improve real SEO ranking, edit `content/services.json`, `content/site.json` descriptions — not just metadata.
