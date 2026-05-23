@@ -34,7 +34,7 @@ export function NavBar({ items }: Props) {
           {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2">
             <Image
-              src="/images/logo/logo-color.png"
+              src="/images/logo/logo-white.png"
               alt="MeDream Studio"
               width={40}
               height={40}
