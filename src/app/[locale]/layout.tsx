@@ -7,7 +7,6 @@ import { routing } from '@/i18n/routing'
 import { getNavConfig, getSiteConfig } from '@/lib/content'
 import { NavBar } from '@/components/layout/NavBar'
 import { Footer } from '@/components/layout/Footer'
-import { ScrollBackground } from '@/components/layout/ScrollBackground'
 import '../globals.css'
 
 export function generateStaticParams() {
@@ -111,6 +110,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600&family=Sarabun:wght@400;500&display=swap"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -118,7 +123,6 @@ export default async function LocaleLayout({
       </head>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <ScrollBackground />
           <NavBar items={nav.items} />
           <main>{children}</main>
           <Footer site={site} navItems={nav.items} locale={locale} />
