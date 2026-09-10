@@ -1,8 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand colors */
-  --color-midnight: #060a14;
+  /* Brand colors — MeDream CI v2 ("เหนือเมฆ ยามแสงแรก")
+     See docs/superpowers/specs/2026-09-11-website-redesign-ia-v2-design.md §2.1 */
+  --color-white: #FFFFFF;
+  --color-midnight: #04103A;
+  --color-navy: #052D6F;
+  --color-navy-card: #0B1D52;
+  --color-blue: #0C5BAC;
+  --color-sky: #3B89D0;
+  --color-mist: #87B2DE;
+  --color-dawn: #ECCCC1;
+  --color-first-light: #F5B98A;
+  --color-ink: #12203F;
+  --color-fg-2: #4B5670;
+  --color-fg-3: #626D87;
+  --color-line: #E4E7EF;
+
+  /* Deprecated — old CI, values UNCHANGED from before this phase, kept only
+     so pages not yet migrated to the new tokens don't lose their utility
+     classes. Each of these is removed once every consumer has migrated to
+     the new tokens above (tracked per-phase in the design spec §7; final
+     cleanup happens in Phase 7). Do not use these in new code. */
   --color-deep-space: #0d1a3e;
   --color-nebula: #1a2b5e;
   --color-royal-blue: #1740b0;
@@ -14,7 +33,9 @@
   --color-dream-cream: #fbf4e0;
 
   /* Typography */
-  --font-sans: "LINE Seed Sans TH", Arial, sans-serif;
+  --font-display: "Prompt", "Noto Sans Thai", system-ui, sans-serif;
+  --font-body: "Sarabun", "Noto Sans Thai", system-ui, sans-serif;
+  --font-sans: var(--font-body);
 
   /* Breakpoints (matches spec: md=768, lg=1024, xl=1280) */
   --breakpoint-sm: 640px;
@@ -22,41 +43,6 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
-}
-
-@font-face {
-  font-family: "LINE Seed Sans TH";
-  src: url("/fonts/LINESeedSansTH_W_Th.woff2") format("woff2");
-  font-weight: 100;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "LINE Seed Sans TH";
-  src: url("/fonts/LINESeedSansTH_W_Rg.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "LINE Seed Sans TH";
-  src: url("/fonts/LINESeedSansTH_W_Bd.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "LINE Seed Sans TH";
-  src: url("/fonts/LINESeedSansTH_W_XBd.woff2") format("woff2");
-  font-weight: 800;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "LINE Seed Sans TH";
-  src: url("/fonts/LINESeedSansTH_W_He.woff2") format("woff2");
-  font-weight: 900;
-  font-display: swap;
 }
 
 * {
@@ -68,7 +54,7 @@ html {
 }
 
 body {
-  background-color: #060a14;
-  color: #fbf4e0;
+  background-color: var(--color-midnight);
+  color: var(--color-dream-cream);
   font-family: var(--font-sans);
 }
