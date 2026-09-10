@@ -103,19 +103,6 @@ export interface FaqItem {
   featured: boolean
 }
 
-export interface BlogPost {
-  slug: string
-  title_th: string
-  title_en: string
-  date: string
-  excerpt_th: string
-  excerpt_en: string
-  body_th: string
-  body_en: string
-  tags: string[]
-  image: string
-}
-
 export interface Award {
   name_th: string
   name_en: string

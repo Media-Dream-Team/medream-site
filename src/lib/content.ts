@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import type {
   NavConfig, SiteConfig, Service, PortfolioItem,
-  TeamMember, TeamMemberDetail, FaqItem, BlogPost, Award, CareerOpening
+  TeamMember, TeamMemberDetail, FaqItem, Award, CareerOpening
 } from '@/types/content'
 
 function readJson<T>(relativePath: string): T {
@@ -49,14 +49,6 @@ export function getFaqItems(): FaqItem[] {
 
 export function getFeaturedFaq(): FaqItem[] {
   return getFaqItems().filter(f => f.featured).slice(0, 8)
-}
-
-export function getBlogPosts(): BlogPost[] {
-  return readJson<BlogPost[]>('blog.json')
-}
-
-export function getBlogPost(slug: string): BlogPost | null {
-  return getBlogPosts().find(p => p.slug === slug) ?? null
 }
 
 export function getAwards(): Award[] {

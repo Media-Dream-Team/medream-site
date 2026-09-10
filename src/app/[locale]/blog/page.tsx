@@ -2,7 +2,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getBlogPosts } from '@/lib/content'
+import { getBlogPosts } from '@/lib/notion'
+
+export const revalidate = 300
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -30,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const l = locale as 'th' | 'en'
-  const posts = getBlogPosts()
+  const posts = await getBlogPosts(l)
 
   return (
     <div className="pt-16">
@@ -53,8 +55,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                 >
                   <div className="relative h-48">
                     <Image
-                      src={post.image || '/images/portfolio/placeholder.png'}
-                      alt={l === 'th' ? post.title_th : post.title_en}
+                      src={post.cover || '/images/portfolio/placeholder.png'}
+                      alt={post.title}
                       fill
                       className="object-cover"
                     />
@@ -62,10 +64,10 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                   <div className="p-4">
                     <p className="text-horizon text-xs mb-2">{post.date}</p>
                     <h2 className="text-dream-cream font-bold group-hover:text-dawn-gold transition-colors">
-                      {l === 'th' ? post.title_th : post.title_en}
+                      {post.title}
                     </h2>
                     <p className="text-horizon text-sm mt-2 leading-relaxed">
-                      {l === 'th' ? post.excerpt_th : post.excerpt_en}
+                      {post.excerpt}
                     </p>
                   </div>
                 </Link>

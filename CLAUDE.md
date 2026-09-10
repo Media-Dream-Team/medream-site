@@ -13,12 +13,17 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 }
 ```
 
+(`AGENTS.md` carries the same warning for tools that read that file instead.)
+
 ## Commands
 
+This repo uses **pnpm** (`packageManager: pnpm@9.15.0` in package.json), not npm — a dependency (`@tsparticles/*`) is pinned via the `workspace:^` protocol, which only pnpm understands. `npm install` fails with `EUNSUPPORTEDPROTOCOL`. Ignore the npm instructions in README.md.
+
 ```bash
-npm run dev       # dev server with Turbopack at localhost:3000
-npm run build     # production build (also runs next-sitemap postbuild)
-npm run lint      # ESLint
+pnpm install      # install dependencies
+pnpm dev          # dev server with Turbopack at localhost:3000
+pnpm build        # production build (also runs next-sitemap postbuild)
+pnpm lint         # ESLint
 npx tsc --noEmit  # TypeScript check
 ```
 
@@ -38,12 +43,18 @@ All pages live under `src/app/[locale]/` — Thai (`th`, default) and English (`
 
 All site content lives in `content/*.json` — **no database, no CMS**. Edit JSON and push; Vercel auto-redeploys. The content loaders in `src/lib/content.ts` read these files at request time with `fs.readFileSync`.
 
+- `content/nav.json` — nav bar items
 - `content/site.json` — name, tagline, vision, mission, pipeline steps, socials
 - `content/services.json`, `portfolio.json`, `team.json`, `faq.json` — main data arrays
 - `content/team/<slug>.json` — per-member detail pages (not linked from nav)
-- `content/blog.json`, `awards.json`, `careers.json` — currently empty arrays
+- `content/awards.json`, `careers.json` — currently empty arrays
+- `content/*.example.json` — reference templates showing the shape for the empty arrays above; not read by the app
+
+**Exception — Blog:** the Blog section does not follow this model. It reads from a Notion database instead of `content/blog.json` (that file no longer exists). See "Blog CMS (Notion)" below.
 
 Types for all content are in `src/types/content.ts`.
+
+Bilingual content fields are duplicated per-field with a `_th`/`_en` suffix (e.g. `title_th`/`title_en`, `label_th`/`label_en`), not routed through next-intl — pages pick the field matching the active `locale`. This is separate from `messages/th.json` and `messages/en.json`, which hold UI chrome strings (buttons, labels, form copy) via next-intl's `useTranslations`.
 
 ### Component Pattern
 
@@ -63,6 +74,16 @@ Pages are **server components** that fetch content and pass it as props. Client 
 Requires env vars:
 - `GOOGLE_SERVICE_ACCOUNT_KEY` — base64-encoded service account JSON
 - `GOOGLE_SHEET_ID` — spreadsheet ID from the sheet URL
+
+### Blog CMS (Notion)
+
+Unlike the rest of the site, `/blog` and `/blog/[slug]` do not read `content/*.json` — they pull from a Notion database via `src/lib/notion.ts` (using `@notionhq/client`).
+
+- **Database:** "Blog Posts" in the "Medream Studio" Notion workspace. One row per language per article (not one row per article) — a single post is two rows sharing the same `Slug` property, one with `Locale = th` and one with `Locale = en`. Only rows with `Status = Published` are shown; body content is the row's page content (native Notion blocks), not a property.
+- **Env vars:** `NOTION_API_KEY` (internal integration token), `NOTION_BLOG_DATABASE_ID` (the database's page ID, from its Notion URL — `src/lib/notion.ts` resolves this to the data source ID the query API needs via `databases.retrieve`).
+- **Rendering:** `src/components/shared/NotionBlocks.tsx` maps Notion blocks (headings, paragraphs, lists, images, tables, quotes, callouts, code, dividers, bookmarks) to JSX styled with the site's own brand tokens — it does not attempt to visually replicate Notion. Images render via a plain `<img>`, not `next/image`, because Notion's file URLs are signed and expire hourly.
+- **Freshness:** both blog pages set `export const revalidate = 300` — edits in Notion appear on the site within 5 minutes, no redeploy needed.
+- **Not yet wired up:** GA4 view/CTA-click tracking on blog pages (deferred, tracked separately — ask before assuming it's out of scope).
 
 ### Tailwind v4
 
