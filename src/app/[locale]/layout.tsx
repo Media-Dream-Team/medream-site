@@ -1,5 +1,6 @@
 // src/app/[locale]/layout.tsx
 import type { Metadata } from 'next'
+import { Prompt, Sarabun } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -8,6 +9,20 @@ import { getNavConfig, getSiteConfig } from '@/lib/content'
 import { NavBar } from '@/components/layout/NavBar'
 import { Footer } from '@/components/layout/Footer'
 import '../globals.css'
+
+const prompt = Prompt({
+  subsets: ['thai', 'latin'],
+  weight: ['500', '600'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const sarabun = Sarabun({
+  subsets: ['thai', 'latin'],
+  weight: ['400', '500'],
+  variable: '--font-body',
+  display: 'swap',
+})
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }))
@@ -108,14 +123,8 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={`${prompt.variable} ${sarabun.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Prompt:wght@500;600&family=Sarabun:wght@400;500&display=swap"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
