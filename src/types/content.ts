@@ -242,5 +242,9 @@ export interface AboutStorySection {
 
 export interface AboutContent {
   story: AboutStorySection[]
-  dna: string[]
+  dna: {
+    headline_th: string
+    headline_en: string
+    traits: string[]
+  }
 }

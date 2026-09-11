@@ -1,10 +1,9 @@
 // src/app/[locale]/about/page.tsx
 import type { Metadata } from 'next'
-import { getSiteConfig, getAboutContent, getAwards, getMilestones, getTeamMembers } from '@/lib/content'
+import { getSiteConfig, getAboutContent, getAwards, getMilestones } from '@/lib/content'
 import { StorySection } from '@/components/about/StorySection'
 import { VisionMissionSection } from '@/components/about/VisionMissionSection'
 import { DnaSection } from '@/components/about/DnaSection'
-import { TeamSection } from '@/components/about/TeamSection'
 import { AwardsSection } from '@/components/about/AwardsSection'
 import { MilestonesSection } from '@/components/about/MilestonesSection'
 
@@ -41,7 +40,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const about = getAboutContent()
   const awards = getAwards()
   const milestones = getMilestones()
-  const members = getTeamMembers()
 
   return (
     <div className="pt-16">
@@ -52,8 +50,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
       <StorySection story={about.story} locale={locale} />
       <VisionMissionSection site={site} locale={locale} />
-      <DnaSection about={about} />
-      <TeamSection members={members} locale={locale} />
+      <DnaSection about={about} locale={locale} />
       <AwardsSection awards={awards} locale={locale} />
       <MilestonesSection milestones={milestones} locale={locale} />
     </div>

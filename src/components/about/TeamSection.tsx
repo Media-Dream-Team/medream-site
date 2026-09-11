@@ -1,5 +1,6 @@
 import type { TeamMember } from '@/types/content'
 import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
 
 interface Props {
   members: TeamMember[]
@@ -17,6 +18,7 @@ function PersonIcon() {
 
 export function TeamSection({ members, locale }: Props) {
   const l = locale as 'th' | 'en'
+  if (members.length === 0) return null
   return (
     <section className="bg-white pb-16 md:pb-24 px-4">
       <div className="max-w-5xl mx-auto">
@@ -25,7 +27,7 @@ export function TeamSection({ members, locale }: Props) {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {members.map(member => (
-            <div key={member.slug} className="border border-line p-6 text-center flex flex-col items-center gap-2">
+            <Card key={member.slug} className="text-center flex flex-col items-center gap-2">
               <div className="text-blue">
                 <PersonIcon />
               </div>
@@ -36,7 +38,7 @@ export function TeamSection({ members, locale }: Props) {
               <Button href={`/${locale}/team/${member.slug}`} variant="text" surface="light">
                 {l === 'th' ? 'ดูผลงาน' : 'View Portfolio'}
               </Button>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

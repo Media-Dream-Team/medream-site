@@ -19,5 +19,9 @@
       "body_en": "As the team started exhibiting and meeting real clients, it became clear that games aren't just for playing alone — they draw people in far better than traditional media. Combined with the founder's background in project management and e-commerce marketing, the team saw an opportunity to use the fun of games to help other businesses build engagement and measure real results.\n\nThis is where the name MeDream comes from — the Thai word \"Me (มี, meaning 'to have')\" combined with \"Dream,\" reflecting the intention to make the dreams we have become real."
     }
   ],
-  "dna": ["Creative", "Gamer", "Storyteller"]
+  "dna": {
+    "headline_th": "DNA ของเรา",
+    "headline_en": "Our DNA",
+    "traits": ["Creative", "Gamer", "Storyteller"]
+  }
 }

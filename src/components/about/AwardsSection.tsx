@@ -1,5 +1,6 @@
 import type { Award } from '@/types/content'
 import { Badge } from '@/components/ui/Badge'
+import { Card } from '@/components/ui/Card'
 
 interface Props {
   awards: Award[]
@@ -17,13 +18,13 @@ export function AwardsSection({ awards, locale }: Props) {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {awards.map((award, i) => (
-            <div key={i} className="border border-line p-5 flex flex-col gap-2">
+            <Card key={i} className="flex flex-col gap-2">
               <Badge className="self-start">{award.year}</Badge>
               <p className="font-display font-semibold text-ink">
                 {l === 'th' ? award.name_th : award.name_en}
               </p>
               <p className="text-fg-2 text-sm">{award.event}</p>
-            </div>
+            </Card>
           ))}
         </div>
       </div>
