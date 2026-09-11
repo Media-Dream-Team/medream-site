@@ -101,6 +101,7 @@ export interface FaqItem {
   answer_th: string
   answer_en: string
   featured: boolean
+  category?: 'general' | 'marketing-event' | 'crm' | 'learning' | 'games'
 }
 
 export interface Award {
@@ -109,6 +110,15 @@ export interface Award {
   year: number
   event: string
   image: string
+}
+
+export interface Milestone {
+  date_th: string
+  date_en: string
+  event_th: string
+  event_en: string
+  location_th: string
+  location_en: string
 }
 
 export interface CareerOpening {
