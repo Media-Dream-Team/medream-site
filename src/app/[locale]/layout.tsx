@@ -134,7 +134,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <NavBar items={nav.items} />
           <main>{children}</main>
-          <Footer site={site} navItems={nav.items} locale={locale} />
+          <Footer site={site} locale={locale} />
         </NextIntlClientProvider>
       </body>
     </html>
