@@ -103,6 +103,12 @@
   "trustedBy": {
     "headline_th": "ได้รับความไว้วางใจจาก",
     "headline_en": "Trusted By",
+    "clientsCaption_th": "ลูกค้า",
+    "clientsCaption_en": "Clients",
+    "awardsCaption_th": "รางวัล",
+    "awardsCaption_en": "Awards",
+    "eventsCaption_th": "เวทีที่เราไปร่วม",
+    "eventsCaption_en": "Featured At",
     "extraClients": [
       {
         "label_th": "การท่องเที่ยวแห่งประเทศไทย (ททท.)",
@@ -119,10 +125,12 @@
       { "level": 3, "label_th": "พัฒนา", "label_en": "Development" },
       { "level": 4, "label_th": "Test & Launch", "label_en": "Test & Launch" }
     ],
-    "cta_th": "ดู Way of work แบบเต็ม",
-    "cta_en": "See Full Way of Work"
+    "cta_th": "คุยกับเรา",
+    "cta_en": "Get in Touch"
   },
   "faqPreview": {
+    "headline_th": "คำถามที่พบบ่อย",
+    "headline_en": "FAQ",
     "items": [
       {
         "question_th": "งบประมาณเริ่มต้นเท่าไหร่?",

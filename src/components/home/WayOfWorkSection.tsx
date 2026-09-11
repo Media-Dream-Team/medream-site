@@ -1,6 +1,7 @@
 import type { HomeContent } from '@/types/content'
 import { LevelBadge } from '@/components/ui/LevelBadge'
 import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
 
 interface Props {
   home: HomeContent
@@ -19,17 +20,14 @@ export function WayOfWorkSection({ home, locale }: Props) {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           {wayOfWork.steps.map(step => (
-            <div key={step.level} className="border border-line p-5 text-center">
+            <Card key={step.level} className="text-center">
               <LevelBadge
                 level={step.level}
                 total={wayOfWork.steps.length}
-                label=""
+                label={l === 'th' ? step.label_th : step.label_en}
                 className="justify-center mb-3"
               />
-              <p className="font-display font-semibold text-ink">
-                {l === 'th' ? step.label_th : step.label_en}
-              </p>
-            </div>
+            </Card>
           ))}
         </div>
         <div className="text-center">

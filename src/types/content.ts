@@ -203,6 +203,12 @@ export interface HomeContent {
   trustedBy: {
     headline_th: string
     headline_en: string
+    clientsCaption_th: string
+    clientsCaption_en: string
+    awardsCaption_th: string
+    awardsCaption_en: string
+    eventsCaption_th: string
+    eventsCaption_en: string
     extraClients: HomeTrustedByItem[]
   }
   wayOfWork: {
@@ -213,6 +219,8 @@ export interface HomeContent {
     cta_en: string
   }
   faqPreview: {
+    headline_th: string
+    headline_en: string
     items: HomeFaqPreviewItem[]
     cta_th: string
     cta_en: string

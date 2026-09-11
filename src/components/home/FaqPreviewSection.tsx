@@ -15,7 +15,7 @@ export function FaqPreviewSection({ home, locale }: Props) {
     <section className="bg-white py-16 md:py-24 px-4">
       <div className="max-w-3xl mx-auto">
         <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] mb-10 text-center">
-          {l === 'th' ? 'คำถามที่พบบ่อย' : 'FAQ'}
+          {l === 'th' ? faqPreview.headline_th : faqPreview.headline_en}
         </h2>
         <div>
           {faqPreview.items.map((item, i) => (
