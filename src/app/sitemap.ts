@@ -2,7 +2,10 @@ import type { MetadataRoute } from 'next'
 
 const BASE_URL = 'https://medream-studio.com'
 const locales = ['th', 'en']
-const staticRoutes = ['', '/services', '/portfolio', '/about', '/faq', '/contact', '/blog', '/careers', '/team']
+const staticRoutes = [
+  '', '/services', '/services/marketing-event', '/services/crm', '/services/learning', '/services/games',
+  '/portfolio', '/about', '/faq', '/contact', '/blog', '/careers', '/team',
+]
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
