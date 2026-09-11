@@ -1,13 +1,5 @@
 [
   {
-    "date_th": "15 มกราคม 2569",
-    "date_en": "15 January 2026",
-    "event_th": "Thai Digital Content Go Global — depa Accelerator Program",
-    "event_en": "Thai Digital Content Go Global — depa Accelerator Program",
-    "location_th": "True Digital Park",
-    "location_en": "True Digital Park"
-  },
-  {
     "date_th": "10 กรกฎาคม 2568",
     "date_en": "10 July 2025",
     "event_th": "Game Festival",
@@ -22,6 +14,14 @@
     "event_en": "Thailand International Game Showcase 2025 (Ministry of Culture)",
     "location_th": "สยามพารากอน",
     "location_en": "Siam Paragon"
+  },
+  {
+    "date_th": "15 มกราคม 2569",
+    "date_en": "15 January 2026",
+    "event_th": "Thai Digital Content Go Global — depa Accelerator Program",
+    "event_en": "Thai Digital Content Go Global — depa Accelerator Program",
+    "location_th": "True Digital Park",
+    "location_en": "True Digital Park"
   },
   {
     "date_th": "24 พฤษภาคม 2569",

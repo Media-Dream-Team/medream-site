@@ -69,7 +69,7 @@ export function NavBar({ items }: Props) {
             <button
               className="lg:hidden text-white hover:text-first-light p-1"
               onClick={() => setDrawerOpen(true)}
-              aria-label="Open menu"
+              aria-label={t('open_menu')}
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="3" y1="6" x2="21" y2="6" />

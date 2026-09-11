@@ -41,6 +41,14 @@ export function Footer({ site, locale }: Props) {
             >
               FAQ
             </Link>
+            {site.email && (
+              <a
+                href={`mailto:${site.email}`}
+                className="text-white hover:text-first-light text-sm font-display font-semibold transition-colors"
+              >
+                {site.email}
+              </a>
+            )}
             {site.socials.map(s => (
               <a
                 key={s.platform}
