@@ -18,7 +18,8 @@ MeDream is repositioning its site around the slogan "We Dream, We Do, We Make Di
 Decisions locked in during brainstorming (2026-09-11):
 1. New CI **fully replaces** the current design system (colors + font) everywhere, not just new pages.
 2. Whole plan is scoped now, built in phases (see §7).
-3. Existing routes (`/portfolio`, `/blog`, `/contact`, `/faq`) are **kept stable** — only nav labels/headings change. No new top-level routes except `/portfolio/[slug]` for the Sumeeper detail page.
+3. Existing routes (`/portfolio`, `/blog`, `/contact`, `/faq`) are **kept stable** — only nav labels/headings change. No new top-level routes except `/portfolio/[slug]` for detail pages.
+4. **(Added 2026-09-11, after Phase 0 shipped)** Works (`/portfolio`) moves from static `content/portfolio.json` to the same Notion CMS pattern as Blog — see §3.3. Motivation: client work gets added indefinitely after launch, and a Notion row is a lower-friction update than a JSON edit + push.
 
 ---
 
@@ -124,29 +125,36 @@ export interface FaqItem {
 - `/contact` ("เริ่มโปรเจกต์"): all items, default view or filtered by tab.
 - Home FAQ preview: `items.filter(f => f.featured)`.
 
-### 3.3 `PortfolioItem` — filters + detail page
+### 3.3 Works — moved to Notion CMS (decision, 2026-09-11, supersedes the original `portfolio.json` plan)
 
-```ts
-export interface PortfolioItem {
-  id: string
-  title_th: string
-  title_en: string
-  type: 'own-ip' | 'client'
-  filterTags: ('event' | 'ar' | 'animation')[]   // renamed from `tags` for clarity; drives Works filter pills
-  featured: boolean
-  image: string
-  year: number
-  desc_th: string       // becomes the full case-study body: โจทย์ → สิ่งที่ทำ → ผลลัพธ์ → เทคโนโลยี
-  desc_en: string
-  url?: string
-  hasDetailPage?: boolean   // true only for Sumeeper — links to /portfolio/[slug]
-  slug?: string              // required when hasDetailPage is true
-}
-```
+**Change from the original plan:** Works (`/portfolio`) was originally scoped as a `content/portfolio.json` rewrite (like every other content type). Per user decision on 2026-09-11, it instead follows the **same Notion CMS pattern already built for the Blog** (`src/lib/notion.ts`, `src/components/shared/NotionBlocks.tsx`) — motivation: new client work gets added occasionally and indefinitely after launch, and editing a Notion row is a much lower-friction update path than editing JSON + a code push, exactly the reason Blog already works this way.
 
-Works filter set: ทั้งหมด / งานลูกค้า (`type === 'client'`) / IP ของเรา (`type === 'own-ip'`) / Event / AR / Animation (`filterTags`). No CRM/Learning filter (per content-ia-v2.md — no real cases exist yet for those groups).
+**Notion database:** a new **"Works"** database (separate from "Blog Posts" — different shape, different cadence), same one-row-per-language-per-item pattern as Blog: two rows share a `Slug`, one `Locale=th` one `Locale=en`. Only `Status=Published` rows are shown. The case-study body (โจทย์ → สิ่งที่ทำ → ผลลัพธ์ → เทคโนโลยี) is the row's **page content** (native Notion blocks), rendered with the existing `NotionBlocks` component — not a property, matching how Blog post bodies work.
 
-New route `src/app/[locale]/portfolio/[slug]/page.tsx` for Sumeeper only, modeled on the existing hidden `team/[slug]` pattern (`getPortfolioDetail(slug)` reading `content/portfolio/<slug>.json` for the extended fields: trailer, Steam/itch.io links, dev-log link, full feature list). This is a new content loader function, not a new top-level type — kept minimal since only one item uses it today.
+Properties:
+| Property | Type | Notes |
+|---|---|---|
+| `Slug` | text | shared join key across the th/en row pair |
+| `Locale` | select (`th`/`en`) | |
+| `Title` | title | |
+| `Type` | select (`own-ip`/`client`) | drives the งานลูกค้า / IP ของเรา filter |
+| `FilterTags` | multi-select (`event`/`ar`/`animation`) | drives the Event/AR/Animation filter pills. No `crm`/`learning` options exist — per content-ia-v2.md, those groups have no real cases yet and must not get fabricated ones |
+| `Featured` | checkbox | pulled into Home's Works teaser section |
+| `Year` | number | |
+| `Image` | files & media | same signed-URL-expires-hourly caveat as Blog images — render via plain `<img>`, not `next/image`, and refetch per request (no caching the URL itself) |
+| `ExternalUrl` | url | optional — e.g. Steam/itch.io link for Sumeeper, or a client's own campaign page |
+| `HasDetailPage` | checkbox | true only for Sumeeper today — gates whether `/portfolio/[slug]` renders for that row |
+| `Status` | select (`Draft`/`Published`) | gates visibility, same as Blog |
+
+**Env vars:** `NOTION_WORKS_DATABASE_ID` (new, alongside the existing `NOTION_API_KEY` — same integration token, different database).
+
+**Routing (unchanged from the original plan):** `/portfolio` (relabeled "Works" in nav/`<h1>`) lists filtered items; `/portfolio/[slug]` is a real dynamic route now (not Sumeeper-only-by-convention) but in practice only rows with `HasDetailPage=true` are linked to it from the listing — same mechanism as `/blog/[slug]`, reusing that page's data-fetching shape (`getWorkBySlug(slug, locale)` mirroring `getBlogPost`).
+
+**Filtering:** ทั้งหมด / งานลูกค้า (`Type==='client'`) / IP ของเรา (`Type==='own-ip'`) / Event / AR / Animation (`FilterTags`) — fetch all `Published` rows for the active locale once per request (`revalidate = 300`, same as Blog), filter client-side in the existing `PortfolioGrid` component exactly as it does today, just swapping its data source from `getPortfolioItems()` (JSON) to the new Notion query function.
+
+**No longer needed:** `content/portfolio.json`, `content/portfolio.example.json` (deleted, same as `content/blog.json` was), the `PortfolioItem` type in `src/types/content.ts`, `getPortfolioItems()`/`getFeaturedPortfolio()` in `src/lib/content.ts` — all replaced by Notion-backed equivalents living in `src/lib/notion.ts` (e.g. `getWorks(locale)`, `getFeaturedWorks(locale)`, `getWorkBySlug(slug, locale)`), mirroring the existing blog functions there.
+
+**Also update:** `CLAUDE.md`'s "Content Model" section (Works becomes a second documented exception alongside Blog, no longer part of the `content/*.json` list) and its "Blog CMS (Notion)" section arguably gets renamed/split to cover both — this is implementation work for Phase 5, noted here so it isn't missed.
 
 ### 3.4 `Award` — populate real data
 
@@ -208,8 +216,8 @@ Per the source docs' own division of labor (the "ผมช่วยได้ไ�
 | `/about` | Full rebuild (Phase 3) |
 | `/services` | Becomes a landing that lists the 4 groups (cards linking to each), replaces current flat grid (Phase 4) |
 | `/services/[group]` | **New dynamic route** (`marketing-event`, `crm`, `learning`, `games`) — one page per group with body/forWho/bullets/FAQ (Phase 4) |
-| `/portfolio` | Relabeled "Works" in nav + `<h1>`; filter UI rebuilt (Phase 5) |
-| `/portfolio/[slug]` | New — Sumeeper only (Phase 5) |
+| `/portfolio` | Relabeled "Works" in nav + `<h1>`; filter UI rebuilt; data source moves to Notion (§3.3) (Phase 5) |
+| `/portfolio/[slug]` | New — renders any `HasDetailPage=true` Notion row (only Sumeeper today) (Phase 5) |
 | `/blog`, `/blog/[slug]` | Nav label → "Insights". No other change; Notion schema Dev-Log/Guide categorization deferred (see §8) |
 | `/contact` | Rebuilt into "เริ่มโปรเจกต์" — Way of work (full) + central FAQ (filterable) + expanded form (Phase 6) |
 | `/faq` | Kept as standalone full FAQ listing, now with category tabs, sourced from the same `faq.json` (Phase 6, built alongside `/contact` since they share the FAQ-list component) |
@@ -267,7 +275,7 @@ CTA button "เริ่มโปรเจกต์" → `/contact`, rendered in
 | 2 | Home rebuild | `src/app/[locale]/page.tsx` + all `src/components/home/*` | 0, 1 |
 | 3 | About rebuild | `src/app/[locale]/about/page.tsx`, new `src/components/about/*` | 0, 1 |
 | 4 | Services (4 groups) | `content/services.json` (rewrite), `src/app/[locale]/services/page.tsx`, new `services/[group]/page.tsx` | 0, 1, 3.2 (FaqItem) |
-| 5 | Works | `content/portfolio.json` (rewrite), `portfolio/page.tsx`, `PortfolioGrid`, new `portfolio/[slug]/page.tsx` | 0, 1 |
+| 5 | Works | `src/lib/notion.ts` (add Works query functions), delete `content/portfolio.json` + `.example.json`, `portfolio/page.tsx`, `PortfolioGrid` (swap data source), new `portfolio/[slug]/page.tsx`, remove `PortfolioItem` from `src/types/content.ts`, new `NOTION_WORKS_DATABASE_ID` env var, update `CLAUDE.md` | 0, 1 |
 | 6 | เริ่มโปรเจกต์ + FAQ | `content/faq.json` (full rewrite), `content/site.json` (`pipeline`), `contact/page.tsx`, `ContactForm.tsx`, `faq/page.tsx`, `google-sheets.ts`, `api/contact/route.ts`, `messages/*.json` | 0, 1, 4 (shares FAQ data/component) |
 | 7 | Polish | `generateMetadata` on every touched page, `sitemap.ts` (add the single `/portfolio/sumeeper` entry explicitly to `staticRoutes` — it's one known slug, not a wildcard pattern like `/team/*`), `next-sitemap.config.js` if needed | all |
 
