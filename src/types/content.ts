@@ -130,3 +130,97 @@ export interface CareerOpening {
   desc_en: string
   open: boolean
 }
+
+export interface WorkTeaser {
+  id: string
+  title_th: string
+  title_en: string
+  desc_th: string
+  desc_en: string
+  image: string
+}
+
+export interface HomeServicePreview {
+  id: 'marketing-event' | 'crm' | 'learning' | 'games'
+  title_th: string
+  title_en: string
+  body_th: string
+  body_en: string
+  cta_th: string
+  cta_en: string
+}
+
+export interface HomeFaqPreviewItem {
+  question_th: string
+  question_en: string
+  answer_th: string
+  answer_en: string
+}
+
+export interface HomeWayOfWorkStep {
+  level: number
+  label_th: string
+  label_en: string
+}
+
+export interface HomeTrustedByItem {
+  label_th: string
+  label_en: string
+}
+
+export interface HomeContent {
+  hero: {
+    subheadline_th: string
+    subheadline_en: string
+  }
+  dream: {
+    headline: string
+    body_th: string
+    body_en: string
+    dna: string[]
+  }
+  services: {
+    headline: string
+    subheadline_th: string
+    subheadline_en: string
+    cards: HomeServicePreview[]
+  }
+  difference: {
+    headline: string
+    body_th: string
+    body_en: string
+    microProofNumber: string
+    microProof_th: string
+    microProof_en: string
+  }
+  works: {
+    headline_th: string
+    headline_en: string
+    teasers: WorkTeaser[]
+    cta_th: string
+    cta_en: string
+  }
+  trustedBy: {
+    headline_th: string
+    headline_en: string
+    extraClients: HomeTrustedByItem[]
+  }
+  wayOfWork: {
+    headline_th: string
+    headline_en: string
+    steps: HomeWayOfWorkStep[]
+    cta_th: string
+    cta_en: string
+  }
+  faqPreview: {
+    items: HomeFaqPreviewItem[]
+    cta_th: string
+    cta_en: string
+  }
+  finalCta: {
+    headline_th: string
+    headline_en: string
+    subheadline_th: string
+    subheadline_en: string
+  }
+}

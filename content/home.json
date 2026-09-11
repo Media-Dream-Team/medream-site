@@ -1,0 +1,161 @@
+{
+  "hero": {
+    "subheadline_th": "เราคือสตูดิโอที่ผสานความคิดสร้างสรรค์เข้ากับเทคโนโลยี สร้างเกมและสื่ออินเทอร์แอคทีฟที่ไม่ได้มีไว้แค่ความสนุก แต่เอาไปใช้กับการตลาดและวัดผลได้จริง",
+    "subheadline_en": "We're a studio that blends creativity with technology, building games and interactive media that aren't just for fun — brands can put them to work in marketing and measure the real results."
+  },
+  "dream": {
+    "headline": "We Dream",
+    "body_th": "เราคือทีมครีเอทีฟ นักเล่นเกม และนักเล่าเรื่อง รวมตัวกันเป็นสตูดิโอเกมและมีเดียอินเทอร์แอคทีฟจากไทย ทำตั้งแต่เกม Event ออกบูธ ไปจนถึง AR เปิดตัวสินค้า เพราะเราเชื่อว่าความสนุกช่วยให้แบรนด์เข้าใกล้ลูกค้าได้มากกว่าที่คิด",
+    "body_en": "We're a team of creatives, gamers, and storytellers who came together to build a Thai game and interactive media studio. We make everything from booth event games to AR product launches, because we believe fun brings brands closer to their customers than they'd expect.",
+    "dna": ["Creative", "Gamer", "Storyteller"]
+  },
+  "services": {
+    "headline": "We Do",
+    "subheadline_th": "เลือกจากโจทย์ที่อยากแก้ ไม่ต้องรู้จักเทคโนโลยีมาก่อนก็ได้",
+    "subheadline_en": "Start from the problem you want to solve — no need to know the technology up front",
+    "cards": [
+      {
+        "id": "marketing-event",
+        "title_th": "Marketing & Event",
+        "title_en": "Marketing & Event",
+        "body_th": "เกม Event เอาไว้ออกบูธ เล่นง่าย เก็บข้อมูลคนเล่นและสรุปผลให้ด้วย",
+        "body_en": "Event games for booths — easy to play, with player data collection and reporting built in",
+        "cta_th": "ดูรายละเอียด",
+        "cta_en": "See details"
+      },
+      {
+        "id": "crm",
+        "title_th": "Brand Engagement & CRM",
+        "title_en": "Brand Engagement & CRM",
+        "body_th": "เกมสะสมแต้ม เกมผูกใจลูกค้า ปรับจาก template พร้อมใช้ได้ใน 1 สัปดาห์",
+        "body_en": "Loyalty and engagement games that keep customers connected to your brand, adapted from a ready template in as little as 1 week",
+        "cta_th": "ดูรายละเอียด",
+        "cta_en": "See details"
+      },
+      {
+        "id": "learning",
+        "title_th": "Learning & Training",
+        "title_en": "Learning & Training",
+        "body_th": "สื่อการเรียนรู้แบบเกม เปลี่ยนเรื่องเข้าใจยากให้กลายเป็นเรื่องสนุก",
+        "body_en": "Game-based learning media that turns hard-to-grasp topics into something fun",
+        "cta_th": "ดูรายละเอียด",
+        "cta_en": "See details"
+      },
+      {
+        "id": "games",
+        "title_th": "Games & Immersive",
+        "title_en": "Games & Immersive",
+        "body_th": "เกม PC / Mobile, AR, VR แบบ custom เต็มรูปแบบ ตั้งแต่ไอเดียยันเปิดตัว",
+        "body_en": "Fully custom PC/Mobile games, AR, and VR — from idea all the way to launch",
+        "cta_th": "ดูรายละเอียด",
+        "cta_en": "See details"
+      }
+    ]
+  },
+  "difference": {
+    "headline": "We Make Difference",
+    "body_th": "ใครๆ ก็ทำเกมสนุกได้ แต่สนุกแล้วต้องวัดผลได้ด้วย นั่นคือสิ่งที่เราให้ความสำคัญเป็นพิเศษ ทุกงานที่เราออกแบบ ไม่ว่าจะเป็นเกม Event หรือสื่ออินเทอร์แอคทีฟ เราคิดเรื่องการเก็บข้อมูลและสรุปผลไว้ตั้งแต่แรก เพื่อให้คุณรู้ชัดๆ ว่าสิ่งที่ทำไปนั้นได้ผลจริงแค่ไหน ไม่ใช่แค่ความประทับใจที่จับต้องไม่ได้",
+    "body_en": "Anyone can make a fun game. But fun that can be measured — that's what we care about most. In every project we design, whether it's an event game or interactive media, we build in data collection and reporting from day one, so you know exactly how well it worked — not just an impression you can't put a number on.",
+    "microProofNumber": "30",
+    "microProof_th": "จอ Interactive AI ที่ช่วยเก็บ potential lead ได้กว่า 30 รายในงานเดียว",
+    "microProof_en": "An Interactive AI kiosk that helped collect over 30 potential leads in a single event"
+  },
+  "works": {
+    "headline_th": "ผลงานที่ผ่านมา",
+    "headline_en": "Our Work",
+    "teasers": [
+      {
+        "id": "ar-product-launch",
+        "title_th": "AR เปิดตัวสินค้าเครื่องสำอาง",
+        "title_en": "AR Cosmetics Product Launch",
+        "desc_th": "กล่องล็อคเวลาที่เปลี่ยนจากนาฬิกานับถอยหลัง เป็นขวด 3D ทันทีที่ถึงวันเปิดตัว",
+        "desc_en": "A time-locked box that switches from a countdown clock to a 3D product reveal the moment launch day arrives",
+        "image": "/images/portfolio/placeholder.png"
+      },
+      {
+        "id": "ai-interactive-booth",
+        "title_th": "จอ Interactive AI จับคู่ธุรกิจ",
+        "title_en": "AI Interactive Business-Matching Kiosk",
+        "desc_th": "เก็บ potential lead ได้กว่า 30 รายในงานเดียว",
+        "desc_en": "Collected over 30 potential leads in a single event",
+        "image": "/images/portfolio/placeholder.png"
+      },
+      {
+        "id": "tat-loy-krathong",
+        "title_th": "แคมเปญลอยกระทงกับ ททท.",
+        "title_en": "TAT Loy Krathong Campaign",
+        "desc_th": "คลิปโปรโมท 3D และการ์ดอวยพร 2D ผ่านมาสคอตน้องอุ่นใจ",
+        "desc_en": "A 3D promo clip and 2D animated greeting cards starring TAT's mascot, Nong Un Jai",
+        "image": "/images/portfolio/placeholder.png"
+      },
+      {
+        "id": "sumeeper",
+        "title_th": "Sumeeper",
+        "title_en": "Sumeeper",
+        "desc_th": "เกมของเราเอง ที่ได้รางวัล Best Game Technical และทุนสนับสนุนจาก depa",
+        "desc_en": "Our own game — winner of the Best Game Technical award and a depa startup grant",
+        "image": "/images/portfolio/sumeeper.png"
+      }
+    ],
+    "cta_th": "ดูผลงานทั้งหมด",
+    "cta_en": "See All Work"
+  },
+  "trustedBy": {
+    "headline_th": "ได้รับความไว้วางใจจาก",
+    "headline_en": "Trusted By",
+    "extraClients": [
+      {
+        "label_th": "การท่องเที่ยวแห่งประเทศไทย (ททท.)",
+        "label_en": "Tourism Authority of Thailand (TAT)"
+      }
+    ]
+  },
+  "wayOfWork": {
+    "headline_th": "เริ่มงานกับเรายังไง",
+    "headline_en": "How It Works",
+    "steps": [
+      { "level": 1, "label_th": "รับโจทย์", "label_en": "Discovery" },
+      { "level": 2, "label_th": "ออกแบบ Solution", "label_en": "Solution Design" },
+      { "level": 3, "label_th": "พัฒนา", "label_en": "Development" },
+      { "level": 4, "label_th": "Test & Launch", "label_en": "Test & Launch" }
+    ],
+    "cta_th": "ดู Way of work แบบเต็ม",
+    "cta_en": "See Full Way of Work"
+  },
+  "faqPreview": {
+    "items": [
+      {
+        "question_th": "งบประมาณเริ่มต้นเท่าไหร่?",
+        "question_en": "What's the starting budget?",
+        "answer_th": "เริ่มต้นหลักหมื่น (ต่ำกว่า 5 หมื่นบาท) สำหรับงานเล็กอย่างเกม CRM แบบ template",
+        "answer_en": "Starting in the tens of thousands of baht (under 50,000 THB) for small projects like a template-based CRM game"
+      },
+      {
+        "question_th": "ใช้เวลานานแค่ไหน?",
+        "question_en": "How long does it take?",
+        "answer_th": "เร็วสุดประมาณ 1–2 สัปดาห์สำหรับงาน Event ทั่วไป",
+        "answer_en": "As fast as 1–2 weeks for a typical event game"
+      },
+      {
+        "question_th": "ไม่รู้ว่าอยากได้อะไร ต้องทำยังไง?",
+        "question_en": "Not sure what you need? What should you do?",
+        "answer_th": "ไม่ต้องรู้มาก่อนก็ได้ ทีมช่วยแนะนำโซลูชันที่เหมาะกับโจทย์จริง",
+        "answer_en": "You don't need to know beforehand — our team helps recommend a solution that fits your actual problem"
+      },
+      {
+        "question_th": "มีบริการเก็บข้อมูล/Dashboard ไหม?",
+        "question_en": "Do you offer data collection or a dashboard?",
+        "answer_th": "มี เป็นจุดต่างหลักของเรา",
+        "answer_en": "Yes — it's one of our main differentiators"
+      }
+    ],
+    "cta_th": "ดู FAQ ทั้งหมด",
+    "cta_en": "See All FAQs"
+  },
+  "finalCta": {
+    "headline_th": "พร้อมทำให้ความฝันของคุณ \"มี\" อยู่จริงหรือยัง?",
+    "headline_en": "Ready to make your dream real?",
+    "subheadline_th": "เล่าโจทย์ให้เราฟังได้เลย ต่อให้ยังไม่แน่ใจงบหรือรูปแบบก็เริ่มคุยกันก่อนได้",
+    "subheadline_en": "Tell us what you're trying to do — even if you're not sure about budget or format yet, let's start the conversation"
+  }
+}

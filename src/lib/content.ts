@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import type {
   NavConfig, SiteConfig, Service, PortfolioItem,
-  TeamMember, TeamMemberDetail, FaqItem, Award, Milestone, CareerOpening
+  TeamMember, TeamMemberDetail, FaqItem, Award, Milestone, CareerOpening, HomeContent
 } from '@/types/content'
 
 function readJson<T>(relativePath: string): T {
@@ -18,6 +18,10 @@ export function getNavConfig(): NavConfig {
 
 export function getSiteConfig(): SiteConfig {
   return readJson<SiteConfig>('site.json')
+}
+
+export function getHomeContent(): HomeContent {
+  return readJson<HomeContent>('home.json')
 }
 
 export function getServices(): Service[] {
