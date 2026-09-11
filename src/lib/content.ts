@@ -32,10 +32,6 @@ export function getPortfolioItems(): PortfolioItem[] {
   return readJson<PortfolioItem[]>('portfolio.json')
 }
 
-export function getFeaturedPortfolio(): PortfolioItem[] {
-  return getPortfolioItems().filter(p => p.featured)
-}
-
 export function getTeamMembers(): TeamMember[] {
   return readJson<TeamMember[]>('team.json')
 }
@@ -49,10 +45,6 @@ export function getTeamMemberDetail(slug: string): TeamMemberDetail | null {
 
 export function getFaqItems(): FaqItem[] {
   return readJson<FaqItem[]>('faq.json')
-}
-
-export function getFeaturedFaq(): FaqItem[] {
-  return getFaqItems().filter(f => f.featured).slice(0, 8)
 }
 
 export function getAwards(): Award[] {

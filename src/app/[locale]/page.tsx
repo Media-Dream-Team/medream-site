@@ -1,8 +1,15 @@
+// src/app/[locale]/page.tsx
 import type { Metadata } from 'next'
-import {
-  getSiteConfig, getServices, getFeaturedPortfolio,
-  getAwards, getFeaturedFaq,
-} from '@/lib/content'
+import { getSiteConfig, getHomeContent, getAwards, getMilestones } from '@/lib/content'
+import { HeroSection } from '@/components/home/HeroSection'
+import { WeDreamSection } from '@/components/home/WeDreamSection'
+import { WeDoSection } from '@/components/home/WeDoSection'
+import { WeMakeDifferenceSection } from '@/components/home/WeMakeDifferenceSection'
+import { WorksSection } from '@/components/home/WorksSection'
+import { TrustedBySection } from '@/components/home/TrustedBySection'
+import { WayOfWorkSection } from '@/components/home/WayOfWorkSection'
+import { FaqPreviewSection } from '@/components/home/FaqPreviewSection'
+import { FinalCtaSection } from '@/components/home/FinalCtaSection'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -16,14 +23,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       : 'MeDream Studio (Media Dream Team) — Thailand game developer studio. We build Unity games, mobile games, serious games, AR/VR, and animation.',
   }
 }
-import { HeroSection } from '@/components/home/HeroSection'
-import { WhoWeAreSection } from '@/components/home/WhoWeAreSection'
-import { ServicesSection } from '@/components/home/ServicesSection'
-import { PortfolioHighlightSection } from '@/components/home/PortfolioHighlightSection'
-import { AwardsSection } from '@/components/home/AwardsSection'
-import { WayOfWorkSection } from '@/components/home/WayOfWorkSection'
-import { FaqPreviewSection } from '@/components/home/FaqPreviewSection'
-import { ContactFormSection } from '@/components/home/ContactFormSection'
 
 export default async function HomePage({
   params,
@@ -32,21 +31,21 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   const site = getSiteConfig()
-  const services = getServices()
-  const portfolio = getFeaturedPortfolio()
+  const home = getHomeContent()
   const awards = getAwards()
-  const faq = getFeaturedFaq()
+  const milestones = getMilestones()
 
   return (
     <>
-      <HeroSection site={site} />
-      <WhoWeAreSection site={site} locale={locale} />
-      <ServicesSection services={services} locale={locale} />
-      <PortfolioHighlightSection items={portfolio} locale={locale} />
-      <AwardsSection awards={awards} locale={locale} />
-      <WayOfWorkSection steps={site.pipeline} locale={locale} />
-      <FaqPreviewSection items={faq} locale={locale} />
-      <ContactFormSection services={services} locale={locale} />
+      <HeroSection site={site} home={home} />
+      <WeDreamSection home={home} locale={locale} />
+      <WeDoSection home={home} locale={locale} />
+      <WeMakeDifferenceSection home={home} locale={locale} />
+      <WorksSection home={home} locale={locale} />
+      <TrustedBySection home={home} awards={awards} milestones={milestones} locale={locale} />
+      <WayOfWorkSection home={home} locale={locale} />
+      <FaqPreviewSection home={home} locale={locale} />
+      <FinalCtaSection home={home} locale={locale} />
     </>
   )
 }
