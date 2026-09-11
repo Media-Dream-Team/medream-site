@@ -26,7 +26,7 @@ export function ServiceGroupFaqSection({ group, locale }: Props) {
     <section className="bg-white pb-16 md:pb-24 px-4">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
       />
       <div className="max-w-3xl mx-auto">
         <h2 className="font-display font-semibold text-ink text-2xl md:text-[28px] mb-8 text-center">

@@ -62,8 +62,8 @@ export default async function ServiceGroupPage({
   return (
     <div className="pt-16">
       <section className="bg-white pt-16 pb-4 px-4 text-center">
-        <Button href={`/${locale}/services`} variant="text" surface="light" className="mb-6 inline-flex">
-          {l === 'th' ? '← กลับไปหน้าบริการ' : '← Back to Services'}
+        <Button href={`/${locale}/services`} variant="text" surface="light" className="mb-6">
+          {l === 'th' ? 'กลับไปหน้าบริการ' : 'Back to Services'}
         </Button>
         <h1 className="font-display font-semibold text-ink text-4xl md:text-5xl mb-3">
           {l === 'th' ? group.title_th : group.title_en}

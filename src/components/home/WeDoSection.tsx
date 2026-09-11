@@ -32,7 +32,7 @@ export function WeDoSection({ home, locale }: Props) {
               <p className="text-fg-2 text-sm leading-relaxed flex-1">
                 {l === 'th' ? card.body_th : card.body_en}
               </p>
-              <Button href={`/${locale}/services`} variant="text" surface="light" className="self-start">
+              <Button href={`/${locale}/services/${card.id}`} variant="text" surface="light" className="self-start">
                 {l === 'th' ? card.cta_th : card.cta_en}
               </Button>
             </Card>

@@ -48,8 +48,8 @@
       "title_en": "Brand Engagement & CRM",
       "forWho_th": "แบรนด์ที่มีระบบสมาชิก คูปอง หรือสะสมแต้มอยู่แล้ว และอยากใช้เกมเป็นเครื่องมือสร้าง engagement ให้ลูกค้ากลับมาซ้ำ",
       "forWho_en": "Brands that already run a membership, coupon, or points program and want a game to drive repeat engagement.",
-      "body_th": "เกม CRM และเกมเลี้ยงสัตว์แบบ template สำเร็จรูปที่ปรับเป็นแบรนด์ของคุณได้ ลูกค้าส่ง asset มาปรับ ใช้เวลาประมาณ 1 สัปดาห์ ทำเร็ว ราคาจับต้องได้ ต่อ API เชื่อมกับระบบ CRM/คูปอง/แต้มเดิมของลูกค้าได้ (ตัวเกมเองไม่มีระบบสะสมแต้มในตัว) — บริการนี้ยังไม่มีลูกค้าจริงใช้งาน ปัจจุบันมี template/demo พร้อมให้ดูตัวอย่าง",
-      "body_en": "Ready-made CRM and pet-raising game templates you can re-skin as your own brand — send us your assets and we adapt the template in about a week. Fast turnaround, accessible pricing. We can connect the game to your existing CRM/coupon/points system via API (the game itself doesn't run its own points system). No client has used this service yet — we currently have templates/demos we can show you.",
+      "body_th": "เกม CRM และเกมเลี้ยงสัตว์แบบ template สำเร็จรูปที่ปรับเป็นแบรนด์ของคุณได้ ลูกค้าส่ง asset มาปรับ ใช้เวลาประมาณ 1 สัปดาห์ ทำเร็ว ราคาจับต้องได้ ต่อ API เชื่อมกับระบบ CRM/คูปอง/แต้มเดิมของลูกค้าได้ (ตัวเกมเองไม่มีระบบสะสมแต้มในตัว)",
+      "body_en": "Ready-made CRM and pet-raising game templates you can re-skin as your own brand — send us your assets and we adapt the template in about a week. Fast turnaround, accessible pricing. We can connect the game to your existing CRM/coupon/points system via API (the game itself doesn't run its own points system).",
       "bullets_th": [
         "เกม CRM / เกมเลี้ยงสัตว์แบบ template ปรับแบรนด์ได้ใน ~1 สัปดาห์",
         "ต่อ API เชื่อมระบบ CRM/คูปอง/แต้มเดิมของลูกค้า",
@@ -88,8 +88,8 @@
       "title_en": "Learning & Training",
       "forWho_th": "องค์กร สถาบันการศึกษา หรือทีม HR ที่ต้องการสื่อการเรียนรู้หรือการฝึกอบรมที่ทำให้คนอยากเรียนต่อ ไม่ใช่แค่นั่งดูสไลด์",
       "forWho_en": "Organizations, schools, or HR teams that want learning or training material people actually want to engage with — not just sit through slides.",
-      "body_th": "สื่อการเรียนการสอน simulation และ gamified training ที่ทีมพร้อมออกแบบให้ แม้ยังไม่เคยมีลูกค้าจริงในกลุ่มนี้ ทีมมีความสามารถและพร้อมออกแบบสื่อการเรียนรู้แบบเกมได้เต็มรูปแบบ",
-      "body_en": "Educational media, simulations, and gamified training the team is ready to design. While no client has used this service yet, the team has the capability and is ready to build full gamified learning experiences.",
+      "body_th": "สื่อการเรียนการสอน simulation และ gamified training ที่ทีมมีความสามารถและพร้อมออกแบบให้ได้เต็มรูปแบบ",
+      "body_en": "Educational media, simulations, and gamified training the team has the capability and is ready to design in full.",
       "bullets_th": [
         "สื่อการเรียนการสอนแบบ interactive",
         "Simulation สำหรับการฝึกอบรม",
