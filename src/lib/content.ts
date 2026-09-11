@@ -2,7 +2,7 @@
 import fs from 'fs'
 import path from 'path'
 import type {
-  NavConfig, SiteConfig, Service, PortfolioItem,
+  NavConfig, SiteConfig, ServicesContent, PortfolioItem,
   TeamMember, TeamMemberDetail, FaqItem, Award, Milestone, CareerOpening, HomeContent, AboutContent
 } from '@/types/content'
 
@@ -28,8 +28,8 @@ export function getAboutContent(): AboutContent {
   return readJson<AboutContent>('about.json')
 }
 
-export function getServices(): Service[] {
-  return readJson<Service[]>('services.json')
+export function getServices(): ServicesContent {
+  return readJson<ServicesContent>('services.json')
 }
 
 export function getPortfolioItems(): PortfolioItem[] {

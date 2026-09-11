@@ -43,15 +43,35 @@ export interface SiteConfig {
   copyright_en: string
 }
 
-export interface Service {
-  id: string
-  icon: string
+export interface ServiceFaqItem {
+  question_th: string
+  question_en: string
+  answer_th: string
+  answer_en: string
+}
+
+export interface ServiceGroup {
+  id: 'marketing-event' | 'crm' | 'learning' | 'games'
   title_th: string
   title_en: string
-  desc_th: string
-  desc_en: string
-  cta_th: string
-  cta_en: string
+  forWho_th: string
+  forWho_en: string
+  body_th: string
+  body_en: string
+  bullets_th: string[]
+  bullets_en: string[]
+  hasCases: boolean
+  faq: ServiceFaqItem[]
+}
+
+export interface CraftItem {
+  label_th: string
+  label_en: string
+}
+
+export interface ServicesContent {
+  groups: ServiceGroup[]
+  craft: CraftItem[]
 }
 
 export interface PortfolioItem {
