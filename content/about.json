@@ -1,0 +1,23 @@
+{
+  "story": [
+    {
+      "heading_th": "ที่มา",
+      "heading_en": "Where It Started",
+      "body_th": "ปี 2024 กลุ่มเพื่อนที่เรียนจบคณะทำเกมด้วยกัน ชวนกันลาออกจากงานประจำ มารวมตัวทำเกมในฝัน\n\nเริ่มจากสิ่งเล็กๆ ที่ทำให้เสร็จได้จริงก่อน หยิบเกม Minesweeper ที่ชอบเล่นมาผสมกับระบบต่อสู้ Auto-battle จนกลายเป็น Sumeeper",
+      "body_en": "In 2024, a group of friends who studied game development together decided to leave their day jobs and come together to build the game they'd always dreamed of.\n\nThey started small, with something they could actually finish — taking Minesweeper, a game they loved, and combining it with an auto-battle combat system. That became Sumeeper."
+    },
+    {
+      "heading_th": "จากเกมเล็กๆ สู่ทีมที่ได้รับการยอมรับ",
+      "heading_en": "From a Small Game to a Recognized Team",
+      "body_th": "จากเกมที่แค่อยากทำให้เสร็จ Sumeeper พาทีมไปไกลกว่าที่คิดไว้เยอะ ทั้งรางวัล Best Game Technical จาก Thai Digital Content Go Global Accelerator Program โดย depa ทุนสนับสนุน Digital Startup Grant และโอกาสได้ออกบูธในงานเกมระดับประเทศหลายเวที\n\nปัจจุบัน MeDream คือทีมที่มีประสบการณ์ด้านการทำเกมครบวงจร ไม่ว่าจะเป็น Game Design, 2D/3D Artist, UX/UI, Developer, QA, Technical Art\n\nพวกเราหวังเป็นอย่างยิ่งว่า จะได้ผลิตผลงานที่มีคุณภาพ และส่งมอบคุณค่าของสิ่งที่เราทำให้กับทุกคน",
+      "body_en": "What started as a game they just wanted to finish took the team much further than expected — winning the Best Game Technical award from the Thai Digital Content Go Global Accelerator Program by depa, a Digital Startup Grant, and the chance to exhibit at several national game events.\n\nToday, MeDream is a team with end-to-end game development experience — Game Design, 2D/3D Art, UX/UI, Development, QA, and Technical Art.\n\nWe hope to keep producing quality work and delivering real value to everyone we work with."
+    },
+    {
+      "heading_th": "จุดเริ่มต้นของการทำเกมเพื่อการตลาด",
+      "heading_en": "How We Got Into Marketing Games",
+      "body_th": "พอเริ่มออกงานและเจอลูกค้าจริง ก็ยิ่งเห็นชัดว่าเกมไม่ได้มีไว้แค่เล่นสนุกคนเดียว มันชวนคนเข้ามามีส่วนร่วมได้ดีกว่าสื่อแบบเดิมๆ เยอะ บวกกับผู้ก่อตั้งมีพื้นฐานสาย Project Management และการตลาด e-commerce มาก่อน เลยมองเห็นโอกาสที่จะเอาความสนุกของเกมมาช่วยธุรกิจอื่นสร้าง engagement และวัดผลได้จริง\n\nนี่คือที่มาของชื่อ MeDream — คำว่า \"Me (มี)\" ในภาษาไทย ผสานกับคำว่า \"Dream (ความฝัน)\" ซึ่งสะท้อนความตั้งใจที่อยากทำให้ความฝันที่มี เกิดขึ้นได้จริง",
+      "body_en": "As the team started exhibiting and meeting real clients, it became clear that games aren't just for playing alone — they draw people in far better than traditional media. Combined with the founder's background in project management and e-commerce marketing, the team saw an opportunity to use the fun of games to help other businesses build engagement and measure real results.\n\nThis is where the name MeDream comes from — the Thai word \"Me (มี, meaning 'to have')\" combined with \"Dream,\" reflecting the intention to make the dreams we have become real."
+    }
+  ],
+  "dna": ["Creative", "Gamer", "Storyteller"]
+}

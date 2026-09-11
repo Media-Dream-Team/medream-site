@@ -232,3 +232,15 @@ export interface HomeContent {
     subheadline_en: string
   }
 }
+
+export interface AboutStorySection {
+  heading_th: string
+  heading_en: string
+  body_th: string
+  body_en: string
+}
+
+export interface AboutContent {
+  story: AboutStorySection[]
+  dna: string[]
+}
