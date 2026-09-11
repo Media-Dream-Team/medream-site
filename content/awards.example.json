@@ -1,22 +1,9 @@
 [
   {
-    "title_th": "รางวัลเกมยอดเยี่ยม",
-    "title_en": "Best Game Award",
-    "organization_th": "สมาคมเกมไทย",
-    "organization_en": "Thai Game Association",
+    "name_th": "ตัวอย่างชื่อรางวัล",
+    "name_en": "Example Award Name",
     "year": 2024,
-    "image": "/images/awards/award-placeholder.png",
-    "desc_th": "รางวัลเกม indie ยอดเยี่ยมแห่งปี",
-    "desc_en": "Best indie game of the year"
-  },
-  {
-    "title_th": "รางวัลนวัตกรรมดิจิทัล",
-    "title_en": "Digital Innovation Award",
-    "organization_th": "กระทรวงดิจิทัล",
-    "organization_en": "Ministry of Digital Economy",
-    "year": 2023,
-    "image": "/images/awards/award-placeholder.png",
-    "desc_th": "ผลงานด้านนวัตกรรม AR/VR",
-    "desc_en": "Outstanding AR/VR innovation work"
+    "event": "ชื่อผู้จัดงานหรือเวที",
+    "image": "/images/awards/placeholder.png"
   }
 ]
