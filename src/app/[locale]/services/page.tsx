@@ -1,15 +1,16 @@
 // src/app/[locale]/services/page.tsx
 import type { Metadata } from 'next'
 import { getServices } from '@/lib/content'
-import { ServiceCard } from '@/components/shared/ServiceCard'
+import { ServiceGroupCard } from '@/components/services/ServiceGroupCard'
+import { CraftBar } from '@/components/services/CraftBar'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const isTh = locale === 'th'
   const title = isTh ? 'บริการ | MeDream Studio' : 'Services | MeDream Studio'
   const description = isTh
-    ? 'MeDream Studio รับพัฒนาเกม Unity, Mobile Game, Serious Game, AR/VR, แอนิเมชัน และสื่อดิจิทัลครบวงจร'
-    : 'MeDream Studio offers game development, Unity, mobile games, serious games, AR/VR, animation and digital media production.'
+    ? 'บริการของ MeDream Studio จัดตามโจทย์ธุรกิจ 4 กลุ่ม: Marketing & Event, Brand Engagement & CRM, Learning & Training, Games & Immersive'
+    : 'MeDream Studio services organized around your business need, in 4 groups: Marketing & Event, Brand Engagement & CRM, Learning & Training, Games & Immersive.'
   return {
     title,
     description,
@@ -18,8 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: { th: 'https://medream-studio.com/th/services', en: 'https://medream-studio.com/en/services' },
     },
     keywords: isTh
-      ? ['รับทำเกม', 'พัฒนาเกม Unity', 'Mobile Game', 'Serious Game', 'Gamification', 'AR VR ไทย', 'แอนิเมชัน', 'Unity Dev Team', 'Thai Game Studio', 'สื่อดิจิทัล']
-      : ['Game Development', 'Unity Dev', 'Unity Dev Team', 'Mobile Game Development', 'Serious Game', 'Gamification', 'AR VR Thailand', 'Animation', 'Thai Game Studio', 'Media Creator'],
+      ? ['บริการ MeDream', 'เกม Event', 'เกม CRM', 'สื่อการเรียนรู้แบบเกม', 'พัฒนาเกม PC Mobile', 'AR VR ไทย', 'Thai Game Studio']
+      : ['MeDream Services', 'Event Games', 'CRM Games', 'Gamified Learning', 'PC Mobile Game Development', 'AR VR Thailand', 'Thai Game Studio'],
     openGraph: {
       title,
       description,
@@ -32,25 +33,28 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const l = locale as 'th' | 'en'
-  const services = getServices()
+  const { groups, craft } = getServices()
 
   return (
     <div className="pt-16">
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-black text-dawn-gold mb-4">
-            {l === 'th' ? 'บริการของเรา' : 'Our Services'}
-          </h1>
-          <p className="text-horizon text-lg mb-12">
-            {l === 'th'
-              ? 'เราพร้อมสร้างประสบการณ์ดิจิทัลที่เหมาะกับแบรนด์ของคุณ'
-              : 'We create digital experiences tailored to your brand'}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {services.map(service => (
-              <ServiceCard key={service.id} service={service} locale={locale} />
+      <section className="bg-white py-16 md:py-24 px-4">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="font-display font-semibold text-ink text-4xl md:text-5xl mb-4">
+              {l === 'th' ? 'บริการของเรา' : 'Our Services'}
+            </h1>
+            <p className="text-fg-2 text-base md:text-lg max-w-2xl mx-auto">
+              {l === 'th'
+                ? 'จัดตามโจทย์ธุรกิจของคุณ ส่วน AR, VR และแอนิเมชันเป็น "วิธี" ที่เราเสนอให้ ไม่ใช่สิ่งที่คุณต้องรู้ก่อนมาหาเรา'
+                : 'Organized around your business need — AR, VR, and animation are the "how" we bring to the table, not something you need to know before reaching out.'}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {groups.map(group => (
+              <ServiceGroupCard key={group.id} group={group} locale={locale} />
             ))}
           </div>
+          <CraftBar craft={craft} locale={locale} />
         </div>
       </section>
     </div>
