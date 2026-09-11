@@ -24,7 +24,7 @@ export function LangToggle() {
     <button
       onClick={toggle}
       disabled={isPending}
-      className="px-3 py-1 rounded border border-horizon text-dream-cream text-sm font-bold hover:border-dawn-gold hover:text-dawn-gold transition-colors"
+      className="px-3 py-1 border border-mist text-white text-sm font-display font-semibold hover:border-first-light hover:text-first-light transition-colors"
       aria-label="Toggle language"
     >
       {locale === 'th' ? 'EN' : 'TH'}

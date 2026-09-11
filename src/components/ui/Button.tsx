@@ -9,6 +9,7 @@ interface ButtonProps {
   href: string
   variant?: Variant
   surface?: Surface
+  onClick?: () => void
   children: React.ReactNode
   className?: string
 }
@@ -22,12 +23,12 @@ const ARROW_PATH = 'M2 7h9.2L7.6 3.4 9 2l6 6-6 6-1.4-1.4L11.2 9H2z'
 const baseClass =
   'inline-flex items-center gap-2 font-display font-semibold text-[15px] leading-none transition-transform duration-200 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-sky focus-visible:outline-offset-[3px]'
 
-export function Button({ href, variant = 'primary', surface = 'light', children, className = '' }: ButtonProps) {
+export function Button({ href, variant = 'primary', surface = 'light', onClick, children, className = '' }: ButtonProps) {
   if (variant === 'primary') {
     const surfaceClass =
       surface === 'light' ? 'bg-blue text-white hover:bg-navy' : 'bg-first-light text-navy hover:bg-dawn'
     return (
-      <Link href={href} style={CHAMFER_STYLE} className={`${baseClass} px-[22px] py-[13px] ${surfaceClass} ${className}`}>
+      <Link href={href} onClick={onClick} style={CHAMFER_STYLE} className={`${baseClass} px-[22px] py-[13px] ${surfaceClass} ${className}`}>
         <Star className="w-[0.9em] h-[0.9em]" />
         {children}
       </Link>
@@ -42,6 +43,7 @@ export function Button({ href, variant = 'primary', surface = 'light', children,
     return (
       <Link
         href={href}
+        onClick={onClick}
         className={`${baseClass} px-[22px] py-[13px] bg-transparent border-[1.5px] ${surfaceClass} ${className}`}
       >
         {children}
@@ -55,7 +57,7 @@ export function Button({ href, variant = 'primary', surface = 'light', children,
   // variant === 'text'
   const surfaceClass = surface === 'light' ? 'text-navy' : 'text-white'
   return (
-    <Link href={href} className={`group relative ${baseClass} py-2 hover:translate-y-0 ${surfaceClass} ${className}`}>
+    <Link href={href} onClick={onClick} className={`group relative ${baseClass} py-2 hover:translate-y-0 ${surfaceClass} ${className}`}>
       {children}
       <svg viewBox="0 0 16 16" className="w-[0.9em] h-[0.9em]" fill="currentColor" aria-hidden="true">
         <path d={ARROW_PATH} />
