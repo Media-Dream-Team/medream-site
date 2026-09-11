@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import type { NavItem } from '@/types/content'
+import { Button } from '@/components/ui/Button'
 import { LangToggle } from '@/components/shared/LangToggle'
 import { MobileDrawer } from './MobileDrawer'
 
@@ -14,6 +15,7 @@ interface Props {
 
 export function NavBar({ items }: Props) {
   const locale = useLocale()
+  const t = useTranslations('nav')
   const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -48,7 +50,7 @@ export function NavBar({ items }: Props) {
               <Link
                 key={item.key}
                 href={`/${locale}${item.href}`}
-                className="text-dream-cream hover:text-dawn-gold text-sm font-bold transition-colors"
+                className="text-white hover:text-first-light text-sm font-display font-semibold transition-colors"
               >
                 {locale === 'th' ? item.label_th : item.label_en}
               </Link>
@@ -57,10 +59,15 @@ export function NavBar({ items }: Props) {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            <div className="hidden lg:block">
+              <Button href={`/${locale}/contact`} variant="primary" surface="dark">
+                {t('contact_cta')}
+              </Button>
+            </div>
             <LangToggle />
             {/* Hamburger — mobile only */}
             <button
-              className="lg:hidden text-dream-cream hover:text-dawn-gold p-1"
+              className="lg:hidden text-white hover:text-first-light p-1"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open menu"
             >
