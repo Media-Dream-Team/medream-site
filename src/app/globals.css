@@ -45,6 +45,12 @@
   --breakpoint-2xl: 1536px;
 }
 
+/* Gradient-dawn — reserved for Hero and the final CTA section only
+   (MEDREAM-DESIGN.md §2). Never behind body text or on buttons/cards. */
+.bg-gradient-dawn {
+  background: linear-gradient(180deg, #04103A 0%, #052D6F 22%, #0C5BAC 46%, #3B89D0 60%, #87B2DE 72%, #ECCCC1 100%);
+}
+
 * {
   box-sizing: border-box;
 }

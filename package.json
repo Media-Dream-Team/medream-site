@@ -14,9 +14,6 @@
   "packageManager": "pnpm@9.15.0",
   "dependencies": {
     "@notionhq/client": "^5.26.0",
-    "@tsparticles/engine": "^4.0.5",
-    "@tsparticles/react": "^4.0.5",
-    "@tsparticles/slim": "^4.0.5",
     "googleapis": "^172.0.0",
     "next": "16.2.6",
     "next-intl": "^4.12.0",

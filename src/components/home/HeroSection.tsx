@@ -1,109 +1,43 @@
-'use client'
-import { useCallback, useMemo } from 'react'
-import Particles, { ParticlesProvider } from '@tsparticles/react'
-import { loadSlim } from '@tsparticles/slim'
-import type { Engine, ISourceOptions } from '@tsparticles/engine'
-import { useLocale, useTranslations } from 'next-intl'
-import Link from 'next/link'
-import type { SiteConfig } from '@/types/content'
+// src/components/home/HeroSection.tsx
+import { getLocale, getTranslations } from 'next-intl/server'
+import type { SiteConfig, HomeContent } from '@/types/content'
+import { Button } from '@/components/ui/Button'
 
 interface Props {
   site: SiteConfig
+  home: HomeContent
 }
 
-function HeroContent({ site }: Props) {
-  const locale = useLocale()
-  const t = useTranslations('hero')
-
-  const options: ISourceOptions = useMemo(
-    () => ({
-      background: { color: { value: 'transparent' } },
-      fpsLimit: 60,
-      particles: {
-        number: { value: 60, density: { enable: true } },
-        color: { value: ['#ECC842', '#3D6EE8', '#8FA8E8'] },
-        opacity: {
-          value: { min: 0.1, max: 0.5 },
-          animation: { enable: true, speed: 0.5 },
-        },
-        size: { value: { min: 1, max: 3 } },
-        move: {
-          enable: true,
-          speed: 0.4,
-          direction: 'none',
-          random: true,
-          outModes: { default: 'out' },
-        },
-        links: { enable: false },
-      },
-      detectRetina: true,
-      responsive: [
-        {
-          maxWidth: 768,
-          options: {
-            particles: { number: { value: 30 } },
-          },
-        },
-      ],
-    }),
-    [],
-  )
-
+export async function HeroSection({ site, home }: Props) {
+  const locale = await getLocale()
   const l = locale as 'th' | 'en'
+  const t = await getTranslations('hero')
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Dawn glow from bottom */}
+    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-midnight px-4">
+      {/* Bottom-anchored gradient-dawn glow — decorative only, content sits above it on solid midnight */}
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 40% at 50% 110%, rgba(23,64,176,0.35) 0%, transparent 70%)',
-        }}
+        className="bg-gradient-dawn pointer-events-none absolute inset-x-0 bottom-0 h-2/5 opacity-70"
+        style={{ maskImage: 'linear-gradient(to bottom, transparent, black)' }}
+        aria-hidden="true"
       />
 
-      {/* Particles */}
-      <Particles
-        id="hero-particles"
-        options={options}
-        className="absolute inset-0"
-      />
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl xl:text-6xl font-black text-dream-cream mb-4 leading-tight">
+      <div className="relative z-10 max-w-3xl mx-auto text-center py-24">
+        <h1 className="font-display font-semibold text-white text-4xl md:text-5xl xl:text-[56px] xl:leading-[64px] mb-6">
           {l === 'th' ? site.tagline_th : site.tagline_en}
         </h1>
-        <p className="text-horizon text-lg md:text-xl mb-10 font-light">
-          {site.name}
+        <p className="text-mist text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+          {l === 'th' ? home.hero.subheadline_th : home.hero.subheadline_en}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href={`/${locale}/portfolio`}
-            className="px-8 py-3 bg-royal-blue hover:bg-electric text-white font-bold rounded transition-colors text-center"
-          >
+          <Button href={`/${locale}/portfolio`} variant="secondary" surface="dark">
             {t('cta_portfolio')}
-          </Link>
-          <a
-            href="#contact-form"
-            className="px-8 py-3 border-2 border-dawn-gold text-dawn-gold hover:bg-dawn-gold hover:text-midnight font-bold rounded transition-colors text-center"
-          >
+          </Button>
+          <Button href={`/${locale}/contact`} variant="primary" surface="dark">
             {t('cta_contact')}
-          </a>
+          </Button>
         </div>
       </div>
     </section>
-  )
-}
-
-export function HeroSection({ site }: Props) {
-  const particlesInit = useCallback(async (engine: Engine): Promise<void> => {
-    await loadSlim(engine)
-  }, [])
-
-  return (
-    <ParticlesProvider init={particlesInit}>
-      <HeroContent site={site} />
-    </ParticlesProvider>
   )
 }
