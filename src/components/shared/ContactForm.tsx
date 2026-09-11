@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
-import type { Service } from '@/types/content'
+import type { ServiceGroup } from '@/types/content'
 
 interface Props {
-  services: Service[]
+  services: ServiceGroup[]
 }
 
 export function ContactForm({ services }: Props) {

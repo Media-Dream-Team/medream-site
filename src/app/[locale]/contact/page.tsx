@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const l = locale as 'th' | 'en'
-  const services = getServices()
+  const services = getServices().groups
 
   return (
     <div className="pt-16">
