@@ -1,11 +1,9 @@
 {
   "items": [
-    { "key": "home",      "href": "/",          "label_th": "หน้าหลัก", "label_en": "Home" },
-    { "key": "about",     "href": "/about",     "label_th": "เกี่ยวกับเรา", "label_en": "About" },
-    { "key": "services",  "href": "/services",  "label_th": "บริการ",       "label_en": "Services" },
-    { "key": "portfolio", "href": "/portfolio", "label_th": "ผลงาน",        "label_en": "Portfolio" },
-    { "key": "blog",      "href": "/blog",      "label_th": "บทความ",       "label_en": "Blog" },
-    { "key": "faq",       "href": "/faq",       "label_th": "คำถาม",        "label_en": "FAQ" },
-    { "key": "contact",   "href": "/contact",   "label_th": "ติดต่อ",       "label_en": "Contact" }
+    { "key": "home",     "href": "/",          "label_th": "หน้าหลัก",     "label_en": "Home" },
+    { "key": "services", "href": "/services",  "label_th": "บริการ",       "label_en": "Services" },
+    { "key": "works",    "href": "/portfolio", "label_th": "ผลงาน",        "label_en": "Works" },
+    { "key": "about",    "href": "/about",     "label_th": "เกี่ยวกับเรา", "label_en": "About" },
+    { "key": "insights", "href": "/blog",      "label_th": "Insights",     "label_en": "Insights" }
   ]
 }
