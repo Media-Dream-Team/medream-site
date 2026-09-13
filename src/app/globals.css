@@ -16,6 +16,7 @@
   --color-fg-2: #4B5670;
   --color-fg-3: #626D87;
   --color-line: #E4E7EF;
+  --color-surface-tint: #E8ECF5; /* pale field under Home's mid-page sections — see design_handoff_medream_website/README.md; not in tokens/colors.css, homepage-scoped */
 
   /* Deprecated — old CI, values UNCHANGED from before this phase, kept only
      so pages not yet migrated to the new tokens don't lose their utility
@@ -61,6 +62,13 @@ html {
 
 body {
   background-color: var(--color-midnight);
-  color: var(--color-dream-cream);
+  color: var(--color-white);
   font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
