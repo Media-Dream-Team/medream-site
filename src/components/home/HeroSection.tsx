@@ -2,6 +2,7 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { SiteConfig, HomeContent } from '@/types/content'
 import { Button } from '@/components/ui/Button'
+import { HeroParallaxBg } from './HeroParallaxBg'
 
 interface Props {
   site: SiteConfig
@@ -14,13 +15,8 @@ export async function HeroSection({ site, home }: Props) {
   const t = await getTranslations('hero')
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-midnight px-4">
-      {/* Bottom-anchored gradient-dawn glow — decorative only, content sits above it on solid midnight */}
-      <div
-        className="bg-gradient-dawn pointer-events-none absolute inset-x-0 bottom-0 h-2/5 opacity-70"
-        style={{ maskImage: 'linear-gradient(to bottom, transparent, black)' }}
-        aria-hidden="true"
-      />
+    <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-midnight px-4">
+      <HeroParallaxBg />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center py-24">
         <h1 className="font-display font-semibold text-white text-4xl md:text-5xl xl:text-[56px] xl:leading-[64px] mb-6">
