@@ -258,6 +258,8 @@ export interface HomeContent {
     headline_en: string
     subheadline_th: string
     subheadline_en: string
+    cta_th: string
+    cta_en: string
   }
 }
 
