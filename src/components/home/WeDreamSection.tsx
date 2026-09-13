@@ -22,9 +22,9 @@ export function WeDreamSection({ home, locale }: Props) {
         <div>
           <div className="flex items-center gap-3 mb-6">
             <Star className="w-7 h-7 text-blue" />
-            <span className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
+            <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
               {dream.headline}
-            </span>
+            </h2>
           </div>
           <p className="font-display font-medium text-ink text-lg md:text-[22px] md:leading-[1.55] max-w-[46ch] mb-7">
             {l === 'th' ? dream.body_th : dream.body_en}

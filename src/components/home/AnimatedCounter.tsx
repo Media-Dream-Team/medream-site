@@ -8,11 +8,14 @@ interface Props {
 
 export function AnimatedCounter({ target, className = '' }: Props) {
   const ref = useRef<HTMLSpanElement>(null)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(target)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
 
     let raf = 0
     let started = false
@@ -22,6 +25,7 @@ export function AnimatedCounter({ target, className = '' }: Props) {
         entries.forEach(entry => {
           if (!entry.isIntersecting || started) return
           started = true
+          setCount(0)
           const start = performance.now()
           const dur = 1200
           const tick = (now: number) => {

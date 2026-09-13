@@ -22,9 +22,9 @@ export function WeDoSection({ home, locale }: Props) {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center gap-3 mb-4">
           <Star className="w-7 h-7 text-blue" />
-          <span className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
+          <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
             {services.headline}
-          </span>
+          </h2>
         </div>
         <p className="text-fg-2 text-base md:text-lg leading-relaxed max-w-[62ch] mb-12">
           {l === 'th' ? services.subheadline_th : services.subheadline_en}

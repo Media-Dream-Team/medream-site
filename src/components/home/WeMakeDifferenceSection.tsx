@@ -21,9 +21,9 @@ export function WeMakeDifferenceSection({ home, locale }: Props) {
         <div>
           <div className="flex items-center gap-3 mb-6">
             <Star className="w-7 h-7 text-blue" />
-            <span className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
+            <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
               {difference.headline}
-            </span>
+            </h2>
           </div>
           <p className="text-fg-2 text-base md:text-lg leading-relaxed mb-8">
             {l === 'th' ? difference.body_th : difference.body_en}

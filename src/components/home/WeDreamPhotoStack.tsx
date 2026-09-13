@@ -27,7 +27,7 @@ export function WeDreamPhotoStack({ captions, locale }: Props) {
 
   return (
     <div className="relative">
-      <div onClick={cycle} className="relative z-[1] cursor-pointer" role="button" aria-label={l === 'th' ? 'สลับดูภาพถัดไป' : 'Show next photo'}>
+      <div onClick={cycle} className="relative z-[1] cursor-pointer">
         {order.map((imgIdx, depth) => {
           const pos = POSITIONS[depth]
           const caption = captions[imgIdx]

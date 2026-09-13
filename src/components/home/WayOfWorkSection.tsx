@@ -63,9 +63,9 @@ export function WayOfWorkSection({ home, locale }: Props) {
       <div className="relative max-w-5xl mx-auto">
         <div className="flex items-center gap-3 mb-16 justify-center">
           <Star className="w-7 h-7 text-white" />
-          <span className="font-display font-semibold text-white text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
+          <h2 className="font-display font-semibold text-white text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
             {l === 'th' ? wayOfWork.headline_th : wayOfWork.headline_en}
-          </span>
+          </h2>
         </div>
 
         <div className="wow-path-desktop relative h-[280px] mb-8">
