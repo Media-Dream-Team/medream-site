@@ -7,7 +7,12 @@
     "headline": "We Dream",
     "body_th": "เราคือทีมครีเอทีฟ นักเล่นเกม และนักเล่าเรื่อง รวมตัวกันเป็นสตูดิโอเกมและมีเดียอินเทอร์แอคทีฟจากไทย ทำตั้งแต่เกม Event ออกบูธ ไปจนถึง AR เปิดตัวสินค้า เพราะเราเชื่อว่าความสนุกช่วยให้แบรนด์เข้าใกล้ลูกค้าได้มากกว่าที่คิด",
     "body_en": "We're a team of creatives, gamers, and storytellers who came together to build a Thai game and interactive media studio. We make everything from booth event games to AR product launches, because we believe fun brings brands closer to their customers than they'd expect.",
-    "dna": ["Creative", "Gamer", "Storyteller"]
+    "dna": ["Creative", "Gamer", "Storyteller"],
+    "photoCaptions": [
+      { "caption_th": "สนุกและวัดผลได้จริง", "caption_en": "Fun that measures" },
+      { "caption_th": "ปรับจาก template ใช้ได้ใน 1 สัปดาห์", "caption_en": "Adapted from a template, ready in 1 week" },
+      { "caption_th": "เก็บ lead ได้กว่า 30 รายในงานเดียว", "caption_en": "Collected 30+ leads in a single event" }
+    ]
   },
   "services": {
     "headline": "We Do",
@@ -120,10 +125,10 @@
     "headline_th": "เริ่มงานกับเรายังไง",
     "headline_en": "How It Works",
     "steps": [
-      { "level": 1, "label_th": "รับโจทย์", "label_en": "Discovery" },
-      { "level": 2, "label_th": "ออกแบบ Solution", "label_en": "Solution Design" },
-      { "level": 3, "label_th": "พัฒนา", "label_en": "Development" },
-      { "level": 4, "label_th": "Test & Launch", "label_en": "Test & Launch" }
+      { "level": 1, "label_th": "รับโจทย์", "label_en": "Discovery", "desc_th": "คุยกันเพื่อรู้ความต้องการจริงๆ (1–2 ชม.)", "desc_en": "A conversation to understand what you actually need (1–2 hrs)" },
+      { "level": 2, "label_th": "ออกแบบ Solution", "label_en": "Solution Design", "desc_th": "เสนอทางที่เหมาะกับงบและปัญหาจริง (2 วัน)", "desc_en": "We propose an approach that fits your budget and real problem (2 days)" },
+      { "level": 3, "label_th": "พัฒนา", "label_en": "Development", "desc_th": "ทีม UX/UI, Game Design, Artist, Dev ลงมือทำ", "desc_en": "UX/UI, Game Design, Artist and Dev teams build it" },
+      { "level": 4, "label_th": "Test & Launch", "label_en": "Test & Launch", "desc_th": "ทดสอบและให้ลูกค้าตรวจ UAT ก่อนส่งมอบ", "desc_en": "Testing and client UAT review before handoff" }
     ],
     "cta_th": "คุยกับเรา",
     "cta_en": "Get in Touch"

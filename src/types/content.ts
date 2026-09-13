@@ -181,6 +181,13 @@ export interface HomeWayOfWorkStep {
   level: number
   label_th: string
   label_en: string
+  desc_th: string
+  desc_en: string
+}
+
+export interface HomeDreamPhotoCaption {
+  caption_th: string
+  caption_en: string
 }
 
 export interface HomeTrustedByItem {
@@ -198,6 +205,7 @@ export interface HomeContent {
     body_th: string
     body_en: string
     dna: string[]
+    photoCaptions: HomeDreamPhotoCaption[]
   }
   services: {
     headline: string
