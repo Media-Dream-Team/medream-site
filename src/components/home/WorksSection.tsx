@@ -12,7 +12,7 @@ export function WorksSection({ home, locale }: Props) {
   const { works } = home
 
   return (
-    <section className="bg-white py-16 md:py-24 px-4">
+    <section className="bg-surface-tint border-t border-line py-16 md:py-24 lg:py-32 px-4">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] mb-12 text-center">
           {l === 'th' ? works.headline_th : works.headline_en}

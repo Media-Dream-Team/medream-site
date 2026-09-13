@@ -30,7 +30,7 @@ export function TrustedBySection({ home, awards, milestones, locale }: Props) {
   ].filter(group => group.labels.length > 0)
 
   return (
-    <section className="bg-white border-y border-line py-12 px-4">
+    <section className="bg-surface-tint border-y border-line py-12 px-4">
       <div className="max-w-5xl mx-auto">
         <p className="text-fg-3 text-center mb-8 font-display font-medium text-xs uppercase tracking-[.12em]">
           {l === 'th' ? trustedBy.headline_th : trustedBy.headline_en}
