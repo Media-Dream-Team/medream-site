@@ -1,6 +1,8 @@
 // src/components/home/WeMakeDifferenceSection.tsx
 import type { HomeContent } from '@/types/content'
 import { Star } from '@/components/ui/Star'
+import { AnimatedCounter } from './AnimatedCounter'
+import { WeMakeDifferenceVisual } from './WeMakeDifferenceVisual'
 
 interface Props {
   home: HomeContent
@@ -10,26 +12,29 @@ interface Props {
 export function WeMakeDifferenceSection({ home, locale }: Props) {
   const l = locale as 'th' | 'en'
   const { difference } = home
+  const target = parseInt(difference.microProofNumber, 10) || 0
 
   return (
-    <section className="bg-white py-16 md:py-24 px-4">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-10 items-center">
+    <section className="bg-surface-tint border-t border-line py-16 md:py-24 lg:py-32 px-4 overflow-hidden">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-12 md:gap-16 items-center">
+        <WeMakeDifferenceVisual />
         <div>
-          <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] mb-6">
-            {difference.headline}
-          </h2>
-          <p className="text-fg-2 text-base md:text-lg leading-relaxed">
+          <div className="flex items-center gap-3 mb-6">
+            <Star className="w-7 h-7 text-blue" />
+            <span className="font-display font-semibold text-ink text-3xl md:text-[36px] md:leading-[44px] tracking-[-.01em]">
+              {difference.headline}
+            </span>
+          </div>
+          <p className="text-fg-2 text-base md:text-lg leading-relaxed mb-8">
             {l === 'th' ? difference.body_th : difference.body_en}
           </p>
-        </div>
-        <div className="bg-navy text-white p-8 flex flex-col items-center text-center gap-3">
-          <div className="flex items-center gap-1 font-display font-semibold text-5xl">
-            {difference.microProofNumber}
-            <Star className="w-6 h-6 text-first-light" />
+          <div className="inline-flex items-baseline gap-2 font-display">
+            <AnimatedCounter target={target} className="text-[44px] font-bold text-navy leading-none" />
+            <Star className="w-5 h-5 text-first-light" />
+            <span className="text-fg-2 text-sm">
+              {l === 'th' ? difference.microProof_th : difference.microProof_en}
+            </span>
           </div>
-          <p className="text-mist text-sm leading-relaxed">
-            {l === 'th' ? difference.microProof_th : difference.microProof_en}
-          </p>
         </div>
       </div>
     </section>
