@@ -1,8 +1,10 @@
 // src/app/[locale]/portfolio/page.tsx
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { getPortfolioItems } from '@/lib/content'
+import { getPortfolioItems } from '@/lib/notion'
 import { PortfolioGrid } from './PortfolioGrid'
+
+export const revalidate = 300
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -32,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
-  const items = getPortfolioItems()
+  const items = await getPortfolioItems()
   const t = await getTranslations('portfolio')
   return (
     <>
