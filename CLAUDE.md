@@ -45,12 +45,12 @@ All site content lives in `content/*.json` — **no database, no CMS**. Edit JSO
 
 - `content/nav.json` — nav bar items
 - `content/site.json` — name, tagline, vision, mission, pipeline steps, socials
-- `content/services.json`, `portfolio.json`, `team.json`, `faq.json` — main data arrays
+- `content/services.json`, `team.json`, `faq.json` — main data arrays
 - `content/team/<slug>.json` — per-member detail pages (not linked from nav)
 - `content/awards.json`, `careers.json` — currently empty arrays
 - `content/*.example.json` — reference templates showing the shape for the empty arrays above; not read by the app
 
-**Exception — Blog:** the Blog section does not follow this model. It reads from a Notion database instead of `content/blog.json` (that file no longer exists). See "Blog CMS (Notion)" below.
+**Exceptions — Blog and Portfolio:** these sections don't follow this model. Blog reads from a Notion database instead of `content/blog.json` (that file no longer exists); Portfolio reads from a Notion database instead of `content/portfolio.json` (also no longer exists). See "Blog CMS (Notion)" and "Portfolio CMS (Notion)" below.
 
 Types for all content are in `src/types/content.ts`.
 
@@ -84,6 +84,16 @@ Unlike the rest of the site, `/blog` and `/blog/[slug]` do not read `content/*.j
 - **Rendering:** `src/components/shared/NotionBlocks.tsx` maps Notion blocks (headings, paragraphs, lists, images, tables, quotes, callouts, code, dividers, bookmarks) to JSX styled with the site's own brand tokens — it does not attempt to visually replicate Notion. Images render via a plain `<img>`, not `next/image`, because Notion's file URLs are signed and expire hourly.
 - **Freshness:** both blog pages set `export const revalidate = 300` — edits in Notion appear on the site within 5 minutes, no redeploy needed.
 - **Not yet wired up:** GA4 view/CTA-click tracking on blog pages (deferred, tracked separately — ask before assuming it's out of scope).
+
+### Portfolio CMS (Notion)
+
+Like Blog, `/portfolio` does not read `content/portfolio.json` (removed) — it pulls from a Notion database via `src/lib/notion.ts`.
+
+- **Database:** "Portfolio" in the "Medream Studio" Notion workspace. Same row-per-locale convention as Blog: one row per (item, locale) pair, two rows sharing a `Slug`, one with `Locale = th` and one with `Locale = en`. Only `Status = Published` rows are shown. `getPortfolioItems()` merges each th/en pair back into one bilingual `PortfolioItem` (`src/types/content.ts`) so the rest of the app — `PortfolioCard`, `PortfolioGrid`, and the `/team/[slug]` reuse of `PortfolioCard` — is unaware the data is locale-split in Notion.
+- **Env vars:** `NOTION_API_KEY` (shared with Blog), `NOTION_PORTFOLIO_DATABASE_ID` (the database's page ID, resolved the same way as `NOTION_BLOG_DATABASE_ID`).
+- **Manual ordering:** an `Order` number property (same value on both rows of a pair) drives display order, ascending — Notion doesn't guarantee row order.
+- **Images:** an `Image` Files property, uploaded directly in Notion. Same hourly-signed-URL caveat as Blog's `Cover` — rendered via a plain `<img>`, not `next/image`.
+- **Freshness:** `/portfolio` sets `export const revalidate = 300`, same as Blog.
 
 ### Tailwind v4
 
