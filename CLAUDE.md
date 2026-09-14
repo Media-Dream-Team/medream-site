@@ -62,7 +62,6 @@ Pages are **server components** that fetch content and pass it as props. Client 
 - `NavBar`, `MobileDrawer`, `LangToggle` — scroll/drawer/routing state
 - `ServiceCard` — smooth-scroll CTA that sets `?service=` query param
 - `FaqItem` — accordion open/close
-- `PortfolioGrid` — filter state (all/own-ip/client)
 - `ContactForm` — form state, `useSearchParams` for service pre-fill
 
 `ContactForm` must always be wrapped in `<Suspense>` because it calls `useSearchParams()`.
@@ -92,7 +91,7 @@ Like Blog, `/portfolio` does not read `content/portfolio.json` (removed) — it 
 - **Database:** "Portfolio" in the "Medream Studio" Notion workspace. Same row-per-locale convention as Blog: one row per (item, locale) pair, two rows sharing a `Slug`, one with `Locale = th` and one with `Locale = en`. Only `Status = Published` rows are shown. `getPortfolioItems()` merges each th/en pair back into one bilingual `PortfolioItem` (`src/types/content.ts`) so the rest of the app — `PortfolioCard`, `PortfolioGrid`, and the `/team/[slug]` reuse of `PortfolioCard` — is unaware the data is locale-split in Notion.
 - **Env vars:** `NOTION_API_KEY` (shared with Blog), `NOTION_PORTFOLIO_DATABASE_ID` (the database's page ID, resolved the same way as `NOTION_BLOG_DATABASE_ID`).
 - **Manual ordering:** an `Order` number property (same value on both rows of a pair) drives display order, ascending — Notion doesn't guarantee row order.
-- **Images:** an `Image` Files property, uploaded directly in Notion. Same hourly-signed-URL caveat as Blog's `Cover` — rendered via a plain `<img>`, not `next/image`.
+- **Images:** an `Image` Files property, uploaded directly in Notion. Rendered via `next/image` — remote Notion URLs work because `next.config.ts` sets `images.unoptimized: true`; re-enabling image optimization would require adding Notion's file host to `images.remotePatterns`.
 - **Freshness:** `/portfolio` sets `export const revalidate = 300`, same as Blog.
 
 ### Tailwind v4

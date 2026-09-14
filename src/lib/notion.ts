@@ -31,11 +31,17 @@ const dataSourceIdCache = new Map<string, Promise<string>>()
 function getDataSourceId(databaseId: string): Promise<string> {
   let cached = dataSourceIdCache.get(databaseId)
   if (!cached) {
-    cached = notion.databases.retrieve({ database_id: databaseId }).then(db => {
-      const id = isFullDatabase(db) ? db.data_sources[0]?.id : undefined
-      if (!id) throw new Error('Notion database has no data source')
-      return id
-    })
+    cached = notion.databases
+      .retrieve({ database_id: databaseId })
+      .then(db => {
+        const id = isFullDatabase(db) ? db.data_sources[0]?.id : undefined
+        if (!id) throw new Error('Notion database has no data source')
+        return id
+      })
+      .catch(err => {
+        dataSourceIdCache.delete(databaseId)
+        throw err
+      })
     dataSourceIdCache.set(databaseId, cached)
   }
   return cached
@@ -148,15 +154,25 @@ function toPortfolioRow(page: PageObjectResponse): PortfolioRow {
 }
 
 export async function getPortfolioItems(): Promise<PortfolioItem[]> {
+  if (!PORTFOLIO_DATABASE_ID) return []
+
   const data_source_id = await getDataSourceId(PORTFOLIO_DATABASE_ID)
-  const res = await notion.dataSources.query({
-    data_source_id,
-    filter: { property: 'Status', select: { equals: 'Published' } },
-  })
-  const rows = res.results.filter(isFullPage).map(toPortfolioRow)
+  const pages: PageObjectResponse[] = []
+  let cursor: string | undefined
+  do {
+    const res = await notion.dataSources.query({
+      data_source_id,
+      filter: { property: 'Status', select: { equals: 'Published' } },
+      start_cursor: cursor,
+    })
+    pages.push(...res.results.filter(isFullPage))
+    cursor = res.next_cursor ?? undefined
+  } while (cursor)
+  const rows = pages.map(toPortfolioRow)
 
   const bySlug = new Map<string, PortfolioRow[]>()
   for (const row of rows) {
+    if (!row.slug) continue
     const group = bySlug.get(row.slug) ?? []
     group.push(row)
     bySlug.set(row.slug, group)
@@ -178,7 +194,7 @@ export async function getPortfolioItems(): Promise<PortfolioItem[]> {
         desc_en: en?.desc ?? '',
         type: shared.type,
         featured: shared.featured,
-        image: shared.image,
+        image: shared.image || '/images/portfolio/placeholder.png',
         tags: shared.tags,
         year: shared.year,
         url: shared.url,
