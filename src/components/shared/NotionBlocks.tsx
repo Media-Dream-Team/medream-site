@@ -18,6 +18,37 @@ const COLOR_CLASS: Record<string, string> = {
   yellow_background: 'bg-dawn-gold/20',
 }
 
+function getYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+  return match ? match[1] : null
+}
+
+function VideoEmbed({ url }: { url: string }) {
+  const youtubeId = getYouTubeId(url)
+  if (!youtubeId) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block border border-nebula rounded-xl p-4 text-electric hover:border-electric transition-colors break-all"
+      >
+        {url}
+      </a>
+    )
+  }
+  return (
+    <div className="relative w-full aspect-video">
+      <iframe
+        src={`https://www.youtube.com/embed/${youtubeId}`}
+        className="absolute inset-0 w-full h-full rounded-xl"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      />
+    </div>
+  )
+}
+
 function RichText({ items }: { items: RichTextItemResponse[] }) {
   return (
     <>
@@ -119,6 +150,26 @@ function Block({ block }: { block: NotionBlock }) {
               cached optimizer would eventually serve a broken image — use a plain img. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt="" className="rounded-xl w-full" />
+          {caption && <figcaption className="text-horizon text-sm mt-2 text-center">{caption}</figcaption>}
+        </figure>
+      )
+    }
+    case 'video': {
+      const video = block.video
+      const url = video.type === 'external' ? video.external.url : video.file.url
+      const caption = video.caption.length > 0 ? <RichText items={video.caption} /> : null
+      return (
+        <figure className="my-6">
+          <VideoEmbed url={url} />
+          {caption && <figcaption className="text-horizon text-sm mt-2 text-center">{caption}</figcaption>}
+        </figure>
+      )
+    }
+    case 'embed': {
+      const caption = block.embed.caption.length > 0 ? <RichText items={block.embed.caption} /> : null
+      return (
+        <figure className="my-6">
+          <VideoEmbed url={block.embed.url} />
           {caption && <figcaption className="text-horizon text-sm mt-2 text-center">{caption}</figcaption>}
         </figure>
       )

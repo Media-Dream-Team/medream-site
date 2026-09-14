@@ -204,3 +204,50 @@ export async function getPortfolioItems(): Promise<PortfolioItem[]> {
   merged.sort((a, b) => a.order - b.order)
   return merged.map(m => m.item)
 }
+
+export interface PortfolioDetail {
+  slug: string
+  title: string
+  desc: string
+  type: 'own-ip' | 'client'
+  featured: boolean
+  image: string
+  tags: string[]
+  year: number
+  url?: string
+  blocks: NotionBlock[]
+}
+
+export async function getPortfolioItem(slug: string, locale: 'th' | 'en'): Promise<PortfolioDetail | null> {
+  if (!PORTFOLIO_DATABASE_ID) return null
+
+  const data_source_id = await getDataSourceId(PORTFOLIO_DATABASE_ID)
+  const res = await notion.dataSources.query({
+    data_source_id,
+    filter: {
+      and: [
+        { property: 'Slug', rich_text: { equals: slug } },
+        { property: 'Locale', select: { equals: locale } },
+        { property: 'Status', select: { equals: 'Published' } },
+      ],
+    },
+    page_size: 1,
+  })
+  const page = res.results.find(isFullPage)
+  if (!page) return null
+
+  const row = toPortfolioRow(page)
+  const blocks = await getBlocksRecursive(page.id)
+  return {
+    slug: row.slug,
+    title: row.title,
+    desc: row.desc,
+    type: row.type,
+    featured: row.featured,
+    image: row.image || '/images/portfolio/placeholder.png',
+    tags: row.tags,
+    year: row.year,
+    url: row.url,
+    blocks,
+  }
+}
