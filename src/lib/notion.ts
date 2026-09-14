@@ -1,9 +1,11 @@
 // src/lib/notion.ts
 import { Client, isFullBlock, isFullDatabase, isFullPage } from '@notionhq/client'
 import type { BlockObjectResponse, PageObjectResponse, RichTextItemResponse } from '@notionhq/client'
+import type { PortfolioItem } from '@/types/content'
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
-const DATABASE_ID = process.env.NOTION_BLOG_DATABASE_ID ?? ''
+const BLOG_DATABASE_ID = process.env.NOTION_BLOG_DATABASE_ID ?? ''
+const PORTFOLIO_DATABASE_ID = process.env.NOTION_PORTFOLIO_DATABASE_ID ?? ''
 
 export type NotionBlock = BlockObjectResponse & { children?: NotionBlock[] }
 
@@ -20,27 +22,30 @@ export interface BlogPostDetail extends BlogPostSummary {
   blocks: NotionBlock[]
 }
 
-let dataSourceIdPromise: Promise<string> | null = null
+type PageProperty = PageObjectResponse['properties'][string]
+
+const dataSourceIdCache = new Map<string, Promise<string>>()
 
 // The env var holds the database ID visible in the Notion URL; databases.retrieve
 // resolves it to the data source ID the query API actually needs (Notion API 2025-09-03+).
-function getDataSourceId(): Promise<string> {
-  if (!dataSourceIdPromise) {
-    dataSourceIdPromise = notion.databases.retrieve({ database_id: DATABASE_ID }).then(db => {
+function getDataSourceId(databaseId: string): Promise<string> {
+  let cached = dataSourceIdCache.get(databaseId)
+  if (!cached) {
+    cached = notion.databases.retrieve({ database_id: databaseId }).then(db => {
       const id = isFullDatabase(db) ? db.data_sources[0]?.id : undefined
       if (!id) throw new Error('Notion database has no data source')
       return id
     })
+    dataSourceIdCache.set(databaseId, cached)
   }
-  return dataSourceIdPromise
+  return cached
 }
 
 function plainText(richText: RichTextItemResponse[] | undefined): string {
   return (richText ?? []).map(t => t.plain_text).join('')
 }
 
-function coverUrl(page: PageObjectResponse): string | null {
-  const prop = page.properties.Cover
+function fileUrl(prop: PageProperty | undefined): string | null {
   if (prop?.type !== 'files' || prop.files.length === 0) return null
   const file = prop.files[0]
   return file.type === 'external' ? file.external.url : file.type === 'file' ? file.file.url : null
@@ -52,14 +57,14 @@ function toSummary(page: PageObjectResponse): BlogPostSummary {
     slug: Slug?.type === 'rich_text' ? plainText(Slug.rich_text) : '',
     title: Title?.type === 'title' ? plainText(Title.title) : '',
     excerpt: Excerpt?.type === 'rich_text' ? plainText(Excerpt.rich_text) : '',
-    cover: coverUrl(page),
+    cover: fileUrl(page.properties.Cover),
     tags: Tags?.type === 'multi_select' ? Tags.multi_select.map(t => t.name) : [],
     date: DateProp?.type === 'date' ? (DateProp.date?.start ?? '') : '',
   }
 }
 
 export async function getBlogPosts(locale: 'th' | 'en'): Promise<BlogPostSummary[]> {
-  const data_source_id = await getDataSourceId()
+  const data_source_id = await getDataSourceId(BLOG_DATABASE_ID)
   const res = await notion.dataSources.query({
     data_source_id,
     filter: {
@@ -74,7 +79,7 @@ export async function getBlogPosts(locale: 'th' | 'en'): Promise<BlogPostSummary
 }
 
 export async function getBlogPost(slug: string, locale: 'th' | 'en'): Promise<BlogPostDetail | null> {
-  const data_source_id = await getDataSourceId()
+  const data_source_id = await getDataSourceId(BLOG_DATABASE_ID)
   const res = await notion.dataSources.query({
     data_source_id,
     filter: {
@@ -109,4 +114,77 @@ async function getBlocksRecursive(blockId: string): Promise<NotionBlock[]> {
     cursor = res.next_cursor ?? undefined
   } while (cursor)
   return blocks
+}
+
+interface PortfolioRow {
+  slug: string
+  locale: 'th' | 'en'
+  title: string
+  desc: string
+  type: 'own-ip' | 'client'
+  featured: boolean
+  image: string
+  tags: string[]
+  year: number
+  order: number
+  url?: string
+}
+
+function toPortfolioRow(page: PageObjectResponse): PortfolioRow {
+  const { Slug, Locale, Title, Description, Type, Featured, Image, Tags, Year, Order, URL } = page.properties
+  return {
+    slug: Slug?.type === 'rich_text' ? plainText(Slug.rich_text) : '',
+    locale: Locale?.type === 'select' && Locale.select?.name === 'en' ? 'en' : 'th',
+    title: Title?.type === 'title' ? plainText(Title.title) : '',
+    desc: Description?.type === 'rich_text' ? plainText(Description.rich_text) : '',
+    type: Type?.type === 'select' && Type.select?.name === 'client' ? 'client' : 'own-ip',
+    featured: Featured?.type === 'checkbox' ? Featured.checkbox : false,
+    image: fileUrl(Image) ?? '',
+    tags: Tags?.type === 'multi_select' ? Tags.multi_select.map(t => t.name) : [],
+    year: Year?.type === 'number' ? (Year.number ?? 0) : 0,
+    order: Order?.type === 'number' ? (Order.number ?? 0) : 0,
+    url: URL?.type === 'url' ? (URL.url ?? undefined) : undefined,
+  }
+}
+
+export async function getPortfolioItems(): Promise<PortfolioItem[]> {
+  const data_source_id = await getDataSourceId(PORTFOLIO_DATABASE_ID)
+  const res = await notion.dataSources.query({
+    data_source_id,
+    filter: { property: 'Status', select: { equals: 'Published' } },
+  })
+  const rows = res.results.filter(isFullPage).map(toPortfolioRow)
+
+  const bySlug = new Map<string, PortfolioRow[]>()
+  for (const row of rows) {
+    const group = bySlug.get(row.slug) ?? []
+    group.push(row)
+    bySlug.set(row.slug, group)
+  }
+
+  const merged: { item: PortfolioItem; order: number }[] = []
+  for (const group of bySlug.values()) {
+    const th = group.find(r => r.locale === 'th')
+    const en = group.find(r => r.locale === 'en')
+    const shared = th ?? en
+    if (!shared) continue
+    merged.push({
+      order: shared.order,
+      item: {
+        id: shared.slug,
+        title_th: th?.title ?? '',
+        title_en: en?.title ?? '',
+        desc_th: th?.desc ?? '',
+        desc_en: en?.desc ?? '',
+        type: shared.type,
+        featured: shared.featured,
+        image: shared.image,
+        tags: shared.tags,
+        year: shared.year,
+        url: shared.url,
+      },
+    })
+  }
+  merged.sort((a, b) => a.order - b.order)
+  return merged.map(m => m.item)
 }
