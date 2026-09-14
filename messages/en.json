@@ -31,9 +31,8 @@
     "required": "Required"
   },
   "portfolio": {
-    "filter_all": "All",
-    "filter_own_ip": "Our IP",
-    "filter_client": "Client Work",
+    "title": "Works",
+    "subtitle": "Real client work and our own in-house game IP",
     "see_all": "See All Work"
   },
   "faq": {

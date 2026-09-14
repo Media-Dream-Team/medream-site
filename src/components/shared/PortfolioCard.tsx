@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import type { PortfolioItem } from '@/types/content'
+import { Badge } from '@/components/ui/Badge'
 
 interface Props {
   item: PortfolioItem
@@ -9,33 +10,29 @@ interface Props {
 export function PortfolioCard({ item, locale }: Props) {
   const l = locale as 'th' | 'en'
   return (
-    <div className="bg-deep-space border border-nebula rounded-xl overflow-hidden hover:border-electric transition-colors group">
-      <div className="relative h-48 bg-nebula overflow-hidden">
+    <div className="border border-line bg-white overflow-hidden hover:border-blue transition-colors">
+      <div className="relative h-48 bg-navy-card overflow-hidden">
         <Image
           src={item.image}
           alt={l === 'th' ? item.title_th : item.title_en}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-cover"
         />
       </div>
-      <div className="p-4">
-        <div className="flex gap-2 mb-2 flex-wrap">
+      <div className="p-5">
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
+          {item.featured && <Badge>{l === 'th' ? 'ผลงานเด่น' : 'Featured'}</Badge>}
           {item.tags.map(tag => (
-            <span
-              key={tag}
-              className="text-xs px-2 py-0.5 rounded bg-nebula text-horizon"
-            >
+            <span key={tag} className="text-xs font-display font-medium text-fg-3 border border-line px-2 py-0.5">
               {tag}
             </span>
           ))}
-          <span className="text-xs px-2 py-0.5 rounded bg-royal-blue/30 text-electric">
-            {item.year}
-          </span>
+          <span className="text-xs text-fg-3">{item.year}</span>
         </div>
-        <h3 className="text-dream-cream font-bold">
+        <h3 className="font-display font-semibold text-ink text-lg">
           {l === 'th' ? item.title_th : item.title_en}
         </h3>
-        <p className="text-horizon text-sm mt-1 leading-relaxed">
+        <p className="text-fg-2 text-sm mt-1 leading-relaxed">
           {l === 'th' ? item.desc_th : item.desc_en}
         </p>
         {item.url && (
@@ -43,9 +40,12 @@ export function PortfolioCard({ item, locale }: Props) {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-3 text-xs px-3 py-1.5 rounded bg-electric/10 text-electric border border-electric/30 hover:bg-electric/20 transition-colors"
+            className="inline-flex items-center gap-1.5 mt-3 font-display font-semibold text-sm text-blue hover:text-navy transition-colors"
           >
-            {l === 'th' ? 'เล่นเกม →' : 'Play →'}
+            {l === 'th' ? 'เล่นเกม' : 'Play'}
+            <svg viewBox="0 0 16 16" className="w-[0.85em] h-[0.85em]" fill="currentColor" aria-hidden="true">
+              <path d="M2 7h9.2L7.6 3.4 9 2l6 6-6 6-1.4-1.4L11.2 9H2z" />
+            </svg>
           </a>
         )}
       </div>

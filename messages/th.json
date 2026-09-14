@@ -31,9 +31,8 @@
     "required": "จำเป็น"
   },
   "portfolio": {
-    "filter_all": "ทั้งหมด",
-    "filter_own_ip": "ผลงานของเรา",
-    "filter_client": "งานลูกค้า",
+    "title": "ผลงาน",
+    "subtitle": "ผลงานจริงจากลูกค้าและ IP เกมของทีมเอง",
     "see_all": "ดูผลงานทั้งหมด"
   },
   "faq": {

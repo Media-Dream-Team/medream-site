@@ -1,5 +1,6 @@
 // src/app/[locale]/portfolio/page.tsx
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { getPortfolioItems } from '@/lib/content'
 import { PortfolioGrid } from './PortfolioGrid'
 
@@ -32,16 +33,22 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const items = getPortfolioItems()
+  const t = await getTranslations('portfolio')
   return (
-    <div className="pt-16">
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-black text-dawn-gold mb-12">
-            {locale === 'th' ? 'ผลงาน' : 'Portfolio'}
+    <>
+      <section className="bg-midnight pt-24 pb-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="font-display font-semibold text-white text-4xl md:text-[44px] md:leading-[1.15] tracking-[-.01em] mb-4">
+            {t('title')}
           </h1>
+          <p className="text-mist text-lg leading-relaxed max-w-[62ch]">{t('subtitle')}</p>
+        </div>
+      </section>
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto">
           <PortfolioGrid items={items} locale={locale} />
         </div>
       </section>
-    </div>
+    </>
   )
 }
