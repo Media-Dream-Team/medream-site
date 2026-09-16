@@ -71,6 +71,16 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* Hides the scrollbar on a horizontally-scrollable row (e.g. the Portfolio
+   category filter) while keeping it scrollable via touch/drag/wheel. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

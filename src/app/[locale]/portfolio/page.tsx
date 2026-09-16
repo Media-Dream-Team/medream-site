@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { getPortfolioItems } from '@/lib/notion'
+import { getServices } from '@/lib/content'
 import { PortfolioGrid } from './PortfolioGrid'
 import { OrbitHeroDecoration } from '@/components/shared/OrbitHeroDecoration'
 
@@ -36,6 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const items = await getPortfolioItems()
+  const { groups } = getServices()
   const t = await getTranslations('portfolio')
   return (
     <>
@@ -50,7 +52,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
       </section>
       <section className="bg-surface-tint border-t border-line py-20 px-4">
         <div className="max-w-5xl mx-auto">
-          <PortfolioGrid items={items} locale={locale} />
+          <PortfolioGrid items={items} locale={locale} groups={groups} allLabel={t('all_categories')} />
         </div>
       </section>
     </>

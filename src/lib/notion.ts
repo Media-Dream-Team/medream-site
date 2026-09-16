@@ -1,7 +1,14 @@
 // src/lib/notion.ts
 import { Client, isFullBlock, isFullDatabase, isFullPage } from '@notionhq/client'
 import type { BlockObjectResponse, PageObjectResponse, RichTextItemResponse } from '@notionhq/client'
-import type { PortfolioItem } from '@/types/content'
+import type { PortfolioItem, ServiceGroupId } from '@/types/content'
+
+const PORTFOLIO_CATEGORY_IDS: ServiceGroupId[] = ['marketing-event', 'crm', 'learning', 'games']
+
+function toPortfolioCategory(prop: PageProperty | undefined): ServiceGroupId | null {
+  const name = prop?.type === 'select' ? prop.select?.name : undefined
+  return (PORTFOLIO_CATEGORY_IDS as string[]).includes(name ?? '') ? (name as ServiceGroupId) : null
+}
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 const BLOG_DATABASE_ID = process.env.NOTION_BLOG_DATABASE_ID ?? ''
@@ -131,13 +138,14 @@ interface PortfolioRow {
   featured: boolean
   image: string
   tags: string[]
+  category: ServiceGroupId | null
   year: number
   order: number
   url?: string
 }
 
 function toPortfolioRow(page: PageObjectResponse): PortfolioRow {
-  const { Slug, Locale, Title, Description, Type, Featured, Image, Tags, Year, Order, URL } = page.properties
+  const { Slug, Locale, Title, Description, Type, Featured, Image, Tags, Category, Year, Order, URL } = page.properties
   return {
     slug: Slug?.type === 'rich_text' ? plainText(Slug.rich_text) : '',
     locale: Locale?.type === 'select' && Locale.select?.name === 'en' ? 'en' : 'th',
@@ -147,6 +155,7 @@ function toPortfolioRow(page: PageObjectResponse): PortfolioRow {
     featured: Featured?.type === 'checkbox' ? Featured.checkbox : false,
     image: fileUrl(Image) ?? '',
     tags: Tags?.type === 'multi_select' ? Tags.multi_select.map(t => t.name) : [],
+    category: toPortfolioCategory(Category),
     year: Year?.type === 'number' ? (Year.number ?? 0) : 0,
     order: Order?.type === 'number' ? (Order.number ?? 0) : 0,
     url: URL?.type === 'url' ? (URL.url ?? undefined) : undefined,
@@ -196,6 +205,7 @@ export async function getPortfolioItems(): Promise<PortfolioItem[]> {
         featured: shared.featured,
         image: shared.image || '/images/portfolio/placeholder.png',
         tags: shared.tags,
+        category: shared.category,
         year: shared.year,
         url: shared.url,
       },
@@ -213,6 +223,7 @@ export interface PortfolioDetail {
   featured: boolean
   image: string
   tags: string[]
+  category: ServiceGroupId | null
   year: number
   url?: string
   blocks: NotionBlock[]
@@ -246,6 +257,7 @@ export async function getPortfolioItem(slug: string, locale: 'th' | 'en'): Promi
     featured: row.featured,
     image: row.image || '/images/portfolio/placeholder.png',
     tags: row.tags,
+    category: row.category,
     year: row.year,
     url: row.url,
     blocks,

@@ -50,8 +50,10 @@ export interface ServiceFaqItem {
   answer_en: string
 }
 
+export type ServiceGroupId = 'marketing-event' | 'crm' | 'learning' | 'games'
+
 export interface ServiceGroup {
-  id: 'marketing-event' | 'crm' | 'learning' | 'games'
+  id: ServiceGroupId
   title_th: string
   title_en: string
   forWho_th: string
@@ -82,6 +84,7 @@ export interface PortfolioItem {
   featured: boolean
   image: string
   tags: string[]
+  category: ServiceGroupId | null
   year: number
   desc_th: string
   desc_en: string

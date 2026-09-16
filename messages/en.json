@@ -33,7 +33,8 @@
   "portfolio": {
     "title": "Works",
     "subtitle": "Real client work and our own in-house game IP",
-    "see_all": "See All Work"
+    "see_all": "See All Work",
+    "all_categories": "All"
   },
   "faq": {
     "see_all": "See All FAQs"

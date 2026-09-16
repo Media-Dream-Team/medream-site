@@ -3,28 +3,40 @@ import Link from 'next/link'
 import type { PortfolioItem } from '@/types/content'
 import { Badge } from '@/components/ui/Badge'
 
+interface CategoryBadge {
+  label: string
+  className: string
+}
+
 interface Props {
   item: PortfolioItem
   locale: string
   detailHref?: string
-  aspect?: '4/5' | '16/10' | '1/1'
+  categoryBadge?: CategoryBadge | null
 }
 
 const CHAMFER_STYLE: React.CSSProperties = {
   clipPath: 'polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)',
 }
 
-export function PortfolioCard({ item, locale, detailHref, aspect = '16/10' }: Props) {
+export function PortfolioCard({ item, locale, detailHref, categoryBadge }: Props) {
   const l = locale as 'th' | 'en'
   const body = (
     <>
-      <div className="relative bg-navy-card overflow-hidden" style={{ aspectRatio: aspect }}>
+      <div className="relative bg-navy-card overflow-hidden aspect-video">
         <Image
           src={item.image}
           alt={l === 'th' ? item.title_th : item.title_en}
           fill
           className="object-cover"
         />
+        {categoryBadge && (
+          <span
+            className={`absolute top-3 left-3 font-display font-bold text-xs px-3 py-[5px] whitespace-nowrap ${categoryBadge.className}`}
+          >
+            {categoryBadge.label}
+          </span>
+        )}
       </div>
       <div className="p-5">
         <div className="flex items-center gap-2 mb-3 flex-wrap">

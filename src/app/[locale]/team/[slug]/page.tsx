@@ -24,6 +24,7 @@ export default async function MemberPage({
     featured: false,
     image: w.image,
     tags: [],
+    category: null,
     year: w.year,
     desc_th: w.desc_th,
     desc_en: w.desc_en,
