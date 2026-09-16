@@ -1,5 +1,4 @@
 import type { AboutContent } from '@/types/content'
-import { Card } from '@/components/ui/Card'
 import { Star } from '@/components/ui/Star'
 
 interface Props {
@@ -7,20 +6,32 @@ interface Props {
   locale: string
 }
 
+const CHAMFER_STYLE: React.CSSProperties = {
+  clipPath: 'polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)',
+}
+
 export function DnaSection({ about, locale }: Props) {
   const l = locale as 'th' | 'en'
   return (
-    <section className="bg-white pb-16 md:pb-24 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="font-display font-semibold text-ink text-2xl md:text-[28px] mb-8 text-center">
-          {l === 'th' ? about.dna.headline_th : about.dna.headline_en}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {about.dna.traits.map(trait => (
-            <Card key={trait} featured className="text-center flex flex-col items-center gap-3">
-              <Star className="w-6 h-6 text-blue" />
-              <p className="font-display font-semibold text-ink text-lg">{trait}</p>
-            </Card>
+    <section className="bg-surface-tint pb-16 md:pb-24 px-4">
+      <div className="max-w-4xl mx-auto text-center">
+        <div className="inline-flex items-center gap-3 mb-8">
+          <Star className="w-7 h-7 text-blue" />
+          <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] leading-tight tracking-[-.01em]">
+            {l === 'th' ? about.dna.headline_th : about.dna.headline_en}
+          </h2>
+        </div>
+        <div className="flex gap-4 flex-wrap justify-center">
+          {about.dna.traits.map((trait, i) => (
+            <span
+              key={trait}
+              className={`font-display font-bold text-lg md:text-xl text-white px-7 py-3.5 ${
+                i % 2 ? 'bg-blue rotate-[1.5deg]' : 'bg-navy -rotate-[1.5deg]'
+              }`}
+              style={i === 1 ? CHAMFER_STYLE : undefined}
+            >
+              {trait}
+            </span>
           ))}
         </div>
       </div>

@@ -43,10 +43,15 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
   return (
     <div className="pt-16">
-      <section className="bg-white pt-16 pb-4 px-4 text-center">
-        <h1 className="font-display font-semibold text-ink text-4xl md:text-5xl">
+      <section className="bg-midnight pt-24 pb-16 md:pb-20 px-4 text-center">
+        <h1 className="font-display font-semibold text-white text-4xl md:text-5xl mb-4">
           {l === 'th' ? 'เกี่ยวกับเรา' : 'About Us'}
         </h1>
+        <p className="text-mist text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+          {l === 'th'
+            ? 'MeDream Studio คือทีมสร้างสรรค์ที่รวมนักออกแบบ นักพัฒนา และนักเล่าเรื่องเข้าไว้ด้วยกัน'
+            : 'MeDream Studio is a creative team combining designers, developers, and storytellers'}
+        </p>
       </section>
       <StorySection story={about.story} locale={locale} />
       <VisionMissionSection site={site} locale={locale} />

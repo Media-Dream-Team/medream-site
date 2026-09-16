@@ -1,4 +1,5 @@
 import type { Milestone } from '@/types/content'
+import { Star } from '@/components/ui/Star'
 
 interface Props {
   milestones: Milestone[]
@@ -9,11 +10,14 @@ export function MilestonesSection({ milestones, locale }: Props) {
   const l = locale as 'th' | 'en'
   if (milestones.length === 0) return null
   return (
-    <section className="bg-white pb-16 md:pb-24 px-4">
+    <section className="bg-surface-tint pb-16 md:pb-24 px-4">
       <div className="max-w-3xl mx-auto">
-        <h2 className="font-display font-semibold text-ink text-2xl md:text-[28px] mb-8 text-center">
-          {l === 'th' ? 'เวทีที่เราไปออกบูธ' : 'Featured At'}
-        </h2>
+        <div className="flex items-center justify-center gap-3 mb-8">
+          <Star className="w-7 h-7 text-blue" />
+          <h2 className="font-display font-semibold text-ink text-3xl md:text-[36px] leading-tight tracking-[-.01em]">
+            {l === 'th' ? 'เวทีที่เราไปออกบูธ' : 'Featured At'}
+          </h2>
+        </div>
         <div className="flex flex-col">
           {milestones.map((m, i) => (
             <div key={i} className="flex flex-col sm:flex-row gap-1 sm:gap-4 border-t border-line py-4 first:border-t-0">
