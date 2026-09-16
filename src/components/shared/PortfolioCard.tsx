@@ -9,6 +9,10 @@ interface Props {
   detailHref?: string
 }
 
+const CHAMFER_STYLE: React.CSSProperties = {
+  clipPath: 'polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)',
+}
+
 export function PortfolioCard({ item, locale, detailHref }: Props) {
   const l = locale as 'th' | 'en'
   const body = (
@@ -41,7 +45,7 @@ export function PortfolioCard({ item, locale, detailHref }: Props) {
     </>
   )
   return (
-    <div className="border border-line bg-white overflow-hidden hover:border-blue transition-colors">
+    <div className="border border-line bg-white overflow-hidden hover:border-blue transition-colors" style={CHAMFER_STYLE}>
       {detailHref ? (
         <Link href={detailHref} className="block">
           {body}

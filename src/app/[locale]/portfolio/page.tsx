@@ -46,7 +46,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
           <p className="text-mist text-lg leading-relaxed max-w-[62ch]">{t('subtitle')}</p>
         </div>
       </section>
-      <section className="py-20 px-4">
+      <section className="bg-surface-tint border-t border-line py-20 px-4">
         <div className="max-w-5xl mx-auto">
           <PortfolioGrid items={items} locale={locale} />
         </div>
