@@ -31,11 +31,7 @@ export function WeDoSection({ home, locale }: Props) {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
           {services.cards.map((card, i) => (
-            <div
-              key={card.id}
-              className="border border-line bg-white flex flex-col overflow-hidden"
-              style={i === 0 ? CHAMFER_STYLE : undefined}
-            >
+            <div key={card.id} className="border border-line bg-white flex flex-col overflow-hidden" style={CHAMFER_STYLE}>
               <div className="relative w-full h-60">
                 <Image src="/images/portfolio/placeholder.png" alt="" fill className="object-cover" />
               </div>
