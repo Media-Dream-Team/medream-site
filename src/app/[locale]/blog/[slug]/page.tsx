@@ -16,16 +16,20 @@ export default async function BlogPostPage({
   if (!post) notFound()
 
   return (
-    <div className="pt-16">
-      <article className="py-20 px-4 max-w-3xl mx-auto">
-        <p className="text-horizon text-sm mb-2">{post.date}</p>
-        <h1 className="text-3xl md:text-4xl font-black text-dawn-gold mb-8">
-          {post.title}
-        </h1>
-        <div className="text-dream-cream">
+    <>
+      <section className="bg-midnight pt-24 pb-16 px-4 text-center">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-mist text-sm mb-3">{post.date}</p>
+          <h1 className="font-display font-semibold text-white text-3xl md:text-4xl leading-tight">
+            {post.title}
+          </h1>
+        </div>
+      </section>
+      <article className="bg-surface-tint border-t border-line py-16 md:py-20 px-4">
+        <div className="max-w-2xl mx-auto">
           <NotionBlocks blocks={post.blocks} />
         </div>
       </article>
-    </div>
+    </>
   )
 }
