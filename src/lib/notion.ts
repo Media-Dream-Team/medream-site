@@ -1,13 +1,20 @@
 // src/lib/notion.ts
 import { Client, isFullBlock, isFullDatabase, isFullPage } from '@notionhq/client'
 import type { BlockObjectResponse, PageObjectResponse, RichTextItemResponse } from '@notionhq/client'
-import type { PortfolioItem, ServiceGroupId } from '@/types/content'
+import type { BlogCategoryId, PortfolioItem, ServiceGroupId } from '@/types/content'
 
 const PORTFOLIO_CATEGORY_IDS: ServiceGroupId[] = ['marketing-event', 'crm', 'learning', 'games']
 
 function toPortfolioCategory(prop: PageProperty | undefined): ServiceGroupId | null {
   const name = prop?.type === 'select' ? prop.select?.name : undefined
   return (PORTFOLIO_CATEGORY_IDS as string[]).includes(name ?? '') ? (name as ServiceGroupId) : null
+}
+
+const BLOG_CATEGORY_IDS: BlogCategoryId[] = ['knowledge', 'devlog']
+
+function toBlogCategory(prop: PageProperty | undefined): BlogCategoryId | null {
+  const name = prop?.type === 'select' ? prop.select?.name : undefined
+  return (BLOG_CATEGORY_IDS as string[]).includes(name ?? '') ? (name as BlogCategoryId) : null
 }
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
@@ -22,6 +29,7 @@ export interface BlogPostSummary {
   excerpt: string
   cover: string | null
   tags: string[]
+  category: BlogCategoryId | null
   date: string
 }
 
@@ -65,13 +73,14 @@ function fileUrl(prop: PageProperty | undefined): string | null {
 }
 
 function toSummary(page: PageObjectResponse): BlogPostSummary {
-  const { Slug, Title, Excerpt, Tags, Date: DateProp } = page.properties
+  const { Slug, Title, Excerpt, Tags, Category, Date: DateProp } = page.properties
   return {
     slug: Slug?.type === 'rich_text' ? plainText(Slug.rich_text) : '',
     title: Title?.type === 'title' ? plainText(Title.title) : '',
     excerpt: Excerpt?.type === 'rich_text' ? plainText(Excerpt.rich_text) : '',
     cover: fileUrl(page.properties.Cover),
     tags: Tags?.type === 'multi_select' ? Tags.multi_select.map(t => t.name) : [],
+    category: toBlogCategory(Category),
     date: DateProp?.type === 'date' ? (DateProp.date?.start ?? '') : '',
   }
 }

@@ -1,18 +1,20 @@
 // src/app/[locale]/blog/page.tsx
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
+import type { BlogCategoryId } from '@/types/content'
 import { getBlogPosts } from '@/lib/notion'
 import { OrbitHeroDecoration } from '@/components/shared/OrbitHeroDecoration'
+import { BlogFeaturedCard } from './BlogFeaturedCard'
+import { BlogGrid } from './BlogGrid'
 
 export const revalidate = 300
 
-const CHAMFER_STYLE: React.CSSProperties = {
-  clipPath: 'polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)',
-}
+const BLOG_CATEGORY_IDS: BlogCategoryId[] = ['knowledge', 'devlog']
 
-const ARROW_PATH = 'M2 7h9.2L7.6 3.4 9 2l6 6-6 6-1.4-1.4L11.2 9H2z'
+const CATEGORY_STYLE: Record<BlogCategoryId, string> = {
+  knowledge: 'bg-blue text-white border-blue',
+  devlog: 'bg-sky text-navy border-sky',
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -46,6 +48,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations('blog')
   const posts = await getBlogPosts(l)
   const [featured, ...rest] = posts
+  const categories = BLOG_CATEGORY_IDS.map(id => ({ id, label: t(`category_${id}`) }))
+  const featuredCategory = featured?.category ? categories.find(c => c.id === featured.category) : undefined
 
   return (
     <>
@@ -71,61 +75,27 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
         <>
           <section className="bg-surface-tint border-t border-line pt-14 px-4">
             <div className="max-w-5xl mx-auto">
-              <Link
+              <BlogFeaturedCard
+                post={featured}
                 href={`/${locale}/blog/${featured.slug}`}
-                className="group grid grid-cols-1 md:grid-cols-[1.2fr_1fr] border border-line bg-white overflow-hidden"
-                style={CHAMFER_STYLE}
-              >
-                <div className="relative aspect-[16/10] bg-navy-card">
-                  <Image
-                    src={featured.cover || '/images/portfolio/placeholder.png'}
-                    alt={featured.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-8 md:p-10 flex flex-col justify-center gap-3">
-                  <p className="font-display font-semibold text-fg-3 text-xs">{featured.date}</p>
-                  <h2 className="font-display font-semibold text-ink text-2xl md:text-[28px] leading-tight">
-                    {featured.title}
-                  </h2>
-                  <p className="text-fg-2 leading-relaxed">{featured.excerpt}</p>
-                  <span className="inline-flex items-center gap-2 font-display font-bold text-sm text-blue mt-1 group-hover:text-navy transition-colors">
-                    {t('read_more')}
-                    <svg viewBox="0 0 16 16" className="w-[0.85em] h-[0.85em]" fill="currentColor" aria-hidden="true">
-                      <path d={ARROW_PATH} />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
+                readMoreLabel={t('read_more')}
+                categoryBadge={
+                  featuredCategory ? { label: featuredCategory.label, className: CATEGORY_STYLE[featuredCategory.id] } : null
+                }
+              />
             </div>
           </section>
 
           {rest.length > 0 && (
             <section className="bg-surface-tint py-14 px-4">
-              <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {rest.map(post => (
-                  <Link
-                    key={post.slug}
-                    href={`/${locale}/blog/${post.slug}`}
-                    className="border border-line bg-white overflow-hidden hover:border-blue transition-colors block"
-                    style={CHAMFER_STYLE}
-                  >
-                    <div className="relative aspect-[16/10] bg-navy-card">
-                      <Image
-                        src={post.cover || '/images/portfolio/placeholder.png'}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <p className="font-display font-semibold text-fg-3 text-xs mb-2">{post.date}</p>
-                      <h3 className="font-display font-semibold text-ink text-lg mb-1">{post.title}</h3>
-                      <p className="text-fg-2 text-sm leading-relaxed">{post.excerpt}</p>
-                    </div>
-                  </Link>
-                ))}
+              <div className="max-w-5xl mx-auto">
+                <BlogGrid
+                  posts={rest}
+                  locale={locale}
+                  categories={categories}
+                  allLabel={t('all_categories')}
+                  readMoreLabel={t('read_more')}
+                />
               </div>
             </section>
           )}

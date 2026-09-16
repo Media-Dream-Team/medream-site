@@ -43,7 +43,10 @@
     "view_portfolio": "ดูผลงาน"
   },
   "blog": {
-    "read_more": "อ่านต่อ"
+    "read_more": "อ่านต่อ",
+    "all_categories": "ทั้งหมด",
+    "category_knowledge": "ให้ความรู้",
+    "category_devlog": "Devlog"
   },
   "careers": {
     "full_time": "งานประจำ",

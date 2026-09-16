@@ -43,7 +43,10 @@
     "view_portfolio": "View Portfolio"
   },
   "blog": {
-    "read_more": "Read more"
+    "read_more": "Read more",
+    "all_categories": "All",
+    "category_knowledge": "Knowledge",
+    "category_devlog": "Devlog"
   },
   "careers": {
     "full_time": "Full-time",

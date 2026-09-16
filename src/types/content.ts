@@ -52,6 +52,8 @@ export interface ServiceFaqItem {
 
 export type ServiceGroupId = 'marketing-event' | 'crm' | 'learning' | 'games'
 
+export type BlogCategoryId = 'knowledge' | 'devlog'
+
 export interface ServiceGroup {
   id: ServiceGroupId
   title_th: string
