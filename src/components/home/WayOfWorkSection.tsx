@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import type { HomeContent } from '@/types/content'
 import { Star } from '@/components/ui/Star'
 import { Button } from '@/components/ui/Button'
@@ -8,6 +9,13 @@ interface Props {
   home: HomeContent
   locale: string
 }
+
+const STEP_ICONS = [
+  '/images/icons/wow-step-1-talk.png',
+  '/images/icons/wow-step-2-edit.png',
+  '/images/icons/wow-step-3-dev.png',
+  '/images/icons/wow-step-4-rocket.png',
+]
 
 const STARFIELD_BG =
   'radial-gradient(1.5px 1.5px at 10% 20%,rgba(255,255,255,.9),transparent),radial-gradient(1px 1px at 25% 65%,rgba(255,255,255,.6),transparent),radial-gradient(1.5px 1.5px at 40% 15%,rgba(255,255,255,.7),transparent),radial-gradient(1px 1px at 55% 80%,rgba(255,255,255,.5),transparent),radial-gradient(2px 2px at 70% 35%,rgba(255,255,255,.9),transparent),radial-gradient(1px 1px at 85% 60%,rgba(255,255,255,.6),transparent),radial-gradient(1.5px 1.5px at 95% 25%,rgba(255,255,255,.7),transparent),radial-gradient(1px 1px at 15% 90%,rgba(255,255,255,.5),transparent),radial-gradient(1px 1px at 60% 55%,rgba(255,255,255,.6),transparent),radial-gradient(1.5px 1.5px at 30% 40%,rgba(255,255,255,.6),transparent)'
@@ -48,7 +56,7 @@ export function WayOfWorkSection({ home, locale }: Props) {
   const total = steps.length
   const points = steps.map((_, i) => ({
     x: total > 1 ? 100 + i * (800 / (total - 1)) : 500,
-    y: i % 2 === 0 ? 140 : 30,
+    y: i % 2 === 0 ? 270 : 160,
   }))
   const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ')
 
@@ -68,7 +76,7 @@ export function WayOfWorkSection({ home, locale }: Props) {
           </h2>
         </div>
 
-        <div className="wow-path-desktop relative h-[280px] mb-8">
+        <div className="wow-path-desktop relative h-[420px] mb-8">
           <svg viewBox="0 0 1000 200" preserveAspectRatio="none" className="absolute left-0 top-0 w-full h-[200px] overflow-visible" aria-hidden="true">
             <path d={pathD} fill="none" stroke="rgba(255,255,255,.25)" strokeWidth="1.5" />
             <path
@@ -97,6 +105,16 @@ export function WayOfWorkSection({ home, locale }: Props) {
                 transition: `opacity 500ms cubic-bezier(0,0,.2,1) ${300 + i * 220}ms`,
               }}
             >
+              {STEP_ICONS[i] && (
+                <Image
+                  src={STEP_ICONS[i]}
+                  alt=""
+                  width={120}
+                  height={120}
+                  className="absolute object-contain"
+                  style={{ bottom: 'calc(100% + 14px)', left: '50%', transform: 'translateX(-50%)' }}
+                />
+              )}
               <GlowBadge size={40} />
               <div className="absolute top-14 left-1/2 -translate-x-1/2 text-center" style={{ width: 'clamp(130px, 22vw, 190px)' }}>
                 <div className="font-display font-semibold text-[15px] text-white mb-1.5">
@@ -121,7 +139,10 @@ export function WayOfWorkSection({ home, locale }: Props) {
                 transition: `opacity 500ms cubic-bezier(0,0,.2,1) ${300 + i * 180}ms, transform 500ms cubic-bezier(0,0,.2,1) ${300 + i * 180}ms`,
               }}
             >
-              <div className="flex flex-col items-center w-10">
+              <div className="flex flex-col items-center w-16">
+                {STEP_ICONS[i] && (
+                  <Image src={STEP_ICONS[i]} alt="" width={64} height={64} className="object-contain mb-3.5" />
+                )}
                 <GlowBadge size={32} />
                 {i < total - 1 && <div className="w-[1.5px] flex-1 min-h-8 bg-white/25 my-2" />}
               </div>

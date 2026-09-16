@@ -7,6 +7,10 @@ interface Props {
   locale: string
 }
 
+const CHAMFER_STYLE: React.CSSProperties = {
+  clipPath: 'polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)',
+}
+
 export function WorksSection({ home, locale }: Props) {
   const l = locale as 'th' | 'en'
   const { works } = home
@@ -19,7 +23,11 @@ export function WorksSection({ home, locale }: Props) {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {works.teasers.map(teaser => (
-            <div key={teaser.id} className="border border-line bg-white overflow-hidden">
+            <div
+              key={teaser.id}
+              className="border border-line bg-white overflow-hidden transition-[transform,border-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-blue"
+              style={CHAMFER_STYLE}
+            >
               <div className="relative h-48 bg-navy-card">
                 <Image
                   src={teaser.image}

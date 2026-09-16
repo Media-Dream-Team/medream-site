@@ -18,7 +18,7 @@ export async function HeroSection({ site, home }: Props) {
     <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-midnight px-4">
       <HeroParallaxBg />
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center py-24">
+      <div className="relative z-10 max-w-[720px] mx-auto text-center py-24">
         <h1 className="font-display font-semibold text-white text-4xl md:text-5xl xl:text-[56px] xl:leading-[64px] mb-6">
           {l === 'th' ? site.tagline_th : site.tagline_en}
         </h1>

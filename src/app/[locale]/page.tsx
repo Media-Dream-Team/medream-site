@@ -1,12 +1,11 @@
 // src/app/[locale]/page.tsx
 import type { Metadata } from 'next'
-import { getSiteConfig, getHomeContent, getAwards, getMilestones } from '@/lib/content'
+import { getSiteConfig, getHomeContent } from '@/lib/content'
 import { HeroSection } from '@/components/home/HeroSection'
 import { WeDreamSection } from '@/components/home/WeDreamSection'
 import { WeDoSection } from '@/components/home/WeDoSection'
 import { WeMakeDifferenceSection } from '@/components/home/WeMakeDifferenceSection'
 import { WorksSection } from '@/components/home/WorksSection'
-import { TrustedBySection } from '@/components/home/TrustedBySection'
 import { WayOfWorkSection } from '@/components/home/WayOfWorkSection'
 import { FaqPreviewSection } from '@/components/home/FaqPreviewSection'
 import { FinalCtaSection } from '@/components/home/FinalCtaSection'
@@ -32,8 +31,6 @@ export default async function HomePage({
   const { locale } = await params
   const site = getSiteConfig()
   const home = getHomeContent()
-  const awards = getAwards()
-  const milestones = getMilestones()
 
   return (
     <>
@@ -42,7 +39,6 @@ export default async function HomePage({
       <WeDoSection home={home} locale={locale} />
       <WeMakeDifferenceSection home={home} locale={locale} />
       <WorksSection home={home} locale={locale} />
-      <TrustedBySection home={home} awards={awards} milestones={milestones} locale={locale} />
       <WayOfWorkSection home={home} locale={locale} />
       <FaqPreviewSection home={home} locale={locale} />
       <FinalCtaSection home={home} locale={locale} />
