@@ -1,6 +1,6 @@
 // src/components/layout/NavBar.tsx
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
@@ -16,22 +16,11 @@ interface Props {
 export function NavBar({ items }: Props) {
   const locale = useLocale()
   const t = useTranslations('nav')
-  const [scrolled, setScrolled] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handler, { passive: true })
-    return () => window.removeEventListener('scroll', handler)
-  }, [])
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
-          scrolled ? 'bg-midnight/95 backdrop-blur shadow-lg' : 'bg-transparent'
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-30 bg-midnight">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2">

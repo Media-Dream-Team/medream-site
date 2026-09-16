@@ -30,12 +30,6 @@ export function Footer({ site, locale }: Props) {
 
           <div className="flex flex-wrap gap-x-8 gap-y-4">
             <Link
-              href={`/${locale}/careers`}
-              className="text-white hover:text-first-light text-sm font-display font-semibold transition-colors"
-            >
-              {l === 'th' ? 'ร่วมงานกับเรา' : 'Careers'}
-            </Link>
-            <Link
               href={`/${locale}/faq`}
               className="text-white hover:text-first-light text-sm font-display font-semibold transition-colors"
             >
@@ -49,17 +43,6 @@ export function Footer({ site, locale }: Props) {
                 {site.email}
               </a>
             )}
-            {site.socials.map(s => (
-              <a
-                key={s.platform}
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-first-light text-sm font-display font-semibold transition-colors"
-              >
-                {s.platform}
-              </a>
-            ))}
           </div>
         </div>
 
