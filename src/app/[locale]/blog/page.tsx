@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 import { getBlogPosts } from '@/lib/notion'
+import { OrbitHeroDecoration } from '@/components/shared/OrbitHeroDecoration'
 
 export const revalidate = 300
 
@@ -48,8 +49,9 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <section className="bg-midnight pt-24 pb-16 px-4 text-center">
-        <div className="max-w-2xl mx-auto">
+      <section className="relative bg-midnight pt-24 pb-16 px-4 text-center overflow-hidden">
+        <OrbitHeroDecoration />
+        <div className="relative max-w-2xl mx-auto">
           <h1 className="font-display font-semibold text-white text-4xl md:text-5xl mb-4">
             {l === 'th' ? 'บทความ' : 'Blog'}
           </h1>

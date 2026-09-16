@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { getPortfolioItems } from '@/lib/notion'
 import { PortfolioGrid } from './PortfolioGrid'
+import { OrbitHeroDecoration } from '@/components/shared/OrbitHeroDecoration'
 
 export const revalidate = 300
 
@@ -38,12 +39,13 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
   const t = await getTranslations('portfolio')
   return (
     <>
-      <section className="bg-midnight pt-24 pb-16 px-4">
-        <div className="max-w-5xl mx-auto">
+      <section className="relative bg-midnight pt-24 pb-16 px-4 text-center overflow-hidden">
+        <OrbitHeroDecoration />
+        <div className="relative max-w-2xl mx-auto">
           <h1 className="font-display font-semibold text-white text-4xl md:text-[44px] md:leading-[1.15] tracking-[-.01em] mb-4">
             {t('title')}
           </h1>
-          <p className="text-mist text-lg leading-relaxed max-w-[62ch]">{t('subtitle')}</p>
+          <p className="text-mist text-lg leading-relaxed">{t('subtitle')}</p>
         </div>
       </section>
       <section className="bg-surface-tint border-t border-line py-20 px-4">

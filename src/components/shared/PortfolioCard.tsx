@@ -7,17 +7,18 @@ interface Props {
   item: PortfolioItem
   locale: string
   detailHref?: string
+  aspect?: '4/5' | '16/10' | '1/1'
 }
 
 const CHAMFER_STYLE: React.CSSProperties = {
   clipPath: 'polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)',
 }
 
-export function PortfolioCard({ item, locale, detailHref }: Props) {
+export function PortfolioCard({ item, locale, detailHref, aspect = '16/10' }: Props) {
   const l = locale as 'th' | 'en'
   const body = (
     <>
-      <div className="relative h-48 bg-navy-card overflow-hidden">
+      <div className="relative bg-navy-card overflow-hidden" style={{ aspectRatio: aspect }}>
         <Image
           src={item.image}
           alt={l === 'th' ? item.title_th : item.title_en}
