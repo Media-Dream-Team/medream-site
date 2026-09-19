@@ -67,9 +67,14 @@ function plainText(richText: RichTextItemResponse[] | undefined): string {
 }
 
 function fileUrl(prop: PageProperty | undefined): string | null {
-  if (prop?.type !== 'files' || prop.files.length === 0) return null
-  const file = prop.files[0]
-  return file.type === 'external' ? file.external.url : file.type === 'file' ? file.file.url : null
+  return fileUrls(prop)[0] ?? null
+}
+
+function fileUrls(prop: PageProperty | undefined): string[] {
+  if (prop?.type !== 'files') return []
+  return prop.files
+    .map(file => (file.type === 'external' ? file.external.url : file.type === 'file' ? file.file.url : null))
+    .filter((url): url is string => url !== null)
 }
 
 function toSummary(page: PageObjectResponse): BlogPostSummary {
@@ -146,6 +151,7 @@ interface PortfolioRow {
   type: 'own-ip' | 'client'
   featured: boolean
   image: string
+  gallery: string[]
   tags: string[]
   category: ServiceGroupId | null
   year: number
@@ -154,7 +160,8 @@ interface PortfolioRow {
 }
 
 function toPortfolioRow(page: PageObjectResponse): PortfolioRow {
-  const { Slug, Locale, Title, Description, Type, Featured, Image, Tags, Category, Year, Order, URL } = page.properties
+  const { Slug, Locale, Title, Description, Type, Featured, Image, Gallery, Tags, Category, Year, Order, URL } =
+    page.properties
   return {
     slug: Slug?.type === 'rich_text' ? plainText(Slug.rich_text) : '',
     locale: Locale?.type === 'select' && Locale.select?.name === 'en' ? 'en' : 'th',
@@ -163,6 +170,7 @@ function toPortfolioRow(page: PageObjectResponse): PortfolioRow {
     type: Type?.type === 'select' && Type.select?.name === 'client' ? 'client' : 'own-ip',
     featured: Featured?.type === 'checkbox' ? Featured.checkbox : false,
     image: fileUrl(Image) ?? '',
+    gallery: fileUrls(Gallery),
     tags: Tags?.type === 'multi_select' ? Tags.multi_select.map(t => t.name) : [],
     category: toPortfolioCategory(Category),
     year: Year?.type === 'number' ? (Year.number ?? 0) : 0,
@@ -231,6 +239,7 @@ export interface PortfolioDetail {
   type: 'own-ip' | 'client'
   featured: boolean
   image: string
+  gallery: string[]
   tags: string[]
   category: ServiceGroupId | null
   year: number
@@ -265,6 +274,7 @@ export async function getPortfolioItem(slug: string, locale: 'th' | 'en'): Promi
     type: row.type,
     featured: row.featured,
     image: row.image || '/images/portfolio/placeholder.png',
+    gallery: row.gallery,
     tags: row.tags,
     category: row.category,
     year: row.year,

@@ -2,6 +2,7 @@
 import { notFound } from 'next/navigation'
 import { getPortfolioItem } from '@/lib/notion'
 import { NotionBlocks } from '@/components/shared/NotionBlocks'
+import { PortfolioGallery } from '@/components/shared/PortfolioGallery'
 
 export const revalidate = 300
 
@@ -29,6 +30,7 @@ export default async function PortfolioDetailPage({
         <div className="max-w-2xl mx-auto">
           <p className="text-fg-2 leading-relaxed mb-8">{item.desc}</p>
           <NotionBlocks blocks={item.blocks} />
+          <PortfolioGallery images={item.gallery} />
         </div>
       </article>
     </>
