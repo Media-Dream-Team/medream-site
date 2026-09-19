@@ -5,14 +5,15 @@ import { appendContactRow } from '@/lib/google-sheets'
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { name, email, phone, service, budget, message, locale } = body
+    const { topic, name, email, phone, service, budget, message, locale } = body
 
-    if (!name || !email) {
-      return NextResponse.json({ error: 'name and email are required' }, { status: 400 })
+    if (!topic || !name || !email) {
+      return NextResponse.json({ error: 'topic, name and email are required' }, { status: 400 })
     }
 
     await appendContactRow({
       timestamp: new Date().toISOString(),
+      topic,
       name,
       email,
       phone: phone ?? '',

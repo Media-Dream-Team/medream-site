@@ -10,6 +10,14 @@
   },
   "contact_form": {
     "title": "ติดต่อเรา",
+    "topic": "ต้องการติดต่อเรื่อง",
+    "topic_placeholder": "เลือกหัวข้อ",
+    "topics": {
+      "hire": "จ้างงาน / เริ่มโปรเจกต์",
+      "careers": "ร่วมงานกับเรา",
+      "partnership": "ความร่วมมือทางธุรกิจ / พาร์ทเนอร์",
+      "general": "สอบถามทั่วไป / อื่นๆ"
+    },
     "name": "ชื่อ-นามสกุล",
     "email": "อีเมลติดต่อ",
     "phone": "เบอร์โทรศัพท์",
@@ -23,7 +31,21 @@
       "200k_500k": "200,000 – 500,000 บาท",
       "over_500k": "มากกว่า 500,000 บาท"
     },
+    "position": "ตำแหน่งที่สนใจ",
+    "position_placeholder": "เช่น Unity Developer, 3D Artist",
+    "portfolio_url": "ลิงก์ผลงาน / Resume",
+    "company": "ชื่อบริษัท/องค์กร",
+    "partnership_type": "ประเภทความร่วมมือ",
+    "partnership_type_placeholder": "เลือกประเภท",
+    "partnership_types": {
+      "reseller": "Reseller",
+      "technology": "Technology Partner",
+      "co_marketing": "Co-marketing",
+      "other": "อื่นๆ"
+    },
     "message": "ข้อความเพิ่มเติม",
+    "intro_message": "ข้อความแนะนำตัว",
+    "details": "รายละเอียด",
     "submit": "ส่งข้อมูล",
     "submitting": "กำลังส่ง...",
     "success": "ส่งข้อมูลสำเร็จ! เราจะติดต่อกลับเร็วๆ นี้",

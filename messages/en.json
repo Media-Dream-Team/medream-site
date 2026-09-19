@@ -10,6 +10,14 @@
   },
   "contact_form": {
     "title": "Contact Us",
+    "topic": "What can we help with?",
+    "topic_placeholder": "Select a topic",
+    "topics": {
+      "hire": "Hire Us / Start a Project",
+      "careers": "Join Our Team",
+      "partnership": "Business Partnership",
+      "general": "General Inquiry / Other"
+    },
     "name": "Full Name",
     "email": "Contact Email",
     "phone": "Phone Number",
@@ -23,7 +31,21 @@
       "200k_500k": "200,000 – 500,000 THB",
       "over_500k": "Over 500,000 THB"
     },
+    "position": "Position of Interest",
+    "position_placeholder": "e.g. Unity Developer, 3D Artist",
+    "portfolio_url": "Portfolio / Resume Link",
+    "company": "Company / Organization",
+    "partnership_type": "Type of Partnership",
+    "partnership_type_placeholder": "Select a type",
+    "partnership_types": {
+      "reseller": "Reseller",
+      "technology": "Technology Partner",
+      "co_marketing": "Co-marketing",
+      "other": "Other"
+    },
     "message": "Additional message",
+    "intro_message": "Tell us about yourself",
+    "details": "Details",
     "submit": "Send",
     "submitting": "Sending...",
     "success": "Sent successfully! We'll be in touch soon.",

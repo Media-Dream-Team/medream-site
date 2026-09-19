@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { getServices } from '@/lib/content'
 import { ContactForm } from '@/components/shared/ContactForm'
+import { Card } from '@/components/ui/Card'
+import { OrbitHeroDecoration } from '@/components/shared/OrbitHeroDecoration'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -36,22 +38,29 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const services = getServices().groups
 
   return (
-    <div className="pt-16">
-      <section className="py-20 px-4">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-black text-dawn-gold mb-4">
+    <>
+      <section className="relative bg-midnight pt-24 pb-16 px-4 text-center overflow-hidden">
+        <OrbitHeroDecoration />
+        <div className="relative max-w-2xl mx-auto">
+          <h1 className="font-display font-semibold text-white text-4xl md:text-5xl mb-4">
             {l === 'th' ? 'ติดต่อเรา' : 'Contact Us'}
           </h1>
-          <p className="text-horizon mb-12">
+          <p className="text-mist text-base md:text-lg leading-relaxed">
             {l === 'th'
               ? 'กรอกข้อมูลเพื่อให้เราติดต่อกลับโดยเร็ว'
               : "Fill in the form and we'll get back to you shortly"}
           </p>
-          <Suspense>
-            <ContactForm services={services} />
-          </Suspense>
         </div>
       </section>
-    </div>
+      <section className="bg-surface-tint border-t border-line py-20 px-4">
+        <div className="max-w-2xl mx-auto">
+          <Card featured>
+            <Suspense>
+              <ContactForm services={services} />
+            </Suspense>
+          </Card>
+        </div>
+      </section>
+    </>
   )
 }

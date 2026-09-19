@@ -3,6 +3,7 @@ import { google } from 'googleapis'
 
 export async function appendContactRow(row: {
   timestamp: string
+  topic: string
   name: string
   email: string
   phone: string
@@ -25,11 +26,12 @@ export async function appendContactRow(row: {
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: process.env.GOOGLE_SHEET_ID!,
-    range: 'Sheet1!A:H',
+    range: 'Sheet1!A:I',
     valueInputOption: 'USER_ENTERED',
     requestBody: {
       values: [[
         row.timestamp,
+        row.topic,
         row.name,
         row.email,
         row.phone,
