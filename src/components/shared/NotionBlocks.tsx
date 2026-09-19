@@ -18,6 +18,49 @@ const COLOR_CLASS: Record<string, string> = {
   yellow_background: 'bg-dawn/40',
 }
 
+const BUTTON_CHAMFER_STYLE: React.CSSProperties = {
+  clipPath: 'polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)',
+}
+
+interface ButtonParagraph {
+  label: string
+  href: string
+  primary: boolean
+}
+
+// Convention: a paragraph that is entirely one hyperlink renders as a button instead of
+// inline text — lets editors drop a CTA anywhere in the page body without a Notion property.
+// Bold the link text to get the highlighted (primary) button style instead of the plain one.
+function asButtonParagraph(items: RichTextItemResponse[]): ButtonParagraph | null {
+  const nonEmpty = items.filter(item => item.plain_text.trim() !== '')
+  if (nonEmpty.length === 0) return null
+  const href = nonEmpty[0].href
+  if (!href || !nonEmpty.every(item => item.href === href)) return null
+  const label = nonEmpty.map(item => item.plain_text).join('').trim()
+  if (!label) return null
+  return { label, href, primary: nonEmpty.some(item => item.annotations.bold) }
+}
+
+function ButtonLink({ button }: { button: ButtonParagraph }) {
+  return (
+    <div className="my-4">
+      <a
+        href={button.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={BUTTON_CHAMFER_STYLE}
+        className={
+          button.primary
+            ? 'inline-flex items-center justify-center font-display font-semibold text-sm bg-first-light text-navy px-5 py-2.5 transition-colors hover:bg-dawn'
+            : 'inline-flex items-center justify-center font-display font-semibold text-sm bg-white text-ink border border-line px-5 py-2.5 transition-colors hover:bg-surface-tint'
+        }
+      >
+        {button.label}
+      </a>
+    </div>
+  )
+}
+
 function getYouTubeId(url: string): string | null {
   const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
   return match ? match[1] : null
@@ -76,13 +119,16 @@ function RichText({ items }: { items: RichTextItemResponse[] }) {
 
 function Block({ block }: { block: NotionBlock }) {
   switch (block.type) {
-    case 'paragraph':
+    case 'paragraph': {
       if (block.paragraph.rich_text.length === 0) return null
+      const button = asButtonParagraph(block.paragraph.rich_text)
+      if (button) return <ButtonLink button={button} />
       return (
         <p className="mb-4 leading-relaxed text-ink">
           <RichText items={block.paragraph.rich_text} />
         </p>
       )
+    }
     case 'heading_1':
       return (
         <h2 className="font-display font-semibold text-ink text-3xl mt-10 mb-4">
